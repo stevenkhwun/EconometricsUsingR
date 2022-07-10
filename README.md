@@ -1,5 +1,7 @@
 # Econometrics Using R
-Brief notes of the LSE external course EC2020 Elements of econometrics and using R to implement the examples and exercises.
+This repository contains brief notes on the LSE external course EC2020 "Elements of econometrics" I have used R to implement the examples and exercises in the course.
+
+The course text is Introduction to Econometrics by Christopher Dougherty (5th edition). The [companion website][Dougherty] contains the datasets and various supplementary materials.
 
 A good reference is [Introduction to Econometrics with R][Intro] by Christoph Hanck, Martin Arnold, Alexander Gerber, and Martin Schmelzer.
 
@@ -11,5 +13,5 @@ A good reference is [Introduction to Econometrics with R][Intro] by Christoph Ha
 
 
 
-
+[Dougherty]: https://global.oup.com/uk/orc/busecon/economics/dougherty5e/
 [Intro]: https://www.econometrics-with-r.org/index.html
