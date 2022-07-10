@@ -42,18 +42,22 @@ linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
 linear_model                                        # Print the result
 ```
 
-
-Please refer to [Dougherty][Dougherty] and the [book][book].
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+summary(eawe21$S)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r, message=FALSE, warning=FALSE}
+# Create the demeaned variable SDEV
 
-[Dougherty]: https://www.econometrics-with-r.org/index.html
-[book]: D:/OneDrive/Bookshelf/Introduction to Econometrics_Dougherty_5th Ed
+library(tidyverse)                  # Load the required package
+
+eawe21_dm <- eawe21 %>%
+  mutate(SDEV = S - mean(S)) %>%    # Create the demeaned variable
+  select(EARNINGS, S, SDEV)         # Select the required columns
+
+# EARNINGS regress on the demeaned variable SDEV
+linear_model_dm <- lm(EARNINGS ~ SDEV, data = eawe21_dm)     # Run the model
+linear_model_dm       
+```
+
+
