@@ -1,0 +1,59 @@
+---
+title: "Simple Regression Analysis"
+author: "AW"
+date: "2022/7/10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Key terms
+
+* Dependent vaiable
+* Expanatory variable, independent variable, regressor
+* Disturbance term
+* Residual
+
+
+## 1. The simple linear model
+
+**The model**:
+
+$$Y_{i}=\beta_{1}+\beta_{2}X_{i}+\mu_{i}$$
+where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledgesthe fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $\mu_{i}$.
+
+**The fitted model**:
+
+$$\hat{Y_{i}}=\hat{\beta_{1}}+\hat{\beta_{2}}X_{i}$$
+
+The difference between the actual value of $Y_{i}$ and the fitted value $\hat{Y_{i}}, in observation $i$ is known as the **residual** in the observation $i$. It will be denoted \hat{\mu_{i}}:
+
+$$\hat{\mu_{i}}=Y_{i}-\hat{Y_{i}}$$
+
+
+
+
+```{r}
+# Example in page 98 of the text
+eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
+linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
+linear_model                                        # Print the result
+```
+
+
+Please refer to [Dougherty][Dougherty] and the [book][book].
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+[Dougherty]: https://www.econometrics-with-r.org/index.html
+[book]: D:/OneDrive/Bookshelf/Introduction to Econometrics_Dougherty_5th Ed
