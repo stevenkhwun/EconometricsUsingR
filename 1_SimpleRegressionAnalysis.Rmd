@@ -15,13 +15,15 @@ knitr::opts_chunk$set(echo = TRUE)
 * Expanatory variable, independent variable, regressor
 * Disturbance term
 * Residual
+* Residual sum of squares, **RSS**
+* Ordinary least squuares, **OLS**
 
 
 ## 1. The simple linear model
 
 **The model**:
 
-$$Y_{i}=\beta_{1}+\beta_{2}X_{i}+\mu_{i}$$
+$$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
 where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledgesthe fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $\mu_{i}$.
 
 **The fitted model**:
@@ -30,16 +32,38 @@ $$\hat{Y_{i}}=\hat{\beta_{1}}+\hat{\beta_{2}}X_{i}$$
 
 The difference between the actual value of $Y_{i}$ and the fitted value $\hat{Y_{i}}, in observation $i$ is known as the **residual** in the observation $i$. It will be denoted \hat{\mu_{i}}:
 
-$$\hat{\mu_{i}}=Y_{i}-\hat{Y_{i}}$$
+$$\hat{u}_{i}=Y_{i}-\hat{Y_{i}}$$
 
 
+## 2. Derivation of the regression coefficients
 
+We use the **least squares** criterion to choose $\hat{\beta_{1}}$ amd $\hat{\beta_{2}}$ so as to minimize **RSS**, the **residual sum of squares** (sum of the squares of the residuals).
+
+$$RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2$$
+This is usually referred to as **ordinary least squares** and abbreviated **OLS**.  
+<br />
+The square of the residual in observaiont $i$ interms of $\hat{\beta_{1}}$ and \hat{\beta_{2}}$, and the data on $X$ and $Y$:
+
+
+\begin{eqnarray}
+{\hat{u}_{i}}^2 &=&(Y_i-\hat{Y}_{i})^2 =(Y_i-\hat{\beta}_{1}-\hat{\beta}_{2}X_i)^2 \\
+
+&=& Y_i^2+\hat{\beta}_{1}^2+\hat{\beta}_{2}^2X_i^2-2\hat{\beta}_{1}Y_i-2\hat{\beta}_{2}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}X_i \\
+\end{eqnarray}
+
+(For formatting of the above equation array, see the website [Using R Markdown for Class Reports][Eqnarray] by Cosma Shalizi for more information.)  
+<br />
+
+
+Summing over all the $n$ observations, we can write **RSS** as
+
+$$RSS=\sum_{i=1}^{n}Y_i^2+n\hat{\beta}_{1}^2+\hat{\beta}_{2}^2\sum_{i=1}^{n}X_i^2-2\hat{\beta}_{1}\sum_{i=1}^{n}Y_i-2\hat{\beta}_{2}\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}\sum_{i=1}^{n}X_i$$
 
 ```{r}
 # Example in page 98 of the text
 eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
 linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
-linear_model                                        # Print the result
+summary(linear_model)                               # The result
 ```
 
 ```{r}
@@ -48,7 +72,6 @@ summary(eawe21$S)
 
 ```{r, message=FALSE, warning=FALSE}
 # Create the demeaned variable SDEV
-
 library(tidyverse)                  # Load the required package
 
 eawe21_dm <- eawe21 %>%
@@ -57,7 +80,8 @@ eawe21_dm <- eawe21 %>%
 
 # EARNINGS regress on the demeaned variable SDEV
 linear_model_dm <- lm(EARNINGS ~ SDEV, data = eawe21_dm)     # Run the model
-linear_model_dm       
+summary(linear_model_dm)                                     # The result      
 ```
 
 
+[Eqnarray]: https://www.stat.cmu.edu/~cshalizi/rmarkdown/
