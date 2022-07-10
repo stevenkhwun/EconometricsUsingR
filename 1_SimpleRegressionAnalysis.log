@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.29)  10 JUL 2022 22:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.10)  10 JUL 2022 22:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **1_SimpleRegressionAnalysis.tex
 (./1_SimpleRegressionAnalysis.tex
-LaTeX2e <2022-06-01> patch level 3
-L3 programming layer <2022-06-16> (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+LaTeX2e <2022-06-01> patch level 5
+L3 programming layer <2022-07-04> (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
@@ -315,7 +315,7 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 \Gin@req@height=\dimen164
 \Gin@req@width=\dimen165
 ) (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-07-01 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count288
 \l__pdf_internal_box=\box54
 )
@@ -434,10 +434,10 @@ Type  H <return>  for immediate help.
 l.152 value \$\hat{Y_{i}}
                          , in observation \(i\) is known as the 
 Here is how much of TeX's memory you used:
- 10959 strings out of 479997
- 173063 string characters out of 5886286
- 463261 words of memory out of 5000000
- 28978 multiletter control sequences out of 15000+600000
+ 10957 strings out of 479984
+ 172928 string characters out of 5886508
+ 463591 words of memory out of 5000000
+ 28991 multiletter control sequences out of 15000+600000
  508912 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,6n,77p,264b,398s stack positions out of 10000i,1000n,20000p,200000b,200000s
