@@ -87,14 +87,15 @@ These equations are known as the **normal equations** for the regression coeffic
 Solving the normal equations and noting that
 
 \begin{equation}
-\bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_i
+\overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_i
 \quad\mathrm{and}\quad
-\bar{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_i
+\overline{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_i
 \end{equation}
 
 and hence
 
-$$\hat{\beta}_{1}=\bar{Y}-\hat{\beta}_{2}\bar{X}$$
+$$\hat{\beta}_{1}=\overline{Y}-\hat{\beta}_{2}\overline{X}$$
+$$\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=1}^{n}X_i^2-n\overline{X}^2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}$$
 
 
 
