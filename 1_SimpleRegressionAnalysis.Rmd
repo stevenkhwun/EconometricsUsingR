@@ -2,7 +2,9 @@
 title: "Simple Regression Analysis"
 author: "AW"
 date: "2022/7/10"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -17,6 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * Residual
 * Residual sum of squares, **RSS**
 * Ordinary least squuares, **OLS**
+* Normal equations
 
 
 ## 1. The simple linear model
@@ -55,10 +58,39 @@ The square of the residual in observaiont $i$ interms of $\hat{\beta_{1}}$ and \
 <br />
 
 
-Summing over all the $n$ observations, we can write **RSS** as
+Summing over all the $n$ observations, we can write _RSS_ as
 
 $$RSS=\sum_{i=1}^{n}Y_i^2+n\hat{\beta}_{1}^2+\hat{\beta}_{2}^2\sum_{i=1}^{n}X_i^2-2\hat{\beta}_{1}\sum_{i=1}^{n}Y_i-2\hat{\beta}_{2}\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}\sum_{i=1}^{n}X_i$$
 
+We find the particular values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ by minimize _RSS_. The partial differentials of _RSS_ with respect to $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ are:
+
+$$\frac{\partial{RSS}}{\partial{\hat{\beta}_{1}}}=2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i$$
+
+$$\frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i$$
+
+The values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ that minimize _RSS_ must satisfy the first-order conditions
+
+\begin{equation}
+\frac{\partial{RSS}}{\partial{\hat{\beta}_{1}}}=0
+\quad\mathrm{and}\quad
+\frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=0
+\end{equation}
+
+Hence
+$$2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0$$
+$$2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i=0$$
+These equations are known as the **normal equations** for the regression coefficients.
+
+\begin{equation}
+x+y=3
+\quad\mathrm{and}\quad
+x-y=8
+\end{equation}
+
+(Please see the website [https://tex.stackexchange.com/questions/288222/two-equations-in-one-line][2equations] for more information on how to format two equations on one line.)
+
+
+## 3. An example
 ```{r}
 # Example in page 98 of the text
 eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
@@ -85,3 +117,4 @@ summary(linear_model_dm)                                     # The result
 
 
 [Eqnarray]: https://www.stat.cmu.edu/~cshalizi/rmarkdown/
+[2equations]: https://tex.stackexchange.com/questions/288222/two-equations-in-one-line
