@@ -3,8 +3,8 @@ title: "Simple Regression Analysis"
 author: "AW"
 date: "2022/7/10"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
   word_document: default
 ---
 
@@ -18,8 +18,8 @@ knitr::opts_chunk$set(echo = TRUE)
 * Expanatory variable, independent variable, regressor
 * Disturbance term
 * Residual
-* Residual sum of squares, **RSS**
-* Ordinary least squuares, **OLS**
+* Residual sum of squares, _RSS_
+* Ordinary least squuares, _OLS_
 * Normal equations
 
 
@@ -41,10 +41,10 @@ $$\hat{u}_{i}=Y_{i}-\hat{Y_{i}}$$
 
 ## 2. Derivation of the regression coefficients
 
-We use the **least squares** criterion to choose $\hat{\beta_{1}}$ amd $\hat{\beta_{2}}$ so as to minimize **RSS**, the **residual sum of squares** (sum of the squares of the residuals).
+We use the **least squares** criterion to choose $\hat{\beta_{1}}$ amd $\hat{\beta_{2}}$ so as to minimize _**RSS**_, the **residual sum of squares** (sum of the squares of the residuals).
 
 $$RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2$$
-This is usually referred to as **ordinary least squares** and abbreviated **OLS**.  
+This is usually referred to as **ordinary least squares** and abbreviated _**OLS**_.  
 <br />
 The square of the residual in observaiont $i$ interms of $\hat{\beta_{1}}$ and \hat{\beta_{2}}$, and the data on $X$ and $Y$:
 
@@ -77,18 +77,28 @@ The values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ that minimize _RSS_ must s
 \frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=0
 \end{equation}
 
+(Please see the website [https://tex.stackexchange.com/questions/288222/two-equations-in-one-line][2equations] for more information on how to format two equations on one line.)
+
 Hence
 $$2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0$$
 $$2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i=0$$
-These equations are known as the **normal equations** for the regression coefficients.
+These equations are known as the **normal equations** for the regression coefficients.  
+<br />
+Solving the normal equations and noting that
 
 \begin{equation}
-x+y=3
+\bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_i
 \quad\mathrm{and}\quad
-x-y=8
+\bar{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_i
 \end{equation}
 
-(Please see the website [https://tex.stackexchange.com/questions/288222/two-equations-in-one-line][2equations] for more information on how to format two equations on one line.)
+and hence
+
+$$\hat{\beta}_{1}=\bar{Y}-\hat{\beta}_{2}\bar{X}$$
+
+
+
+
 
 
 ## 3. An example
