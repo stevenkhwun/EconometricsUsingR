@@ -1,6 +1,6 @@
 ---
 title: "Simple Regression Analysis"
-author: "AW"
+author: "SW"
 date: "2022/7/10"
 output:
   html_document: default
@@ -14,13 +14,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Key terms
 
-* Dependent vaiable
-* Expanatory variable, independent variable, regressor
+* Dependent variable
+* Explanatory variable, independent variable, regressor
 * Disturbance term
 * Residual
 * Residual sum of squares, _RSS_
-* Ordinary least squuares, _OLS_
+* Ordinary least squares, _OLS_
 * Normal equations
+* Demeaning
 
 
 ## 1. The simple linear model
@@ -103,17 +104,35 @@ $$\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=
 
 
 ## 3. An example
+
+The following example is adopted from an example in p. 98 of the text book. Hourly earnings in 2011, `EARNINGS`, measured in dollars, are regressed on schooling, `S`, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.
 ```{r}
-# Example in page 98 of the text
+# EARNINGS regress on schooling
 eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
 linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
 summary(linear_model)                               # The result
 ```
 
+The regression output gives the estimates of the intercept and the coefficient of `S`, and thus the following fitted equation:
+
+$$\hat{EARNINGS}=0.76+1.27S$$
+Interpreting the equation literally, the slope coefficient indicates that, as `S` increases by one unit, `EARNINGS` increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.
+
+#### Demeaning
+Often the intercept in a regression equation has no sensible interpretation because $X=0$ is distant from the data range. The wage equation above is an example, with the intercept being implausibly low.  
+<br />
+Sometimes it is useful to deal with the problem by defining $X^*$ as the deviation of $X$ about its sample mean
+
+$$X_{i}^{*}=X_i-\overline{X}$$
+and regressing $Y$ on $X^*$. The slope coefficient will not be affected, but the intercept will now be the fitted value of $Y$ at the sample mean of $X$.  
+<br />
+The following R code gives the descriptive statistics of `S`. This gives the mean years of schooling was 14.87.
 ```{r}
+# Descriptive statistics for S
 summary(eawe21$S)
 ```
-
+We then regress `EARNINGS` on the demeaned variable `SDEV`, where
+$$SDEV_i=S_i-\overline{S}$$
 ```{r, message=FALSE, warning=FALSE}
 # Create the demeaned variable SDEV
 library(tidyverse)                  # Load the required package
@@ -126,7 +145,24 @@ eawe21_dm <- eawe21 %>%
 linear_model_dm <- lm(EARNINGS ~ SDEV, data = eawe21_dm)     # Run the model
 summary(linear_model_dm)                                     # The result      
 ```
+From the regression results, we can see that the coefficient for `SDEV` is 1.27, which is the same as the coefficient of `S` in the original wage equation. However, this regression further predicts that the hourly earnings is $19.58 for the mean years of schooling of 14.87.
 
+```{r}
+# EARNINGS regress on schooling
+eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
+linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
+summary(linear_model)
+anova(linear_model)
+```
+
+```{r}
+# EARNINGS regress on schooling
+eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
+lm(EARNINGS ~ S, data = eawe21) %>%
+  anova
+```
+(Please the website [https://rc2e.com/linearregressionandanova][rc2e] for more information on regression output.)
 
 [Eqnarray]: https://www.stat.cmu.edu/~cshalizi/rmarkdown/
 [2equations]: https://tex.stackexchange.com/questions/288222/two-equations-in-one-line
+[rc2e]: https://rc2e.com/linearregressionandanova
