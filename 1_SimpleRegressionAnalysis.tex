@@ -37,7 +37,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Simple Regression Analysis},
-  pdfauthor={AW},
+  pdfauthor={SW},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -104,7 +104,7 @@
 \fi
 
 \title{Simple Regression Analysis}
-\author{AW}
+\author{SW}
 \date{2022/7/10}
 
 \begin{document}
@@ -116,19 +116,21 @@
 \begin{itemize}
 \tightlist
 \item
-  Dependent vaiable
+  Dependent variable
 \item
-  Expanatory variable, independent variable, regressor
+  Explanatory variable, independent variable, regressor
 \item
   Disturbance term
 \item
   Residual
 \item
-  Residual sum of squares, \textbf{RSS}
+  Residual sum of squares, \emph{RSS}
 \item
-  Ordinary least squuares, \textbf{OLS}
+  Ordinary least squares, \emph{OLS}
 \item
   Normal equations
+\item
+  Demeaning
 \end{itemize}
 
 \hypertarget{the-simple-linear-model}{%
@@ -161,11 +163,11 @@ coefficients}\label{derivation-of-the-regression-coefficients}}
 
 We use the \textbf{least squares} criterion to choose
 \(\hat{\beta_{1}}\) amd \(\hat{\beta_{2}}\) so as to minimize
-\textbf{RSS}, the \textbf{residual sum of squares} (sum of the squares
-of the residuals).
+\emph{\textbf{RSS}}, the \textbf{residual sum of squares} (sum of the
+squares of the residuals).
 
 \[RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2\] This is usually referred to as
-\textbf{ordinary least squares} and abbreviated \textbf{OLS}.\\
+\textbf{ordinary least squares} and abbreviated \emph{\textbf{OLS}}.\\
 The square of the residual in observaiont \(i\) interms of
 \(\hat{\beta_{1}}\) and \hat{\beta_{2}}\$, and the data on \(X\) and
 \(Y\):
@@ -202,28 +204,40 @@ The values of \(\hat{\beta}_{1}\) and \(\hat{\beta}_{2}\) that minimize
 \frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=0
 \end{equation}
 
-Hence
-\[2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0\]
-\[2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i=0\]
-These equations are known as the \textbf{normal equations} for the
-regression coefficients.
-
-\begin{equation}
-x+y=3
-\quad\mathrm{and}\quad
-x-y=8
-\end{equation}
-
 (Please see the website
 \url{https://tex.stackexchange.com/questions/288222/two-equations-in-one-line}
 for more information on how to format two equations on one line.)
 
+Hence
+\[2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0\]
+\[2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i=0\]
+These equations are known as the \textbf{normal equations} for the
+regression coefficients.\\
+Solving the normal equations and noting that
+
+\begin{equation}
+\overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_i
+\quad\mathrm{and}\quad
+\overline{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_i
+\end{equation}
+
+and hence
+
+\[\hat{\beta}_{1}=\overline{Y}-\hat{\beta}_{2}\overline{X}\]
+\[\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=1}^{n}X_i^2-n\overline{X}^2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}\]
+
 \hypertarget{an-example}{%
 \subsection{3. An example}\label{an-example}}
 
+The following example is adopted from an example in p.~98 of the text
+book. Hourly earnings in 2011, \texttt{EARNINGS}, measured in dollars,
+are regressed on schooling, \texttt{S}, measured as highest grade
+completed, for 500 respondents from the US National Longitudinal Survey
+of Youth 1997-.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Example in page 98 of the text}
+\CommentTok{\# EARNINGS regress on schooling}
 \NormalTok{eawe21 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}./Data/EAWE21.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{header=}\NormalTok{T)   }\CommentTok{\# Import data}
 \NormalTok{linear\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(EARNINGS }\SpecialCharTok{\textasciitilde{}}\NormalTok{ S, }\AttributeTok{data =}\NormalTok{ eawe21)     }\CommentTok{\# Run the model}
 \FunctionTok{summary}\NormalTok{(linear\_model)                               }\CommentTok{\# The result}
@@ -251,8 +265,33 @@ for more information on how to format two equations on one line.)
 ## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11
 \end{verbatim}
 
+The regression output gives the estimates of the intercept and the
+coefficient of \texttt{S}, and thus the following fitted equation:
+
+\[\hat{EARNINGS}=0.76+1.27S\] Interpreting the equation literally, the
+slope coefficient indicates that, as \texttt{S} increases by one unit,
+\texttt{EARNINGS} increases by 1.27 units. This implies that hourly
+earnings increase by \$1.27 for every extra year of schooling.
+
+\hypertarget{demeaning}{%
+\paragraph{Demeaning}\label{demeaning}}
+
+Often the intercept in a regression equation has no sensible
+interpretation because \(X=0\) is distant from the data range. The wage
+equation above is an example, with the intercept being implausibly
+low.\\
+Sometimes it is useful to deal with the problem by defining \(X^*\) as
+the deviation of \(X\) about its sample mean
+
+\[X_{i}^{*}=X_i-\overline{X}\] and regressing \(Y\) on \(X^*\). The
+slope coefficient will not be affected, but the intercept will now be
+the fitted value of \(Y\) at the sample mean of \(X\).\\
+The following R code gives the descriptive statistics of \texttt{S}.
+This gives the mean years of schooling was 14.87.
+
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Descriptive statistics for S}
 \FunctionTok{summary}\NormalTok{(eawe21}\SpecialCharTok{$}\NormalTok{S)}
 \end{Highlighting}
 \end{Shaded}
@@ -261,6 +300,9 @@ for more information on how to format two equations on one line.)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    8.00   12.00   15.00   14.87   17.00   20.00
 \end{verbatim}
+
+We then regress \texttt{EARNINGS} on the demeaned variable
+\texttt{SDEV}, where \[SDEV_i=S_i-\overline{S}\]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -297,5 +339,81 @@ for more information on how to format two equations on one line.)
 ## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
 ## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11
 \end{verbatim}
+
+From the regression results, we can see that the coefficient for
+\texttt{SDEV} is 1.27, which is the same as the coefficient of
+\texttt{S} in the original wage equation. However, this regression
+further predicts that the hourly earnings is \$19.58 for the mean years
+of schooling of 14.87.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# EARNINGS regress on schooling}
+\NormalTok{eawe21 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}./Data/EAWE21.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{header=}\NormalTok{T)   }\CommentTok{\# Import data}
+\NormalTok{linear\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(EARNINGS }\SpecialCharTok{\textasciitilde{}}\NormalTok{ S, }\AttributeTok{data =}\NormalTok{ eawe21)     }\CommentTok{\# Run the model}
+\FunctionTok{summary}\NormalTok{(linear\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = EARNINGS ~ S, data = eawe21)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -20.079  -6.726  -2.203   3.451  79.037 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   0.7647     2.8038   0.273    0.785    
+## S             1.2657     0.1855   6.824 2.58e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 11.36 on 498 degrees of freedom
+## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
+## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(linear\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: EARNINGS
+##            Df Sum Sq Mean Sq F value    Pr(>F)    
+## S           1   6014  6014.0  46.568 2.579e-11 ***
+## Residuals 498  64315   129.1                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# EARNINGS regress on schooling}
+\NormalTok{eawe21 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}./Data/EAWE21.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{header=}\NormalTok{T)   }\CommentTok{\# Import data}
+\FunctionTok{lm}\NormalTok{(EARNINGS }\SpecialCharTok{\textasciitilde{}}\NormalTok{ S, }\AttributeTok{data =}\NormalTok{ eawe21) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  anova}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: EARNINGS
+##            Df Sum Sq Mean Sq F value    Pr(>F)    
+## S           1   6014  6014.0  46.568 2.579e-11 ***
+## Residuals 498  64315   129.1                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+(Please the website \url{https://rc2e.com/linearregressionandanova} for
+more information on regression output.)
 
 \end{document}
