@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="AW" />
+<meta name="author" content="SW" />
 
 
 <title>Simple Regression Analysis</title>
@@ -165,7 +165,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Simple Regression Analysis</h1>
-<h4 class="author">AW</h4>
+<h4 class="author">SW</h4>
 <h4 class="date">2022/7/10</h4>
 
 </div>
@@ -174,29 +174,30 @@ pre code {
 <div id="key-terms" class="section level2">
 <h2>Key terms</h2>
 <ul>
-<li>Dependent vaiable</li>
-<li>Expanatory variable, independent variable, regressor</li>
+<li>Dependent variable</li>
+<li>Explanatory variable, independent variable, regressor</li>
 <li>Disturbance term</li>
 <li>Residual</li>
 <li>Residual sum of squares, <em>RSS</em></li>
-<li>Ordinary least squuares, <em>OLS</em></li>
+<li>Ordinary least squares, <em>OLS</em></li>
 <li>Normal equations</li>
+<li>Demeaning</li>
 </ul>
 </div>
 <div id="the-simple-linear-model" class="section level2">
 <h2>1. The simple linear model</h2>
 <p><strong>The model</strong>:</p>
-<p><span class="math display">\[Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}\]</span> where <span class="math inline">\(Y\)</span> is usually described as the <strong>dependent variable</strong>, and <span class="math inline">\(X\)</span> as the <strong>explanatory variable</strong> or <strong>independent variable</strong> or the <strong>regressor</strong>. In statistical analysis, one generally acknowledgesthe fact that the relationship is not exact by explicitly including in it a random factor known as the <strong>disturbance term</strong>, <span class="math inline">\(\mu_{i}\)</span>.</p>
+<p><span class="math display">\[Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}\]</span> where <span class="math inline">\(Y\)</span> is usually described as the <strong>dependent variable</strong>, and <span class="math inline">\(X\)</span> as the <strong>explanatory variable</strong> or <strong>independent variable</strong> or the <strong>regressor</strong>. In statistical analysis, one generally acknowledgesthe fact that the relationship is not exact by explicitly including in it a random factor known as the <strong>disturbance term</strong>, <span class="math inline">\(u_i\)</span>.</p>
 <p><strong>The fitted model</strong>:</p>
 <p><span class="math display">\[\hat{Y_{i}}=\hat{\beta_{1}}+\hat{\beta_{2}}X_{i}\]</span></p>
-<p>The difference between the actual value of <span class="math inline">\(Y_{i}\)</span> and the fitted value $, in observation <span class="math inline">\(i\)</span> is known as the <strong>residual</strong> in the observation <span class="math inline">\(i\)</span>. It will be denoted :</p>
+<p>The difference between the actual value of <span class="math inline">\(Y_{i}\)</span> and the fitted value <span class="math inline">\(\hat{Y_{i}}\)</span>, in observation <span class="math inline">\(i\)</span> is known as the <strong>residual</strong> in the observation <span class="math inline">\(i\)</span>. It will be denoted :</p>
 <p><span class="math display">\[\hat{u}_{i}=Y_{i}-\hat{Y_{i}}\]</span></p>
 </div>
 <div id="derivation-of-the-regression-coefficients" class="section level2">
 <h2>2. Derivation of the regression coefficients</h2>
 <p>We use the <strong>least squares</strong> criterion to choose <span class="math inline">\(\hat{\beta_{1}}\)</span> amd <span class="math inline">\(\hat{\beta_{2}}\)</span> so as to minimize <em><strong>RSS</strong></em>, the <strong>residual sum of squares</strong> (sum of the squares of the residuals).</p>
 <p><span class="math display">\[RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2\]</span> This is usually referred to as <strong>ordinary least squares</strong> and abbreviated <em><strong>OLS</strong></em>.<br />
-<br /> The square of the residual in observaiont <span class="math inline">\(i\)</span> interms of <span class="math inline">\(\hat{\beta_{1}}\)</span> and $, and the data on <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<br /> The square of the residual in observation <span class="math inline">\(i\)</span> in terms of <span class="math inline">\(\hat{\beta_{1}}\)</span> and <span class="math inline">\(\hat{\beta_{2}}\)</span>, and the data on <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
 <p><span class="math display">\[\begin{eqnarray}
 {\hat{u}_{i}}^2 &amp;=&amp;(Y_i-\hat{Y}_{i})^2 =(Y_i-\hat{\beta}_{1}-\hat{\beta}_{2}X_i)^2 \\
 
@@ -228,7 +229,8 @@ pre code {
 </div>
 <div id="an-example" class="section level2">
 <h2>3. An example</h2>
-<pre class="r"><code># Example in page 98 of the text
+<p>The following example is adopted from an example in p. 98 of the text book. Hourly earnings in 2011, <code>EARNINGS</code>, measured in dollars, are regressed on schooling, <code>S</code>, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.</p>
+<pre class="r"><code># EARNINGS regress on schooling
 eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
 linear_model &lt;- lm(EARNINGS ~ S, data = eawe21)     # Run the model
 summary(linear_model)                               # The result</code></pre>
@@ -250,9 +252,19 @@ summary(linear_model)                               # The result</code></pre>
 ## Residual standard error: 11.36 on 498 degrees of freedom
 ## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
 ## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
-<pre class="r"><code>summary(eawe21$S)</code></pre>
+<p>The regression output gives the estimates of the intercept and the coefficient of <code>S</code>, and thus the following fitted equation:</p>
+<p><span class="math display">\[\hat{EARNINGS}=0.76+1.27S\]</span> Interpreting the equation literally, the slope coefficient indicates that, as <code>S</code> increases by one unit, <code>EARNINGS</code> increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.</p>
+<div id="demeaning" class="section level4">
+<h4>Demeaning</h4>
+<p>Often the intercept in a regression equation has no sensible interpretation because <span class="math inline">\(X=0\)</span> is distant from the data range. The wage equation above is an example, with the intercept being implausibly low.<br />
+<br /> Sometimes it is useful to deal with the problem by defining <span class="math inline">\(X^*\)</span> as the deviation of <span class="math inline">\(X\)</span> about its sample mean</p>
+<p><span class="math display">\[X_{i}^{*}=X_i-\overline{X}\]</span> and regressing <span class="math inline">\(Y\)</span> on <span class="math inline">\(X^*\)</span>. The slope coefficient will not be affected, but the intercept will now be the fitted value of <span class="math inline">\(Y\)</span> at the sample mean of <span class="math inline">\(X\)</span>.<br />
+<br /> The following R code gives the descriptive statistics of <code>S</code>. This gives the mean years of schooling was 14.87.</p>
+<pre class="r"><code># Descriptive statistics for S
+summary(eawe21$S)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    8.00   12.00   15.00   14.87   17.00   20.00</code></pre>
+<p>We then regress <code>EARNINGS</code> on the demeaned variable <code>SDEV</code>, where <span class="math display">\[SDEV_i=S_i-\overline{S}\]</span></p>
 <pre class="r"><code># Create the demeaned variable SDEV
 library(tidyverse)                  # Load the required package
 
@@ -281,6 +293,52 @@ summary(linear_model_dm)                                     # The result      <
 ## Residual standard error: 11.36 on 498 degrees of freedom
 ## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
 ## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
+<p>From the regression results, we can see that the coefficient for <code>SDEV</code> is 1.27, which is the same as the coefficient of <code>S</code> in the original wage equation. However, this regression further predicts that the hourly earnings is $19.58 for the mean years of schooling of 14.87.</p>
+<pre class="r"><code># EARNINGS regress on schooling
+eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
+linear_model &lt;- lm(EARNINGS ~ S, data = eawe21)     # Run the model
+summary(linear_model)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = EARNINGS ~ S, data = eawe21)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -20.079  -6.726  -2.203   3.451  79.037 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.7647     2.8038   0.273    0.785    
+## S             1.2657     0.1855   6.824 2.58e-11 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 11.36 on 498 degrees of freedom
+## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
+## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
+<pre class="r"><code>anova(linear_model)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: EARNINGS
+##            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## S           1   6014  6014.0  46.568 2.579e-11 ***
+## Residuals 498  64315   129.1                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code># EARNINGS regress on schooling
+eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
+lm(EARNINGS ~ S, data = eawe21) %&gt;%
+  anova</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: EARNINGS
+##            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## S           1   6014  6014.0  46.568 2.579e-11 ***
+## Residuals 498  64315   129.1                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>(Please the website <a href="https://rc2e.com/linearregressionandanova">https://rc2e.com/linearregressionandanova</a> for more information on regression output.)</p>
+</div>
 </div>
 
 
