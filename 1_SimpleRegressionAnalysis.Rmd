@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = TRUE)
 **The model**:
 
 $$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
-where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledgesthe fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $u_i$.
+where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $u_i$.
 
 **The fitted model**:
 
@@ -142,14 +142,26 @@ eawe21.dm <- eawe21 %>%
   select(EARNINGS, S, SDEV)         # Select the required columns
 
 # EARNINGS regress on the demeaned variable SDEV
-# Use pip operator to perform the analysis
+# Using pipe (%>%) operator to simplify the code
 lm(EARNINGS ~ SDEV, data = eawe21.dm) %>%        # Run the model
   summary                                        # Print the result      
 ```
 From the regression results, we can see that the coefficient for `SDEV` is 1.27, which is the same as the coefficient of `S` in the original wage equation. However, this regression further predicts that the hourly earnings is $19.58 for the mean years of schooling of 14.87.
 
 
-## 4. Two important results relating to OLAn example
+## 4. Two important results relating to OLS regressions
+
+These results are valid only if the model includes an intercept.
+
+1.  The mean value of the residuals is zero
+$$\overline{\hat{u}}=0$$
+As a corollary, the mean of the fitted values of $Y$ is equal to the mean of the actual values of $Y$.
+$$\overline{\hat{Y}}=\overline{Y}$$
+2.  The sample correlation between the observations on $X$ and the residuals is zero  
+Using the normal equation, we can show that $\sum{}{}X_i\hat{u}_i=0$. Together with the fact that $\overline{\hat{u}}=0$, the numerator of the sample correlation coefficient for $X$ and $\hat{u}$ is $0$, that is:
+$$\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0$$
+Hence the correlation coefficient is zero, provided that the denominator is nonzero, which means that the sample variances of $X$ and $\hat{u}$ are both nonzero.  
+As a corollary, the fitted values of the dependent variable are uncorrelated with the residuals in a simple regression model.
 
 ```{r}
 # EARNINGS regress on schooling

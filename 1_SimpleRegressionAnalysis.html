@@ -390,7 +390,7 @@ where <span class="math inline">\(Y\)</span> is usually described as the
 <strong>dependent variable</strong>, and <span class="math inline">\(X\)</span> as the <strong>explanatory
 variable</strong> or <strong>independent variable</strong> or the
 <strong>regressor</strong>. In statistical analysis, one generally
-acknowledgesthe fact that the relationship is not exact by explicitly
+acknowledges the fact that the relationship is not exact by explicitly
 including in it a random factor known as the <strong>disturbance
 term</strong>, <span class="math inline">\(u_i\)</span>.</p>
 <p><strong>The fitted model</strong>:</p>
@@ -509,7 +509,7 @@ eawe21.dm &lt;- eawe21 %&gt;%
   select(EARNINGS, S, SDEV)         # Select the required columns
 
 # EARNINGS regress on the demeaned variable SDEV
-# Use pip operator to perform the analysis
+# Using pipe (%&gt;%) operator to simplify the code
 lm(EARNINGS ~ SDEV, data = eawe21.dm) %&gt;%        # Run the model
   summary                                        # Print the result      </code></pre>
 <pre><code>## 
@@ -537,8 +537,22 @@ further predicts that the hourly earnings is $19.58 for the mean years
 of schooling of 14.87.</p>
 </div>
 </div>
-<div id="two-important-results-relating-to-olan-example" class="section level2">
-<h2>4. Two important results relating to OLAn example</h2>
+<div id="two-important-results-relating-to-ols-regressions" class="section level2">
+<h2>4. Two important results relating to OLS regressions</h2>
+<p>These results are valid only if the model includes an intercept.</p>
+<ol style="list-style-type: decimal">
+<li>The mean value of the residuals is zero <span class="math display">\[\overline{\hat{u}}=0\]</span> As a corollary, the
+mean of the fitted values of <span class="math inline">\(Y\)</span> is
+equal to the mean of the actual values of <span class="math inline">\(Y\)</span>. <span class="math display">\[\overline{\hat{Y}}=\overline{Y}\]</span></li>
+<li>The sample correlation between the observations on <span class="math inline">\(X\)</span> and the residuals is zero<br />
+Using the normal equation, we can show that <span class="math inline">\(\sum{}{}X_i\hat{u}_i=0\)</span>. Together with the
+fact that <span class="math inline">\(\overline{\hat{u}}=0\)</span>, the
+numerator of the sample correlation coefficient for <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> is <span class="math inline">\(0\)</span>, that is: <span class="math display">\[\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0\]</span>
+Hence the correlation coefficient is zero, provided that the denominator
+is nonzero, which means that the sample variances of <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> are both nonzero.<br />
+As a corollary, the fitted values of the dependent variable are
+uncorrelated with the residuals in a simple regression model.</li>
+</ol>
 <pre class="r"><code># EARNINGS regress on schooling
 eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
 linear_model &lt;- lm(EARNINGS ~ S, data = eawe21)     # Run the model
