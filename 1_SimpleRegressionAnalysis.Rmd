@@ -56,7 +56,7 @@ The square of the residual in observation $i$ in terms of $\hat{\beta_{1}}$ and 
 &=& Y_i^2+\hat{\beta}_{1}^2+\hat{\beta}_{2}^2X_i^2-2\hat{\beta}_{1}Y_i-2\hat{\beta}_{2}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}X_i \\
 \end{eqnarray}
 
-(For formatting of the above equation array, see the website [Using R Markdown for Class Reports][Eqnarray] by Cosma Shalizi for more information.)  
+
 <br />
 
 
@@ -78,7 +78,7 @@ The values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ that minimize _RSS_ must s
 \frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=0
 \end{equation}
 
-(Please see the website [https://tex.stackexchange.com/questions/288222/two-equations-in-one-line][2equations] for more information on how to format two equations on one line.)
+
 
 Hence
 $$2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0$$
@@ -109,8 +109,8 @@ The following example is adopted from an example in p. 98 of the text book. Hour
 ```{r}
 # EARNINGS regress on schooling
 eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
-linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
-summary(linear_model)                               # The result
+lin.model <- lm(EARNINGS ~ S, data = eawe21)        # Run the model
+summary(lin.model)                                  # The result
 ```
 
 The regression output gives the estimates of the intercept and the coefficient of `S`, and thus the following fitted equation:
@@ -137,15 +137,19 @@ $$SDEV_i=S_i-\overline{S}$$
 # Create the demeaned variable SDEV
 library(tidyverse)                  # Load the required package
 
-eawe21_dm <- eawe21 %>%
+eawe21.dm <- eawe21 %>%
   mutate(SDEV = S - mean(S)) %>%    # Create the demeaned variable
   select(EARNINGS, S, SDEV)         # Select the required columns
 
 # EARNINGS regress on the demeaned variable SDEV
-linear_model_dm <- lm(EARNINGS ~ SDEV, data = eawe21_dm)     # Run the model
-summary(linear_model_dm)                                     # The result      
+# Use pip operator to perform the analysis
+lm(EARNINGS ~ SDEV, data = eawe21.dm) %>%        # Run the model
+  summary                                        # Print the result      
 ```
 From the regression results, we can see that the coefficient for `SDEV` is 1.27, which is the same as the coefficient of `S` in the original wage equation. However, this regression further predicts that the hourly earnings is $19.58 for the mean years of schooling of 14.87.
+
+
+## 4. Two important results relating to OLAn example
 
 ```{r}
 # EARNINGS regress on schooling
@@ -159,10 +163,7 @@ anova(linear_model)
 # EARNINGS regress on schooling
 eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
 lm(EARNINGS ~ S, data = eawe21) %>%
-  anova
+  summary.lm()
 ```
-(Please the website [https://rc2e.com/linearregressionandanova][rc2e] for more information on regression output.)
 
-[Eqnarray]: https://www.stat.cmu.edu/~cshalizi/rmarkdown/
-[2equations]: https://tex.stackexchange.com/questions/288222/two-equations-in-one-line
-[rc2e]: https://rc2e.com/linearregressionandanova
+

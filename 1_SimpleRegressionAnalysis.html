@@ -416,9 +416,7 @@ abbreviated <em><strong>OLS</strong></em>.<br />
 Y_i^2+\hat{\beta}_{1}^2+\hat{\beta}_{2}^2X_i^2-2\hat{\beta}_{1}Y_i-2\hat{\beta}_{2}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}X_i
 \\
 \end{eqnarray}\]</span></p>
-<p>(For formatting of the above equation array, see the website <a href="https://www.stat.cmu.edu/~cshalizi/rmarkdown/">Using R Markdown
-for Class Reports</a> by Cosma Shalizi for more information.)<br />
-<br /></p>
+<p><br /></p>
 <p>Summing over all the <span class="math inline">\(n\)</span>
 observations, we can write <em>RSS</em> as</p>
 <p><span class="math display">\[RSS=\sum_{i=1}^{n}Y_i^2+n\hat{\beta}_{1}^2+\hat{\beta}_{2}^2\sum_{i=1}^{n}X_i^2-2\hat{\beta}_{1}\sum_{i=1}^{n}Y_i-2\hat{\beta}_{2}\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}\sum_{i=1}^{n}X_i\]</span></p>
@@ -434,8 +432,6 @@ and <span class="math inline">\(\hat{\beta}_{2}\)</span> that minimize
 \quad\mathrm{and}\quad
 \frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=0
 \end{equation}\]</span></p>
-<p>(Please see the website <a href="https://tex.stackexchange.com/questions/288222/two-equations-in-one-line">https://tex.stackexchange.com/questions/288222/two-equations-in-one-line</a>
-for more information on how to format two equations on one line.)</p>
 <p>Hence <span class="math display">\[2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0\]</span>
 <span class="math display">\[2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i=0\]</span>
 These equations are known as the <strong>normal equations</strong> for
@@ -459,8 +455,8 @@ grade completed, for 500 respondents from the US National Longitudinal
 Survey of Youth 1997-.</p>
 <pre class="r"><code># EARNINGS regress on schooling
 eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
-linear_model &lt;- lm(EARNINGS ~ S, data = eawe21)     # Run the model
-summary(linear_model)                               # The result</code></pre>
+lin.model &lt;- lm(EARNINGS ~ S, data = eawe21)        # Run the model
+summary(lin.model)                                  # The result</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = EARNINGS ~ S, data = eawe21)
@@ -508,16 +504,17 @@ summary(eawe21$S)</code></pre>
 <pre class="r"><code># Create the demeaned variable SDEV
 library(tidyverse)                  # Load the required package
 
-eawe21_dm &lt;- eawe21 %&gt;%
+eawe21.dm &lt;- eawe21 %&gt;%
   mutate(SDEV = S - mean(S)) %&gt;%    # Create the demeaned variable
   select(EARNINGS, S, SDEV)         # Select the required columns
 
 # EARNINGS regress on the demeaned variable SDEV
-linear_model_dm &lt;- lm(EARNINGS ~ SDEV, data = eawe21_dm)     # Run the model
-summary(linear_model_dm)                                     # The result      </code></pre>
+# Use pip operator to perform the analysis
+lm(EARNINGS ~ SDEV, data = eawe21.dm) %&gt;%        # Run the model
+  summary                                        # Print the result      </code></pre>
 <pre><code>## 
 ## Call:
-## lm(formula = EARNINGS ~ SDEV, data = eawe21_dm)
+## lm(formula = EARNINGS ~ SDEV, data = eawe21.dm)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
@@ -538,6 +535,10 @@ summary(linear_model_dm)                                     # The result      <
 <code>S</code> in the original wage equation. However, this regression
 further predicts that the hourly earnings is $19.58 for the mean years
 of schooling of 14.87.</p>
+</div>
+</div>
+<div id="two-important-results-relating-to-olan-example" class="section level2">
+<h2>4. Two important results relating to OLAn example</h2>
 <pre class="r"><code># EARNINGS regress on schooling
 eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
 linear_model &lt;- lm(EARNINGS ~ S, data = eawe21)     # Run the model
@@ -572,18 +573,25 @@ summary(linear_model)</code></pre>
 <pre class="r"><code># EARNINGS regress on schooling
 eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
 lm(EARNINGS ~ S, data = eawe21) %&gt;%
-  anova</code></pre>
-<pre><code>## Analysis of Variance Table
+  summary.lm()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = EARNINGS ~ S, data = eawe21)
 ## 
-## Response: EARNINGS
-##            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-## S           1   6014  6014.0  46.568 2.579e-11 ***
-## Residuals 498  64315   129.1                      
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -20.079  -6.726  -2.203   3.451  79.037 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.7647     2.8038   0.273    0.785    
+## S             1.2657     0.1855   6.824 2.58e-11 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>(Please the website <a href="https://rc2e.com/linearregressionandanova">https://rc2e.com/linearregressionandanova</a>
-for more information on regression output.)</p>
-</div>
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 11.36 on 498 degrees of freedom
+## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
+## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
 </div>
 
 
