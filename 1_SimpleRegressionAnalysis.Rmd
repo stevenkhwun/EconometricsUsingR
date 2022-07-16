@@ -22,7 +22,11 @@ knitr::opts_chunk$set(echo = TRUE)
 * Ordinary least squares, _OLS_
 * Normal equations
 * Demeaning
-* Goodness of fit:
+* Goodness of fit
+* Total sum of squares, _TSS_
+* Explained sum of squares, _ESS_
+* Residual sum of squares, _RSS_
+* Coefficient of determination: $R^2$
 
 
 ## 1. The simple linear model
@@ -166,12 +170,15 @@ As a corollary, the fitted values of the dependent variable are uncorrelated wit
 
 ## 5. Goodness of fit: $R^2$
 
-
+The variations in $Y$ in any sample can be summarized by
+$$TSS=\sum(Y_i-\overline{Y})^2$$
+where **_TSS_** is the **total sume of squares**, the sume of the squared deviations about its sample mean.  
+After fitting a regresseion:
+$$Y_i=\hat{Y}_i+\hat{u}_i$$
 ```{r}
 # EARNINGS regress on schooling
 eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
 linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
-summary(linear_model)
 anova(linear_model)
 ```
 

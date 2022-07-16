@@ -380,7 +380,11 @@ pre code {
 <li>Ordinary least squares, <em>OLS</em></li>
 <li>Normal equations</li>
 <li>Demeaning</li>
-<li>Goodness of fit:</li>
+<li>Goodness of fit</li>
+<li>Total sum of squares, <em>TSS</em></li>
+<li>Explained sum of squares, <em>ESS</em></li>
+<li>Residual sum of squares, <em>RSS</em></li>
+<li>Coefficient of determination: <span class="math inline">\(R^2\)</span></li>
 </ul>
 </div>
 <div id="the-simple-linear-model" class="section level2">
@@ -559,29 +563,16 @@ uncorrelated with the residuals in a simple regression model.</li>
 </div>
 <div id="goodness-of-fit-r2" class="section level2">
 <h2>5. Goodness of fit: <span class="math inline">\(R^2\)</span></h2>
+<p>The variations in <span class="math inline">\(Y\)</span> in any
+sample can be summarized by <span class="math display">\[TSS=\sum(Y_i-\overline{Y})^2\]</span> where
+<strong><em>TSS</em></strong> is the <strong>total sume of
+squares</strong>, the sume of the squared deviations about its sample
+mean.<br />
+After fitting a regresseion: <span class="math display">\[Y_i=\hat{Y}_i+\hat{u}_i\]</span></p>
 <pre class="r"><code># EARNINGS regress on schooling
 eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
 linear_model &lt;- lm(EARNINGS ~ S, data = eawe21)     # Run the model
-summary(linear_model)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = EARNINGS ~ S, data = eawe21)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -20.079  -6.726  -2.203   3.451  79.037 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   0.7647     2.8038   0.273    0.785    
-## S             1.2657     0.1855   6.824 2.58e-11 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 11.36 on 498 degrees of freedom
-## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
-## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
-<pre class="r"><code>anova(linear_model)</code></pre>
+anova(linear_model)</code></pre>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: EARNINGS
