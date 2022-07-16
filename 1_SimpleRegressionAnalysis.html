@@ -542,23 +542,25 @@ further predicts that the hourly earnings is $19.58 for the mean years
 of schooling of 14.87.</p>
 </div>
 </div>
-<div id="two-important-results-relating-to-ols-regressions" class="section level2">
-<h2>4. Two important results relating to OLS regressions</h2>
+<div id="some-important-results-relating-to-ols-regressions" class="section level2">
+<h2>4. Some important results relating to OLS regressions</h2>
 <p>These results are valid only if the model includes an intercept.
 These results hold automatically, irrespective of whether the model is
 well or poorly specified.</p>
 <ol style="list-style-type: decimal">
-<li>The mean value of the residuals is zero <span class="math display">\[\overline{\hat{u}}=0\]</span> As a corollary, the
+<li><p>The mean value of the residuals is zero <span class="math display">\[\overline{\hat{u}}=0\]</span> As a corollary, the
 mean of the fitted values of <span class="math inline">\(Y\)</span> is
-equal to the mean of the actual values of <span class="math inline">\(Y\)</span>. <span class="math display">\[\overline{\hat{Y}}=\overline{Y}\]</span></li>
-<li>The sample covariance<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> between the observations on <span class="math inline">\(X\)</span> and the residuals is zero. Using the
+equal to the mean of the actual values of <span class="math inline">\(Y\)</span>. <span class="math display">\[\overline{\hat{Y}}=\overline{Y}\]</span></p></li>
+<li><p>The sample covariance<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> between the observations on <span class="math inline">\(X\)</span> and the residuals is zero. Using the
 normal equation, we can show that <span class="math inline">\(\sum{}{}X_i\hat{u}_i=0\)</span>. Together with the
 fact that <span class="math inline">\(\overline{\hat{u}}=0\)</span>, we
 can show that the sample covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> is <span class="math inline">\(0\)</span>, that is: <span class="math display">\[\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0\]</span>
 Hence the correlation coefficient<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> is also zero, provided that the sample
 variances of <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> are both nonzero.<br />
 As a corollary, the fitted values of the dependent variable are
-uncorrelated with the residuals in a simple regression model.</li>
+uncorrelated with the residuals in a simple regression model.</p></li>
+<li><p>The fitted line must pass through the point {<span class="math inline">\(\overline{X}\)</span>,<span class="math inline">\(\overline{Y}\)</span>} representing the mean of
+the observations in the sample.</p></li>
 </ol>
 </div>
 <div id="goodness-of-fit-r2" class="section level2">
@@ -599,10 +601,11 @@ anova(lin.model)</code></pre>
 <p><em>ESS</em>, which is described as the independent variable
 <code>S</code> sum of squares, is <span class="math inline">\(6,014\)</span>. <em>TSS</em> is the sum of
 <em>ESS</em> and the <em>RSS</em>, which is described as
-<code>Residual</code> sum of squares is 64,315. Hence, <span class="math inline">\(TSS=6,014+64,315=70,329\)</span>. Dividing
+<code>Residual</code> sum of squares, is 64,315. Hence, <span class="math inline">\(TSS=6,014+64,315=70,329\)</span>. Dividing
 <em>ESS</em> by <em>TSS</em>, we have <span class="math inline">\(R^2=0.08551\)</span>, which is given by the
 command <code>summary()</code> in <code>R</code>.</p>
 <pre class="r"><code># EARNINGS regress on schooling
+# Summary of regression results, including the coefficient of determination
 summary(lin.model)</code></pre>
 <pre><code>## 
 ## Call:
@@ -622,6 +625,25 @@ summary(lin.model)</code></pre>
 ## Residual standard error: 11.36 on 498 degrees of freedom
 ## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
 ## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
+<p>Other things being equal, one would like <span class="math inline">\(R^2\)</span> to be as high as possible. In
+particular, we would like the coefficients <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> should be chosen in such a
+way as to maximize <span class="math inline">\(R^2\)</span>. On the
+other hand, the coefficients <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> should be chosen to
+minimize the sum of the squares of the residuals. In fact, the two
+criteria are equivalent since we can rewrite <span class="math inline">\(R^2\)</span> as: <span class="math display">\[R^2=1-\frac{\sum_{i=1}^{n}\hat{u}_i^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}\]</span></p>
+<p>Since <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> minimize the residual sum
+of squares, they automatically maximize <span class="math inline">\(R^2\)</span>.<br />
+<br /></p>
+</div>
+<div id="alternative-interpretation-of-r2" class="section level4">
+<h4>Alternative interpretation of <span class="math inline">\(R^2\)</span></h4>
+<p>It should be intuitively obvious that the better is the fit achieved
+by the regression equation, the higher should be the correlation
+coefficient for the actual and predicted values of <span class="math inline">\(Y\)</span>, which the correlation coefficient is
+denoted as <span class="math inline">\(r_{Y,\hat{Y}}\)</span>:</p>
+<p><span class="math display">\[r_{Y,\hat{Y}}=\frac{\sum_{i=1}^{n}(Y_i-\overline{Y})(\hat{Y}_i-\overline{Y})}{\sqrt{\sum_{i=1}^{n}(Y_i-\overline{Y})^2\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}}\]</span>
+After some algebraic manipulation, we have:</p>
+<p><span class="math display">\[r_{Y,\hat{Y}}=\sqrt{R^2}\]</span></p>
 </div>
 </div>
 <div class="footnotes footnotes-end-of-document">

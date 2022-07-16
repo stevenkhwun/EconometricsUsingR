@@ -154,7 +154,7 @@ lm(EARNINGS ~ SDEV, data = eawe21.dm) %>%        # Run the model
 From the regression results, we can see that the coefficient for `SDEV` is 1.27, which is the same as the coefficient of `S` in the original wage equation. However, this regression further predicts that the hourly earnings is $19.58 for the mean years of schooling of 14.87.
 
 
-## 4. Two important results relating to OLS regressions
+## 4. Some important results relating to OLS regressions
 
 These results are valid only if the model includes an intercept. These results hold automatically, irrespective of whether the model is well or poorly specified.
 
@@ -167,6 +167,9 @@ Using the normal equation, we can show that $\sum{}{}X_i\hat{u}_i=0$. Together w
 $$\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0$$
 Hence the correlation coefficient^[The correlation of two random variables $X$ and $Y$, denoted by $\rho(X,Y)$, is defined as $\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$] is also zero, provided that the sample variances of $X$ and $\hat{u}$ are both nonzero.  
 As a corollary, the fitted values of the dependent variable are uncorrelated with the residuals in a simple regression model.
+
+3.  The fitted line must pass through the point {$\overline{X}$,$\overline{Y}$} representing the mean of the observations in the sample.
+
 
 ## 5. Goodness of fit: $R^2$
 
@@ -196,11 +199,23 @@ The value of _ESS_ and _RSS_ are provided by the command `anova()` in `R`.
 # Analysis of variance table
 anova(lin.model)
 ```
-_ESS_, which is described as the independent variable `S` sum of squares, is $6,014$. _TSS_ is the sum of _ESS_ and the _RSS_, which is described as `Residual` sum of squares is 64,315. Hence, $TSS=6,014+64,315=70,329$. 
+_ESS_, which is described as the independent variable `S` sum of squares, is $6,014$. _TSS_ is the sum of _ESS_ and the _RSS_, which is described as `Residual` sum of squares, is 64,315. Hence, $TSS=6,014+64,315=70,329$. 
 Dividing _ESS_ by _TSS_, we have $R^2=0.08551$, which is given by the command `summary()` in `R`.
 ```{r}
 # EARNINGS regress on schooling
+# Summary of regression results, including the coefficient of determination
 summary(lin.model)
 ```
+Other things being equal, one would like $R^2$ to be as high as possible. In particular, we would like the coefficients $\hat{\beta}_1$ and $\hat{\beta}_2$ should be chosen in such a way as to maximize $R^2$. On the other hand, the coefficients $\hat{\beta}_1$ and $\hat{\beta}_2$ should be chosen to minimize the sum of the squares of the residuals. In fact, the two criteria are equivalent since we can rewrite $R^2$ as:
+$$R^2=1-\frac{\sum_{i=1}^{n}\hat{u}_i^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}$$
 
+Since $\hat{\beta}_1$ and $\hat{\beta}_2$ minimize the residual sum of squares, they automatically maximize $R^2$.  
+<br />
 
+#### Alternative interpretation of $R^2$
+It should be intuitively obvious that the better is the fit achieved by the regression equation, the higher should be the correlation coefficient for the actual and predicted values of $Y$, which the correlation coefficient is denoted as $r_{Y,\hat{Y}}$:
+
+$$r_{Y,\hat{Y}}=\frac{\sum_{i=1}^{n}(Y_i-\overline{Y})(\hat{Y}_i-\overline{Y})}{\sqrt{\sum_{i=1}^{n}(Y_i-\overline{Y})^2\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}}$$
+After some algebraic manipulation, we have:
+
+$$r_{Y,\hat{Y}}=\sqrt{R^2}$$
