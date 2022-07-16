@@ -1,7 +1,7 @@
 ---
-title: "Simple Regression Analysis"
+title: "Properties of the Regression Coefficients and Hypothesis Testing"
 author: "SW"
-date: "2022/7/10"
+date: "2022/7/16"
 output:
   html_document: default
   pdf_document: default
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Key terms
 
-* Dependent variable
+* Classical linear regression model (CLRM)
 * Explanatory variable, independent variable, regressor
 * Disturbance term
 * Residual
