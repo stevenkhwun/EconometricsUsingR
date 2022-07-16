@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * Ordinary least squares, _OLS_
 * Normal equations
 * Demeaning
+* Goodness of fit:
 
 
 ## 1. The simple linear model
@@ -151,17 +152,20 @@ From the regression results, we can see that the coefficient for `SDEV` is 1.27,
 
 ## 4. Two important results relating to OLS regressions
 
-These results are valid only if the model includes an intercept.
+These results are valid only if the model includes an intercept. These results hold automatically, irrespective of whether the model is well or poorly specified.
 
 1.  The mean value of the residuals is zero
 $$\overline{\hat{u}}=0$$
 As a corollary, the mean of the fitted values of $Y$ is equal to the mean of the actual values of $Y$.
 $$\overline{\hat{Y}}=\overline{Y}$$
-2.  The sample correlation between the observations on $X$ and the residuals is zero  
-Using the normal equation, we can show that $\sum{}{}X_i\hat{u}_i=0$. Together with the fact that $\overline{\hat{u}}=0$, the numerator of the sample correlation coefficient for $X$ and $\hat{u}$ is $0$, that is:
+2.  The sample covariance^[By definition, $Cov(X,Y)=E[(X-E[X])(Y-E[Y])]$. Hence, $Cov(X,\hat{u})=E[(X-E[X])(\hat{u}-E[\hat{u}])]=\frac{1}{n}\sum_{i=1}^{n}[(X_i-E[X])(\hat{u}_i-E(\hat{u})]$.] between the observations on $X$ and the residuals is zero. 
+Using the normal equation, we can show that $\sum{}{}X_i\hat{u}_i=0$. Together with the fact that $\overline{\hat{u}}=0$, we can show that the sample covariance between $X$ and $\hat{u}$ is $0$, that is:
 $$\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0$$
-Hence the correlation coefficient is zero, provided that the denominator is nonzero, which means that the sample variances of $X$ and $\hat{u}$ are both nonzero.  
+Hence the correlation coefficient^[The correlation of two random variables $X$ and $Y$, denoted by $\rho(X,Y)$, is defined as $\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$] is also zero, provided that the sample variances of $X$ and $\hat{u}$ are both nonzero.  
 As a corollary, the fitted values of the dependent variable are uncorrelated with the residuals in a simple regression model.
+
+## 5. Goodness of fit: $R^2$
+
 
 ```{r}
 # EARNINGS regress on schooling

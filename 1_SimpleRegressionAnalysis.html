@@ -380,6 +380,7 @@ pre code {
 <li>Ordinary least squares, <em>OLS</em></li>
 <li>Normal equations</li>
 <li>Demeaning</li>
+<li>Goodness of fit:</li>
 </ul>
 </div>
 <div id="the-simple-linear-model" class="section level2">
@@ -539,20 +540,25 @@ of schooling of 14.87.</p>
 </div>
 <div id="two-important-results-relating-to-ols-regressions" class="section level2">
 <h2>4. Two important results relating to OLS regressions</h2>
-<p>These results are valid only if the model includes an intercept.</p>
+<p>These results are valid only if the model includes an intercept.
+These results hold automatically, irrespective of whether the model is
+well or poorly specified.</p>
 <ol style="list-style-type: decimal">
 <li>The mean value of the residuals is zero <span class="math display">\[\overline{\hat{u}}=0\]</span> As a corollary, the
 mean of the fitted values of <span class="math inline">\(Y\)</span> is
 equal to the mean of the actual values of <span class="math inline">\(Y\)</span>. <span class="math display">\[\overline{\hat{Y}}=\overline{Y}\]</span></li>
-<li>The sample correlation between the observations on <span class="math inline">\(X\)</span> and the residuals is zero<br />
-Using the normal equation, we can show that <span class="math inline">\(\sum{}{}X_i\hat{u}_i=0\)</span>. Together with the
-fact that <span class="math inline">\(\overline{\hat{u}}=0\)</span>, the
-numerator of the sample correlation coefficient for <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> is <span class="math inline">\(0\)</span>, that is: <span class="math display">\[\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0\]</span>
-Hence the correlation coefficient is zero, provided that the denominator
-is nonzero, which means that the sample variances of <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> are both nonzero.<br />
+<li>The sample covariance<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> between the observations on <span class="math inline">\(X\)</span> and the residuals is zero. Using the
+normal equation, we can show that <span class="math inline">\(\sum{}{}X_i\hat{u}_i=0\)</span>. Together with the
+fact that <span class="math inline">\(\overline{\hat{u}}=0\)</span>, we
+can show that the sample covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> is <span class="math inline">\(0\)</span>, that is: <span class="math display">\[\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0\]</span>
+Hence the correlation coefficient<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> is also zero, provided that the sample
+variances of <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> are both nonzero.<br />
 As a corollary, the fitted values of the dependent variable are
 uncorrelated with the residuals in a simple regression model.</li>
 </ol>
+</div>
+<div id="goodness-of-fit-r2" class="section level2">
+<h2>5. Goodness of fit: <span class="math inline">\(R^2\)</span></h2>
 <pre class="r"><code># EARNINGS regress on schooling
 eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
 linear_model &lt;- lm(EARNINGS ~ S, data = eawe21)     # Run the model
@@ -606,6 +612,14 @@ lm(EARNINGS ~ S, data = eawe21) %&gt;%
 ## Residual standard error: 11.36 on 498 degrees of freedom
 ## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
 ## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>By definition, <span class="math inline">\(Cov(X,Y)=E[(X-E[X])(Y-E[Y])]\)</span>. Hence,
+<span class="math inline">\(Cov(X,\hat{u})=E[(X-E[X])(\hat{u}-E[\hat{u}])]=\frac{1}{n}\sum_{i=1}^{n}[(X_i-E[X])(\hat{u}_i-E(\hat{u})]\)</span>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>The correlation of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, denoted by <span class="math inline">\(\rho(X,Y)\)</span>, is defined as <span class="math inline">\(\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}\)</span><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 
