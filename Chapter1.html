@@ -185,7 +185,6 @@ pre code {
 <li>Goodness of fit</li>
 <li>Total sum of squares, <em>TSS</em></li>
 <li>Explained sum of squares, <em>ESS</em></li>
-<li>Residual sum of squares, <em>RSS</em></li>
 <li>Coefficient of determination: <span class="math inline">\(R^2\)</span></li>
 </ul>
 </div>
@@ -352,7 +351,7 @@ summary(lin.model)</code></pre>
 ## Residual standard error: 11.36 on 498 degrees of freedom
 ## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
 ## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
-<p>Other things being equal, one would like <span class="math inline">\(R^2\)</span> to be as high as possible. In particular, we would like the coefficients <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> should be chosen in such a way as to maximize <span class="math inline">\(R^2\)</span>. On the other hand, the coefficients <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> should be chosen to minimize the sum of the squares of the residuals. In fact, the two criteria are equivalent since we can rewrite <span class="math inline">\(R^2\)</span> as: <span class="math display">\[R^2=1-\frac{\sum_{i=1}^{n}\hat{u}_i^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}\]</span></p>
+<p>Other things being equal, one would like <span class="math inline">\(R^2\)</span> to be as high as possible. In particular, we would like the coefficients <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> should be chosen in such a way as to maximize <span class="math inline">\(R^2\)</span>. On the other hand, the coefficients <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> should be chosen to minimize the sum of the squares of the residuals. In fact, the two criteria are equivalent since we can rewrite <span class="math inline">\(R^2\)</span> as: <span class="math display">\[R^2=1-\frac{RSS}{TSS}=1-\frac{\sum_{i=1}^{n}\hat{u}_i^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}\]</span></p>
 <p>Since <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> minimize the residual sum of squares, they automatically maximize <span class="math inline">\(R^2\)</span>.<br />
 <br /></p>
 </div>

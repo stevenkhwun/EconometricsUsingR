@@ -25,7 +25,6 @@ knitr::opts_chunk$set(echo = TRUE)
 * Goodness of fit
 * Total sum of squares, _TSS_
 * Explained sum of squares, _ESS_
-* Residual sum of squares, _RSS_
 * Coefficient of determination: $R^2$
 
 
@@ -207,7 +206,7 @@ Dividing _ESS_ by _TSS_, we have $R^2=0.08551$, which is given by the command `s
 summary(lin.model)
 ```
 Other things being equal, one would like $R^2$ to be as high as possible. In particular, we would like the coefficients $\hat{\beta}_1$ and $\hat{\beta}_2$ should be chosen in such a way as to maximize $R^2$. On the other hand, the coefficients $\hat{\beta}_1$ and $\hat{\beta}_2$ should be chosen to minimize the sum of the squares of the residuals. In fact, the two criteria are equivalent since we can rewrite $R^2$ as:
-$$R^2=1-\frac{\sum_{i=1}^{n}\hat{u}_i^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}$$
+$$R^2=1-\frac{RSS}{TSS}=1-\frac{\sum_{i=1}^{n}\hat{u}_i^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}$$
 
 Since $\hat{\beta}_1$ and $\hat{\beta}_2$ minimize the residual sum of squares, they automatically maximize $R^2$.  
 <br />
