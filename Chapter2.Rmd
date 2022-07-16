@@ -1,7 +1,7 @@
 ---
-title: "Simple Regression Analysis"
+title: "Properties of the Regression Coefficients and Hypothesis Testing"
 author: "SW"
-date: "2022/7/10"
+date: "2022/7/16"
 output:
   html_document: default
   pdf_document: default
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Key terms
 
-* Dependent variable
+* Classical linear regression model (CLRM)
 * Explanatory variable, independent variable, regressor
 * Disturbance term
 * Residual
@@ -22,6 +22,11 @@ knitr::opts_chunk$set(echo = TRUE)
 * Ordinary least squares, _OLS_
 * Normal equations
 * Demeaning
+* Goodness of fit
+* Total sum of squares, _TSS_
+* Explained sum of squares, _ESS_
+* Residual sum of squares, _RSS_
+* Coefficient of determination: $R^2$
 
 
 ## 1. The simple linear model
@@ -29,7 +34,7 @@ knitr::opts_chunk$set(echo = TRUE)
 **The model**:
 
 $$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
-where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledgesthe fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $u_i$.
+where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $u_i$.
 
 **The fitted model**:
 
@@ -56,7 +61,7 @@ The square of the residual in observation $i$ in terms of $\hat{\beta_{1}}$ and 
 &=& Y_i^2+\hat{\beta}_{1}^2+\hat{\beta}_{2}^2X_i^2-2\hat{\beta}_{1}Y_i-2\hat{\beta}_{2}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}X_i \\
 \end{eqnarray}
 
-(For formatting of the above equation array, see the website [Using R Markdown for Class Reports][Eqnarray] by Cosma Shalizi for more information.)  
+
 <br />
 
 
@@ -78,7 +83,7 @@ The values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ that minimize _RSS_ must s
 \frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=0
 \end{equation}
 
-(Please see the website [https://tex.stackexchange.com/questions/288222/two-equations-in-one-line][2equations] for more information on how to format two equations on one line.)
+
 
 Hence
 $$2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0$$
@@ -109,8 +114,8 @@ The following example is adopted from an example in p. 98 of the text book. Hour
 ```{r}
 # EARNINGS regress on schooling
 eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
-linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
-summary(linear_model)                               # The result
+lin.model <- lm(EARNINGS ~ S, data = eawe21)        # Run the model
+summary(lin.model)                                  # The result
 ```
 
 The regression output gives the estimates of the intercept and the coefficient of `S`, and thus the following fitted equation:
@@ -137,32 +142,80 @@ $$SDEV_i=S_i-\overline{S}$$
 # Create the demeaned variable SDEV
 library(tidyverse)                  # Load the required package
 
-eawe21_dm <- eawe21 %>%
+eawe21.dm <- eawe21 %>%
   mutate(SDEV = S - mean(S)) %>%    # Create the demeaned variable
   select(EARNINGS, S, SDEV)         # Select the required columns
 
 # EARNINGS regress on the demeaned variable SDEV
-linear_model_dm <- lm(EARNINGS ~ SDEV, data = eawe21_dm)     # Run the model
-summary(linear_model_dm)                                     # The result      
+# Using pipe (%>%) operator to simplify the code
+lm(EARNINGS ~ SDEV, data = eawe21.dm) %>%        # Run the model
+  summary                                        # Print the result      
 ```
 From the regression results, we can see that the coefficient for `SDEV` is 1.27, which is the same as the coefficient of `S` in the original wage equation. However, this regression further predicts that the hourly earnings is $19.58 for the mean years of schooling of 14.87.
 
+
+## 4. Some important results relating to OLS regressions
+
+These results are valid only if the model includes an intercept. These results hold automatically, irrespective of whether the model is well or poorly specified.
+
+1.  The mean value of the residuals is zero
+$$\overline{\hat{u}}=0$$
+As a corollary, the mean of the fitted values of $Y$ is equal to the mean of the actual values of $Y$.
+$$\overline{\hat{Y}}=\overline{Y}$$
+2.  The sample covariance^[By definition, $Cov(X,Y)=E[(X-E[X])(Y-E[Y])]$. Hence, $Cov(X,\hat{u})=E[(X-E[X])(\hat{u}-E[\hat{u}])]=\frac{1}{n}\sum_{i=1}^{n}[(X_i-E[X])(\hat{u}_i-E(\hat{u})]$.] between the observations on $X$ and the residuals is zero. 
+Using the normal equation, we can show that $\sum{}{}X_i\hat{u}_i=0$. Together with the fact that $\overline{\hat{u}}=0$, we can show that the sample covariance between $X$ and $\hat{u}$ is $0$, that is:
+$$\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0$$
+Hence the correlation coefficient^[The correlation of two random variables $X$ and $Y$, denoted by $\rho(X,Y)$, is defined as $\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$] is also zero, provided that the sample variances of $X$ and $\hat{u}$ are both nonzero.  
+As a corollary, the fitted values of the dependent variable are uncorrelated with the residuals in a simple regression model.
+
+3.  The fitted line must pass through the point {$\overline{X}$,$\overline{Y}$} representing the mean of the observations in the sample.
+
+
+## 5. Goodness of fit: $R^2$
+
+The variations in $Y$ in any sample can be summarized by
+$$TSS=\sum(Y_i-\overline{Y})^2$$
+where **_TSS_** is the **total sume of squares**, the sume of the squared deviations about its sample mean.  
+<br />
+After fitting a regresseion:
+$$Y_i=\hat{Y}_i+\hat{u}_i$$
+We can use this to decompose $\sum(Y_i-\overline{Y})^2$:
+$$\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}([\hat{Y}_i+\hat{u}_i]-[\overline{\hat{Y}}+\overline{\hat{u}}])^2$$
+After some algebraic manipulation, we have:
+$$\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2+\sum_{i=1}^{n}\hat{u}_i^2$$
+Thus we have the decomposition
+$$TSS=ESS+RSS$$
+where **_ESS_**, the **explained sum of squares**, and **_RSS_**, the **residual sume of squares**, are the two terms on the right side.  
+<br />
+
+#### Coefficient of determination
+
+The proportion of the total sum of squares explained by the regression line is known as the **coefficient of determination** or, more usually, $R^2$:
+
+$$R^2=\frac{ESS}{TSS}=\frac{\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}$$
+The value of _ESS_ and _RSS_ are provided by the command `anova()` in `R`. 
 ```{r}
 # EARNINGS regress on schooling
-eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
-linear_model <- lm(EARNINGS ~ S, data = eawe21)     # Run the model
-summary(linear_model)
-anova(linear_model)
+# Analysis of variance table
+anova(lin.model)
 ```
-
+_ESS_, which is described as the independent variable `S` sum of squares, is $6,014$. _TSS_ is the sum of _ESS_ and the _RSS_, which is described as `Residual` sum of squares, is 64,315. Hence, $TSS=6,014+64,315=70,329$. 
+Dividing _ESS_ by _TSS_, we have $R^2=0.08551$, which is given by the command `summary()` in `R`.
 ```{r}
 # EARNINGS regress on schooling
-eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
-lm(EARNINGS ~ S, data = eawe21) %>%
-  anova
+# Summary of regression results, including the coefficient of determination
+summary(lin.model)
 ```
-(Please the website [https://rc2e.com/linearregressionandanova][rc2e] for more information on regression output.)
+Other things being equal, one would like $R^2$ to be as high as possible. In particular, we would like the coefficients $\hat{\beta}_1$ and $\hat{\beta}_2$ should be chosen in such a way as to maximize $R^2$. On the other hand, the coefficients $\hat{\beta}_1$ and $\hat{\beta}_2$ should be chosen to minimize the sum of the squares of the residuals. In fact, the two criteria are equivalent since we can rewrite $R^2$ as:
+$$R^2=1-\frac{\sum_{i=1}^{n}\hat{u}_i^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}$$
 
-[Eqnarray]: https://www.stat.cmu.edu/~cshalizi/rmarkdown/
-[2equations]: https://tex.stackexchange.com/questions/288222/two-equations-in-one-line
-[rc2e]: https://rc2e.com/linearregressionandanova
+Since $\hat{\beta}_1$ and $\hat{\beta}_2$ minimize the residual sum of squares, they automatically maximize $R^2$.  
+<br />
+
+#### Alternative interpretation of $R^2$
+It should be intuitively obvious that the better is the fit achieved by the regression equation, the higher should be the correlation coefficient for the actual and predicted values of $Y$, which the correlation coefficient is denoted as $r_{Y,\hat{Y}}$:
+
+$$r_{Y,\hat{Y}}=\frac{\sum_{i=1}^{n}(Y_i-\overline{Y})(\hat{Y}_i-\overline{Y})}{\sqrt{\sum_{i=1}^{n}(Y_i-\overline{Y})^2\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}}$$
+After some algebraic manipulation, we have:
+
+$$r_{Y,\hat{Y}}=\sqrt{R^2}$$
