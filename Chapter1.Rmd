@@ -120,7 +120,25 @@ summary(lin.model)                                  # The result
 The regression output gives the estimates of the intercept and the coefficient of `S`, and thus the following fitted equation:
 
 $$\hat{EARNINGS}=0.76+1.27S$$
-Interpreting the equation literally, the slope coefficient indicates that, as `S` increases by one unit, `EARNINGS` increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.
+Interpreting the equation literally, the slope coefficient indicates that, as `S` increases by one unit, `EARNINGS` increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.  
+<br />
+The following `R` codes produces a plot of the data together with the regression line.
+
+```{r}
+# EARNINGS regress on schooling
+# Plot the data
+plot(EARNINGS ~ S, 
+     data = eawe21,
+     main = "A simple wage equation", 
+     xlab = "Years of schooling (highest grade completed)",
+     ylab = "Hourly earnings ($)",
+     xlim = c(0, 20),
+     ylim = c(0, 120))
+
+abline(lin.model)              # Add the regression line
+
+```
+
 
 #### Demeaning
 Often the intercept in a regression equation has no sensible interpretation because $X=0$ is distant from the data range. The wage equation above is an example, with the intercept being implausibly low.  
