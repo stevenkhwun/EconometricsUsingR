@@ -568,11 +568,26 @@ sample can be summarized by <span class="math display">\[TSS=\sum(Y_i-\overline{
 <strong><em>TSS</em></strong> is the <strong>total sume of
 squares</strong>, the sume of the squared deviations about its sample
 mean.<br />
-After fitting a regresseion: <span class="math display">\[Y_i=\hat{Y}_i+\hat{u}_i\]</span></p>
+<br /> After fitting a regresseion: <span class="math display">\[Y_i=\hat{Y}_i+\hat{u}_i\]</span> We can use this
+to decompose <span class="math inline">\(\sum(Y_i-\overline{Y})^2\)</span>: <span class="math display">\[\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}([\hat{Y}_i+\hat{u}_i]-[\overline{\hat{Y}}+\overline{\hat{u}}])^2\]</span>
+After some algebraic manipulation, we have: <span class="math display">\[\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2+\sum_{i=1}^{n}\hat{u}_i^2\]</span>
+Thus we have the decomposition <span class="math display">\[TSS=ESS+RSS\]</span> where
+<strong><em>ESS</em></strong>, the <strong>explained sum of
+squares</strong>, and <strong><em>RSS</em></strong>, the
+<strong>residual sume of squares</strong>, are the two terms on the
+right side.<br />
+<br /></p>
+<div id="coefficient-of-determination" class="section level4">
+<h4>Coefficient of determination</h4>
+<p>The proportion of the total sum of squares explained by the
+regression line is known as the <strong>coefficient of
+determination</strong> or, more usually, <span class="math inline">\(R^2\)</span>:</p>
+<p><span class="math display">\[R^2=\frac{ESS}{TSS}=\frac{\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}\]</span>
+The value of <em>ESS</em> and <em>RSS</em> are provided by the command
+<code>anova()</code> in <code>R</code>.</p>
 <pre class="r"><code># EARNINGS regress on schooling
-eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
-linear_model &lt;- lm(EARNINGS ~ S, data = eawe21)     # Run the model
-anova(linear_model)</code></pre>
+# Analysis of variance table
+anova(lin.model)</code></pre>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: EARNINGS
@@ -581,10 +596,14 @@ anova(linear_model)</code></pre>
 ## Residuals 498  64315   129.1                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><em>ESS</em>, which is described as the independent variable
+<code>S</code> sum of squares, is <span class="math inline">\(6,014\)</span>. <em>TSS</em> is the sum of
+<em>ESS</em> and the <em>RSS</em>, which is described as
+<code>Residual</code> sum of squares is 64,315. Hence, <span class="math inline">\(TSS=6,014+64,315=70,329\)</span>. Dividing
+<em>ESS</em> by <em>TSS</em>, we have <span class="math inline">\(R^2=0.08551\)</span>, which is given by the
+command <code>summary()</code> in <code>R</code>.</p>
 <pre class="r"><code># EARNINGS regress on schooling
-eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)   # Import data
-lm(EARNINGS ~ S, data = eawe21) %&gt;%
-  summary.lm()</code></pre>
+summary(lin.model)</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = EARNINGS ~ S, data = eawe21)
@@ -603,6 +622,7 @@ lm(EARNINGS ~ S, data = eawe21) %&gt;%
 ## Residual standard error: 11.36 on 498 degrees of freedom
 ## Multiple R-squared:  0.08551,    Adjusted R-squared:  0.08368 
 ## F-statistic: 46.57 on 1 and 498 DF,  p-value: 2.579e-11</code></pre>
+</div>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
