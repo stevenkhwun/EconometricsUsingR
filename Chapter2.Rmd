@@ -29,20 +29,43 @@ knitr::opts_chunk$set(echo = TRUE)
 * Coefficient of determination: $R^2$
 
 
-## 1. The simple linear model
+## 1. Assumptions for regression models with nonstochastic regressors
 
-**The model**:
+**Assumption 1**:
+The regression model is **linear in the parameters**, though it may or may not be linear in the variables. That is the regression model as shown in the following equation:
 
 $$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
-where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $u_i$.
+'Linear in parameters' means that each term on the right side includes a $\beta$ parameter as a simple factor and there is no built-in relationship among the $\beta$ parameters.
 
-**The fitted model**:
+**Assumption 2**:
+Values taken by the regressor $X$ may be considered fixed in repeated samples. This is equivalent to the assumption that the independent variable in question is controlled by the researcher, who can change its value in accordance with experimental objectives. Such an assumption is unrealistic in the study of most business and economic problems; it has been made for expositional purposes.
 
-$$\hat{Y_{i}}=\hat{\beta_{1}}+\hat{\beta_{2}}X_{i}$$
+**Assumption 3**:
+Given the value of $X_i$, the mean, or expected, value of the random disturbance term $u_i$ is zero. Symbolically, we have
+$$E(u_i|X_i,...,X_n)=0~~~ \forall~~ i$$
+$$E(u_i|X_i,...,X_n)=0 ~~~ for~all ~~ i$$
 
-The difference between the actual value of $Y_{i}$ and the fitted value $\hat{Y_{i}}$, in observation $i$ is known as the **residual** in the observation $i$. It will be denoted \hat{\mu_{i}}:
+\begin{equation}
+E(u_i|X_i,...,X_n)=0
+\quad\mathrm{for~~all}\quad
+i
+\end{equation}
 
-$$\hat{u}_{i}=Y_{i}-\hat{Y_{i}}$$
+To simplify the appearance of the algebra, we will take the conditionality for granted and not write it explicitly each time.
+$$E(u_i)=0 ~~~\forall ~~ i$$
+Note that the assumption $E(u_i|X_i)=0$ implies that $E(Y_i|X_i)=\beta_1+\beta_2X_i$. (Why?) Note also that if the conditional mean of one variable given another random variable is zero, the covariance between the two variables is zero and hence the two variables are uncorrelated. Assumption 3 therefore implies that $X_i$ and $u_i$ are uncorrelated.^[The converse, however, is not true because correlation is a measure of linear association only. That is, even if $X_i$ and $u_i$ are uncorrelated, the conditional mean of $u_i$ given $X_i$ may not be zero. However, if $X_i$ and $u_i$ are correlated, $E(u_i|X_i)$ must be nonzero, violating Assumption 3. See James H. Stock and Mark W, Watson, _Introduction to Econometrics_, Addison-Wesley, Boston, 2003, pp. 104--105.]
+
+It is important to point out that Assumption 3 implies that there is no **specification bias** or **specification error** in the model used in empirical analysis. In other words, the regression model is correctly specified.
+
+Actually, it is usually reasonable to assume that Assumption 3 is satisfied automatically if an intercept is included in the regression equation. This is because the role of the intercept is to pick up any systematic, but constant, tendency in $Y$ not accounted for by the explanatory variables included in the regression equation.
+
+**Assumption 4**:
+The disturbance term is **homoskedastic**. This means that its value in each observation is drawn from a distribution with constant population variance:
+
+$$E\{(u_i-\mu_u)^2\}=\sigma_u^2 ~~~ for~all~~i$$
+Since $E(u_i)=\mu_u=0$ by virtue of Assumption 3, the condition may also be written
+
+$$E(u_i^2)=\sigma_u^2 ~~~ for~all~~i$$
 
 
 ## 2. Derivation of the regression coefficients
