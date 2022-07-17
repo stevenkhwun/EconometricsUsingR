@@ -374,9 +374,9 @@ and Hypothesis Testing</h1>
 <h2>Key terms</h2>
 <ul>
 <li>Classical linear regression model (CLRM)</li>
-<li>Explanatory variable, independent variable, regressor</li>
-<li>Disturbance term</li>
-<li>Residual</li>
+<li>Homoskedastic</li>
+<li>Heteroscedastic</li>
+<li>Autocorrelation</li>
 <li>Residual sum of squares, <em>RSS</em></li>
 <li>Ordinary least squares, <em>OLS</em></li>
 <li>Normal equations</li>
@@ -391,38 +391,45 @@ and Hypothesis Testing</h1>
 <div id="assumptions-for-regression-models-with-nonstochastic-regressors" class="section level2">
 <h2>1. Assumptions for regression models with nonstochastic
 regressors</h2>
-<p><strong>Assumption 1</strong>: The regression model is <strong>linear
-in the parameters</strong>, though it may or may not be linear in the
-variables. That is the regression model as shown in the following
-equation:</p>
+<p>This list of assumptions, excluding Assumption 6, constitutes the
+<strong>classical linear regression model</strong>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a><br />
+<br /></p>
+<div id="assumption-1" class="section level4">
+<h4>Assumption 1</h4>
+<p>The regression model is <strong>linear in the parameters</strong>,
+though it may or may not be linear in the variables. That is the
+regression model as shown in the following equation:</p>
 <p><span class="math display">\[Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}\]</span>
 ‘Linear in parameters’ means that each term on the right side includes a
 <span class="math inline">\(\beta\)</span> parameter as a simple factor
-and there is no built-in relationship among the <span class="math inline">\(\beta\)</span> parameters.</p>
-<p><strong>Assumption 2</strong>: Values taken by the regressor <span class="math inline">\(X\)</span> may be considered fixed in repeated
-samples. This is equivalent to the assumption that the independent
-variable in question is controlled by the researcher, who can change its
-value in accordance with experimental objectives. Such an assumption is
-unrealistic in the study of most business and economic problems; it has
-been made for expositional purposes.</p>
-<p><strong>Assumption 3</strong>: Given the value of <span class="math inline">\(X_i\)</span>, the mean, or expected, value of the
-random disturbance term <span class="math inline">\(u_i\)</span> is
-zero. Symbolically, we have <span class="math display">\[E(u_i|X_i,...,X_n)=0~~~ \forall~~ i\]</span>
-<span class="math display">\[E(u_i|X_i,...,X_n)=0 ~~~ for~all ~~
+and there is no built-in relationship among the <span class="math inline">\(\beta\)</span> parameters.<br />
+<br /></p>
+</div>
+<div id="assumption-2" class="section level4">
+<h4>Assumption 2</h4>
+<p>Values taken by the regressor <span class="math inline">\(X\)</span>
+may be considered fixed in repeated samples. This is equivalent to the
+assumption that the independent variable in question is controlled by
+the researcher, who can change its value in accordance with experimental
+objectives. Such an assumption is unrealistic in the study of most
+business and economic problems; it has been made for expositional
+purposes.<br />
+<br /></p>
+</div>
+<div id="assumption-3" class="section level4">
+<h4>Assumption 3</h4>
+<p>Given the value of <span class="math inline">\(X_i\)</span>, the
+mean, or expected, value of the random disturbance term <span class="math inline">\(u_i\)</span> is zero. Symbolically, we have</p>
+<p><span class="math display">\[E(u_i|X_i,...,X_n)=0 ~~~ for~all ~~
 i\]</span></p>
-<p><span class="math display">\[\begin{equation}
-E(u_i|X_i,...,X_n)=0
-\quad\mathrm{for~~all}\quad
-i
-\end{equation}\]</span></p>
 <p>To simplify the appearance of the algebra, we will take the
-conditionality for granted and not write it explicitly each time. <span class="math display">\[E(u_i)=0 ~~~\forall ~~ i\]</span> Note that the
+conditionality for granted and not write it explicitly each time. <span class="math display">\[E(u_i)=0 ~~~ for~all ~~ i\]</span> Note that the
 assumption <span class="math inline">\(E(u_i|X_i)=0\)</span> implies
 that <span class="math inline">\(E(Y_i|X_i)=\beta_1+\beta_2X_i\)</span>.
 (Why?) Note also that if the conditional mean of one variable given
 another random variable is zero, the covariance between the two
 variables is zero and hence the two variables are uncorrelated.
-Assumption 3 therefore implies that <span class="math inline">\(X_i\)</span> and <span class="math inline">\(u_i\)</span> are uncorrelated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+Assumption 3 therefore implies that <span class="math inline">\(X_i\)</span> and <span class="math inline">\(u_i\)</span> are uncorrelated.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>It is important to point out that Assumption 3 implies that there is
 no <strong>specification bias</strong> or <strong>specification
 error</strong> in the model used in empirical analysis. In other words,
@@ -431,22 +438,70 @@ the regression model is correctly specified.</p>
 satisfied automatically if an intercept is included in the regression
 equation. This is because the role of the intercept is to pick up any
 systematic, but constant, tendency in <span class="math inline">\(Y\)</span> not accounted for by the explanatory
-variables included in the regression equation.</p>
-<p><strong>Assumption 4</strong>: The disturbance term is
-<strong>homoskedastic</strong>. This means that its value in each
-observation is drawn from a distribution with constant population
-variance:</p>
+variables included in the regression equation.<br />
+<br /></p>
+</div>
+<div id="assumption-4" class="section level4">
+<h4>Assumption 4</h4>
+<p>The disturbance term is <strong>homoskedastic</strong>. This means
+that its value in each observation is drawn from a distribution with
+constant population variance:</p>
 <p><span class="math display">\[E\{(u_i-\mu_u)^2\}=\sigma_u^2 ~~~
 for~all~~i\]</span> Since <span class="math inline">\(E(u_i)=\mu_u=0\)</span> by virtue of Assumption 3,
 the condition may also be written</p>
 <p><span class="math display">\[E(u_i^2)=\sigma_u^2 ~~~
 for~all~~i\]</span> Note that Assumption 4 implies that the conditional
 variances of <span class="math inline">\(Y_i\)</span> are also
-homoscedastic.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> That is, <span class="math display">\[var(Y_i|X_i)=\sigma^2\]</span> Of course, the
+homoscedastic.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> That is, <span class="math display">\[var(Y_i|X_i)=\sigma^2\]</span> Of course, the
 <em>unconditional variance</em> of <span class="math inline">\(Y\)</span> is <span class="math inline">\(\sigma_Y^2\)</span>.</p>
+<p>In contrast, where the conditional variance of the <span class="math inline">\(Y\)</span> population varies with <span class="math inline">\(X\)</span>, this situation is known appropriately
+as <strong>heteroscedasticity</strong>, or unequal
+<strong>spread</strong>, or <strong>variance</strong>. Symbolically,
+<span class="math display">\[var(u_i|X_i)=\sigma_i^2\]</span> If
+Assumption 4 is not satisfied, the OLS regression coefficient will be
+inefficient.<br />
+<br /></p>
 </div>
-<div id="derivation-of-the-regression-coefficients" class="section level2">
-<h2>2. Derivation of the regression coefficients</h2>
+<div id="assumption-5" class="section level4">
+<h4>Assumption 5</h4>
+<p>The values of the disturbance term have independent distributions.
+That is, <span class="math inline">\(u_i\)</span> is distributed
+independently of <span class="math inline">\(u_j\)</span> for all <span class="math inline">\(j \ne i\)</span>. In other words, the disturbance
+term is not subject to <strong>autocorrelation</strong>, meaning that
+there should be no systematic association between its values in any two
+observations.</p>
+<p>The assumption implies that <span class="math inline">\(\sigma_{u_iu_j}\)</span>, the population
+covariance between <span class="math inline">\(u_i\)</span> and <span class="math inline">\(u_j\)</span>, is zero, because</p>
+<p><span class="math display">\[\begin{eqnarray}
+\sigma_{u_iu_j} &amp;=&amp; E\{(u_i-\mu_u)(u_j-\mu_u)\} =E(u_iu_j) \\
+&amp;=&amp; E(u_i)E(u_j)=0 \\
+\end{eqnarray}\]</span></p>
+<p>(Note that <span class="math inline">\(E(u_iu_j)\)</span> can be
+decomposed as <span class="math inline">\(E(u_i)E(u_j)\)</span> if <span class="math inline">\(u_i\)</span> and <span class="math inline">\(u_j\)</span> are generated independently.)</p>
+<p>If this assumption is not satisfied, OLS will again give inefficient
+estimates.<br />
+<br /></p>
+</div>
+<div id="assumption-6" class="section level4">
+<h4>Assumption 6</h4>
+<p>The disturbance term has a <strong>normal distribution</strong>. The
+justification for the assumption depends on the Lindeberg-Feller central
+limit theorem. In essence, this states that if a ranom variable is the
+composite result of the effects of a large number of other random
+variables, it will have an approximately normal distribution even if its
+components do not, provided that none of them is dominant. The
+disturbance term <span class="math inline">\(u\)</span> is composed of a
+number of factors not appearing explicitly in the regression equation
+and so, even if we know nothing about the distributions of these
+factors, we are usually entitled to assume that the disturbance term is
+normally distributed. (The Lindeberg-Levy central limit theorem required
+all the random components to be drawn from the same distribution. The
+Lindeberg-Feller theorem is less restrictive.)</p>
+</div>
+</div>
+<div id="the-random-components-and-unbiasedness-of-the-ols-regression-coefficients" class="section level2">
+<h2>2. The random components and unbiasedness of the OLS regression
+coefficients</h2>
 <p>We use the <strong>least squares</strong> criterion to choose <span class="math inline">\(\hat{\beta_{1}}\)</span> amd <span class="math inline">\(\hat{\beta_{2}}\)</span> so as to minimize
 <em><strong>RSS</strong></em>, the <strong>residual sum of
 squares</strong> (sum of the squares of the residuals).</p>
@@ -592,11 +647,11 @@ well or poorly specified.</p>
 <li><p>The mean value of the residuals is zero <span class="math display">\[\overline{\hat{u}}=0\]</span> As a corollary, the
 mean of the fitted values of <span class="math inline">\(Y\)</span> is
 equal to the mean of the actual values of <span class="math inline">\(Y\)</span>. <span class="math display">\[\overline{\hat{Y}}=\overline{Y}\]</span></p></li>
-<li><p>The sample covariance<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> between the observations on <span class="math inline">\(X\)</span> and the residuals is zero. Using the
+<li><p>The sample covariance<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> between the observations on <span class="math inline">\(X\)</span> and the residuals is zero. Using the
 normal equation, we can show that <span class="math inline">\(\sum{}{}X_i\hat{u}_i=0\)</span>. Together with the
 fact that <span class="math inline">\(\overline{\hat{u}}=0\)</span>, we
 can show that the sample covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> is <span class="math inline">\(0\)</span>, that is: <span class="math display">\[\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0\]</span>
-Hence the correlation coefficient<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> is also zero, provided that the sample
+Hence the correlation coefficient<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> is also zero, provided that the sample
 variances of <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> are both nonzero.<br />
 As a corollary, the fitted values of the dependent variable are
 uncorrelated with the residuals in a simple regression model.</p></li>
@@ -690,16 +745,19 @@ After some algebraic manipulation, we have:</p>
 <div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
-<li id="fn1"><p>The converse, however, is not true because correlation
+<li id="fn1"><p>See Robert S. Pindyck and Daniel L. Rubinfeld,
+<em>Econometric Models and Economic Forecasts</em>, McGraw-Hill,
+Singapore, 1991, pp. 47.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>The converse, however, is not true because correlation
 is a measure of linear association only. That is, even if <span class="math inline">\(X_i\)</span> and <span class="math inline">\(u_i\)</span> are uncorrelated, the conditional
 mean of <span class="math inline">\(u_i\)</span> given <span class="math inline">\(X_i\)</span> may not be zero. However, if <span class="math inline">\(X_i\)</span> and <span class="math inline">\(u_i\)</span> are correlated, <span class="math inline">\(E(u_i|X_i)\)</span> must be nonzero, violating
 Assumption 3. See James H. Stock and Mark W, Watson, <em>Introduction to
-Econometrics</em>, Addison-Wesley, Boston, 2003, pp. 104–105.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>See Damodar N. Gujarati and Dawn C. Porter, <em>Basic
-Econometrics</em>, McGraw-Hill/Irwin, New York, 2009, pp. 66.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>By definition, <span class="math inline">\(Cov(X,Y)=E[(X-E[X])(Y-E[Y])]\)</span>. Hence,
-<span class="math inline">\(Cov(X,\hat{u})=E[(X-E[X])(\hat{u}-E[\hat{u}])]=\frac{1}{n}\sum_{i=1}^{n}[(X_i-E[X])(\hat{u}_i-E(\hat{u})]\)</span>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>The correlation of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, denoted by <span class="math inline">\(\rho(X,Y)\)</span>, is defined as <span class="math inline">\(\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}\)</span><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+Econometrics</em>, Addison-Wesley, Boston, 2003, pp. 104–105.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>See Damodar N. Gujarati and Dawn C. Porter, <em>Basic
+Econometrics</em>, McGraw-Hill/Irwin, New York, 2009, pp. 66.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>By definition, <span class="math inline">\(Cov(X,Y)=E[(X-E[X])(Y-E[Y])]\)</span>. Hence,
+<span class="math inline">\(Cov(X,\hat{u})=E[(X-E[X])(\hat{u}-E[\hat{u}])]=\frac{1}{n}\sum_{i=1}^{n}[(X_i-E[X])(\hat{u}_i-E(\hat{u})]\)</span>.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>The correlation of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, denoted by <span class="math inline">\(\rho(X,Y)\)</span>, is defined as <span class="math inline">\(\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}\)</span><a href="#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

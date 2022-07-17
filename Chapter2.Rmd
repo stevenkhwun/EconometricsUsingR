@@ -15,9 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Key terms
 
 * Classical linear regression model (CLRM)
-* Explanatory variable, independent variable, regressor
-* Disturbance term
-* Residual
+* Homoskedastic
+* Heteroscedastic
+* Autocorrelation
 * Residual sum of squares, _RSS_
 * Ordinary least squares, _OLS_
 * Normal equations
@@ -31,35 +31,39 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Assumptions for regression models with nonstochastic regressors
 
-**Assumption 1**:
+This list of assumptions, excluding Assumption 6, constitutes the **classical linear regression model**.^[See Robert S. Pindyck and Daniel L. Rubinfeld, _Econometric Models and Economic Forecasts_, McGraw-Hill, Singapore, 1991, pp. 47.]  
+<br />
+
+
+#### Assumption 1
 The regression model is **linear in the parameters**, though it may or may not be linear in the variables. That is the regression model as shown in the following equation:
 
 $$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
-'Linear in parameters' means that each term on the right side includes a $\beta$ parameter as a simple factor and there is no built-in relationship among the $\beta$ parameters.
+'Linear in parameters' means that each term on the right side includes a $\beta$ parameter as a simple factor and there is no built-in relationship among the $\beta$ parameters.  
+<br />
 
-**Assumption 2**:
-Values taken by the regressor $X$ may be considered fixed in repeated samples. This is equivalent to the assumption that the independent variable in question is controlled by the researcher, who can change its value in accordance with experimental objectives. Such an assumption is unrealistic in the study of most business and economic problems; it has been made for expositional purposes.
 
-**Assumption 3**:
+#### Assumption 2
+Values taken by the regressor $X$ may be considered fixed in repeated samples. This is equivalent to the assumption that the independent variable in question is controlled by the researcher, who can change its value in accordance with experimental objectives. Such an assumption is unrealistic in the study of most business and economic problems; it has been made for expositional purposes.  
+<br />
+
+
+#### Assumption 3
 Given the value of $X_i$, the mean, or expected, value of the random disturbance term $u_i$ is zero. Symbolically, we have
-$$E(u_i|X_i,...,X_n)=0~~~ \forall~~ i$$
+
 $$E(u_i|X_i,...,X_n)=0 ~~~ for~all ~~ i$$
 
-\begin{equation}
-E(u_i|X_i,...,X_n)=0
-\quad\mathrm{for~~all}\quad
-i
-\end{equation}
-
 To simplify the appearance of the algebra, we will take the conditionality for granted and not write it explicitly each time.
-$$E(u_i)=0 ~~~\forall ~~ i$$
+$$E(u_i)=0 ~~~ for~all ~~ i$$
 Note that the assumption $E(u_i|X_i)=0$ implies that $E(Y_i|X_i)=\beta_1+\beta_2X_i$. (Why?) Note also that if the conditional mean of one variable given another random variable is zero, the covariance between the two variables is zero and hence the two variables are uncorrelated. Assumption 3 therefore implies that $X_i$ and $u_i$ are uncorrelated.^[The converse, however, is not true because correlation is a measure of linear association only. That is, even if $X_i$ and $u_i$ are uncorrelated, the conditional mean of $u_i$ given $X_i$ may not be zero. However, if $X_i$ and $u_i$ are correlated, $E(u_i|X_i)$ must be nonzero, violating Assumption 3. See James H. Stock and Mark W, Watson, _Introduction to Econometrics_, Addison-Wesley, Boston, 2003, pp. 104--105.]
 
 It is important to point out that Assumption 3 implies that there is no **specification bias** or **specification error** in the model used in empirical analysis. In other words, the regression model is correctly specified.
 
-Actually, it is usually reasonable to assume that Assumption 3 is satisfied automatically if an intercept is included in the regression equation. This is because the role of the intercept is to pick up any systematic, but constant, tendency in $Y$ not accounted for by the explanatory variables included in the regression equation.
+Actually, it is usually reasonable to assume that Assumption 3 is satisfied automatically if an intercept is included in the regression equation. This is because the role of the intercept is to pick up any systematic, but constant, tendency in $Y$ not accounted for by the explanatory variables included in the regression equation.  
+<br />
 
-**Assumption 4**:
+
+#### Assumption 4
 The disturbance term is **homoskedastic**. This means that its value in each observation is drawn from a distribution with constant population variance:
 
 $$E\{(u_i-\mu_u)^2\}=\sigma_u^2 ~~~ for~all~~i$$
@@ -70,7 +74,35 @@ Note that Assumption 4 implies that the conditional variances of $Y_i$ are also 
 $$var(Y_i|X_i)=\sigma^2$$
 Of course, the _unconditional variance_ of $Y$ is $\sigma_Y^2$.
 
-## 2. Derivation of the regression coefficients
+In contrast, where the conditional variance of the $Y$ population varies with $X$, this situation is known appropriately as **heteroscedasticity**, or unequal __spread__, or __variance__. Symbolically,
+$$var(u_i|X_i)=\sigma_i^2$$
+If Assumption 4 is not satisfied, the OLS regression coefficient will be inefficient.  
+<br />
+
+
+#### Assumption 5
+The values of the disturbance term have independent distributions. That is, $u_i$ is distributed independently of $u_j$ for all $j \ne i$. In other words, the disturbance term is not subject to **autocorrelation**, meaning that there should be no systematic association between its values in any two observations. 
+
+The assumption implies that $\sigma_{u_iu_j}$, the population covariance between $u_i$ and $u_j$, is zero, because
+
+\begin{eqnarray}
+\sigma_{u_iu_j} &=& E\{(u_i-\mu_u)(u_j-\mu_u)\} =E(u_iu_j) \\
+&=& E(u_i)E(u_j)=0 \\
+\end{eqnarray}
+
+(Note that $E(u_iu_j)$ can be decomposed as $E(u_i)E(u_j)$ if $u_i$ and $u_j$ are generated independently.)
+
+
+If this assumption is not satisfied, OLS will again give inefficient estimates.  
+<br />
+
+
+#### Assumption 6
+
+The disturbance term has a **normal distribution**. The justification for the assumption depends on the Lindeberg-Feller central limit theorem. In essence, this states that if a ranom variable is the composite result of the effects of a large number of other random variables, it will have an approximately normal distribution even if its components do not, provided that none of them is dominant. The disturbance term $u$ is composed of a number of factors not appearing explicitly in the regression equation and so, even if we know nothing about the distributions of these factors, we are usually entitled to assume that the disturbance term is normally distributed. (The Lindeberg-Levy central limit theorem required all the random components to be drawn from the same distribution. The Lindeberg-Feller theorem is less restrictive.)
+
+
+## 2. The random components and unbiasedness of the OLS regression coefficients
 
 We use the **least squares** criterion to choose $\hat{\beta_{1}}$ amd $\hat{\beta_{2}}$ so as to minimize _**RSS**_, the **residual sum of squares** (sum of the squares of the residuals).
 
