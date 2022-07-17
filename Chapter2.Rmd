@@ -66,7 +66,9 @@ $$E\{(u_i-\mu_u)^2\}=\sigma_u^2 ~~~ for~all~~i$$
 Since $E(u_i)=\mu_u=0$ by virtue of Assumption 3, the condition may also be written
 
 $$E(u_i^2)=\sigma_u^2 ~~~ for~all~~i$$
-
+Note that Assumption 4 implies that the conditional variances of $Y_i$ are also homoscedastic.^[See Damodar N. Gujarati and Dawn C. Porter, _Basic Econometrics_, McGraw-Hill/Irwin, New York, 2009, pp. 66.] That is,
+$$var(Y_i|X_i)=\sigma^2$$
+Of course, the _unconditional variance_ of $Y$ is $\sigma_Y^2$.
 
 ## 2. Derivation of the regression coefficients
 

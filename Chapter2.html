@@ -440,7 +440,10 @@ variance:</p>
 for~all~~i\]</span> Since <span class="math inline">\(E(u_i)=\mu_u=0\)</span> by virtue of Assumption 3,
 the condition may also be written</p>
 <p><span class="math display">\[E(u_i^2)=\sigma_u^2 ~~~
-for~all~~i\]</span></p>
+for~all~~i\]</span> Note that Assumption 4 implies that the conditional
+variances of <span class="math inline">\(Y_i\)</span> are also
+homoscedastic.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> That is, <span class="math display">\[var(Y_i|X_i)=\sigma^2\]</span> Of course, the
+<em>unconditional variance</em> of <span class="math inline">\(Y\)</span> is <span class="math inline">\(\sigma_Y^2\)</span>.</p>
 </div>
 <div id="derivation-of-the-regression-coefficients" class="section level2">
 <h2>2. Derivation of the regression coefficients</h2>
@@ -589,11 +592,11 @@ well or poorly specified.</p>
 <li><p>The mean value of the residuals is zero <span class="math display">\[\overline{\hat{u}}=0\]</span> As a corollary, the
 mean of the fitted values of <span class="math inline">\(Y\)</span> is
 equal to the mean of the actual values of <span class="math inline">\(Y\)</span>. <span class="math display">\[\overline{\hat{Y}}=\overline{Y}\]</span></p></li>
-<li><p>The sample covariance<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> between the observations on <span class="math inline">\(X\)</span> and the residuals is zero. Using the
+<li><p>The sample covariance<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> between the observations on <span class="math inline">\(X\)</span> and the residuals is zero. Using the
 normal equation, we can show that <span class="math inline">\(\sum{}{}X_i\hat{u}_i=0\)</span>. Together with the
 fact that <span class="math inline">\(\overline{\hat{u}}=0\)</span>, we
 can show that the sample covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> is <span class="math inline">\(0\)</span>, that is: <span class="math display">\[\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0\]</span>
-Hence the correlation coefficient<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> is also zero, provided that the sample
+Hence the correlation coefficient<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> is also zero, provided that the sample
 variances of <span class="math inline">\(X\)</span> and <span class="math inline">\(\hat{u}\)</span> are both nonzero.<br />
 As a corollary, the fitted values of the dependent variable are
 uncorrelated with the residuals in a simple regression model.</p></li>
@@ -692,9 +695,11 @@ is a measure of linear association only. That is, even if <span class="math inli
 mean of <span class="math inline">\(u_i\)</span> given <span class="math inline">\(X_i\)</span> may not be zero. However, if <span class="math inline">\(X_i\)</span> and <span class="math inline">\(u_i\)</span> are correlated, <span class="math inline">\(E(u_i|X_i)\)</span> must be nonzero, violating
 Assumption 3. See James H. Stock and Mark W, Watson, <em>Introduction to
 Econometrics</em>, Addison-Wesley, Boston, 2003, pp. 104–105.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>By definition, <span class="math inline">\(Cov(X,Y)=E[(X-E[X])(Y-E[Y])]\)</span>. Hence,
-<span class="math inline">\(Cov(X,\hat{u})=E[(X-E[X])(\hat{u}-E[\hat{u}])]=\frac{1}{n}\sum_{i=1}^{n}[(X_i-E[X])(\hat{u}_i-E(\hat{u})]\)</span>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>The correlation of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, denoted by <span class="math inline">\(\rho(X,Y)\)</span>, is defined as <span class="math inline">\(\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}\)</span><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>See Damodar N. Gujarati and Dawn C. Porter, <em>Basic
+Econometrics</em>, McGraw-Hill/Irwin, New York, 2009, pp. 66.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>By definition, <span class="math inline">\(Cov(X,Y)=E[(X-E[X])(Y-E[Y])]\)</span>. Hence,
+<span class="math inline">\(Cov(X,\hat{u})=E[(X-E[X])(\hat{u}-E[\hat{u}])]=\frac{1}{n}\sum_{i=1}^{n}[(X_i-E[X])(\hat{u}_i-E(\hat{u})]\)</span>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>The correlation of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, denoted by <span class="math inline">\(\rho(X,Y)\)</span>, is defined as <span class="math inline">\(\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}\)</span><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
