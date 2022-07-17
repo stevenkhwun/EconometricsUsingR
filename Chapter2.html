@@ -502,6 +502,52 @@ Lindeberg-Feller theorem is less restrictive.)</p>
 <div id="the-random-components-and-unbiasedness-of-the-ols-regression-coefficients" class="section level2">
 <h2>2. The random components and unbiasedness of the OLS regression
 coefficients</h2>
+<div id="the-random-components-of-the-ols-regression-coefficients" class="section level4">
+<h4>The random components of the OLS regression coefficients</h4>
+<p>Recalled that the simple regression model where <span class="math inline">\(Y\)</span> depends on a nonstochastic variable
+<span class="math inline">\(X\)</span> according to the relationship</p>
+<p><span class="math display">\[Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}\]</span></p>
+<p><span class="math inline">\(Y_i\)</span> has two components. It has a
+nonrandom component (<span class="math inline">\(\beta_{1}+\beta_{2}X_{i}\)</span>), which owes
+nothing to the laws of chance (<span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> may be unknown, but nevertheless
+they are fixed constants), and it has a random component <span class="math inline">\(u_i\)</span>.<br />
+<br /> Since we calculate <span class="math inline">\(\hat{\beta}_2\)</span> according to the
+formula</p>
+<p><span class="math display">\[\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}\]</span>
+<span class="math inline">\(\hat{\beta}_{2}\)</span> also has a random
+component. <span class="math inline">\(\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})\)</span>
+depends on the values of <span class="math inline">\(Y\)</span>, and the
+values of <span class="math inline">\(Y\)</span> depends on the values
+of <span class="math inline">\(u\)</span>.<br />
+<br /> We can decompose <span class="math inline">\(\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})\)</span>
+into its nonrandom and random components</p>
+<p><span class="math display">\[\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})=\beta_2\sum_{i=1}^{n}(X_i-\overline{X})^2+\sum_{i=1}^{n}(X_i-\overline{X})(u_i-\overline{u})\]</span>
+And hence</p>
+<p><span class="math display">\[\hat{\beta}_2=\beta_2+\frac{\sum_{i=1}^{n}(X_i-\overline{X})(u_i-\overline{u})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}\]</span>
+The regression coefficient <span class="math inline">\(\hat{\beta}_2\)</span> obtained from any sample
+consists of (1) a fixed component, equal to the true value, <span class="math inline">\(\beta_2\)</span>, and (2) a random component that
+depends on the values of the disturbance term in the sample. The random
+component is responsible for the variations of <span class="math inline">\(\hat{\beta}_2\)</span> around its fixed component
+<span class="math inline">\(\beta_2\)</span>.<br />
+<br /> To express <span class="math inline">\(\sum_{i=1}^{n}(X_i-\overline{X})(u_i-\overline{u})\)</span>
+more tidily, we get</p>
+<p><span class="math display">\[\sum_{i=1}^{n}(X_i-\overline{X})(u_i-\overline{u})=\sum_{i=1}^{n}(X_i-\overline{X})u_i\]</span>
+and hence</p>
+<p><span class="math display">\[\begin{eqnarray}
+\hat{\beta}_2 &amp;=&amp;
+\beta_2+\frac{\sum_{i=1}^{n}(X_i-\overline{X})u_i}{\sum_{i=1}^{n}(X_i-\overline{X})^2}
+=
+\beta_2+\sum_{i=1}^{n}\Biggl\{\frac{(X_i-\overline{X})}{\sum_{j=1}^{n}(X_j-\overline{X})^2}\Biggl\}u_i
+\\
+&amp;=&amp; \beta_2+\sum_{i=1}^{n}a_iu_i \\
+\end{eqnarray}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[a_i=\frac{(X_i-\overline{X})}{\sum_{j=1}^{n}(X_j-\overline{X})^2}\]</span>
+(Note that we have used different index for the summations.)<br />
+<br /> Thus <span class="math inline">\(\hat{\beta}_2\)</span> is equal
+to the true value, <span class="math inline">\(\beta_2\)</span>, plus a
+linear combination of the values of the disturbance term in all the
+observations in the sample.</p>
 <p>We use the <strong>least squares</strong> criterion to choose <span class="math inline">\(\hat{\beta_{1}}\)</span> amd <span class="math inline">\(\hat{\beta_{2}}\)</span> so as to minimize
 <em><strong>RSS</strong></em>, the <strong>residual sum of
 squares</strong> (sum of the squares of the residuals).</p>
@@ -546,6 +592,7 @@ the regression coefficients.<br />
 <p>and hence</p>
 <p><span class="math display">\[\hat{\beta}_{1}=\overline{Y}-\hat{\beta}_{2}\overline{X}\]</span>
 <span class="math display">\[\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=1}^{n}X_i^2-n\overline{X}^2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}\]</span></p>
+</div>
 </div>
 <div id="an-example" class="section level2">
 <h2>3. An example</h2>

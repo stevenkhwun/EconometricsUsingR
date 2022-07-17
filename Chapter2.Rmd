@@ -104,6 +104,52 @@ The disturbance term has a **normal distribution**. The justification for the as
 
 ## 2. The random components and unbiasedness of the OLS regression coefficients
 
+#### The random components of the OLS regression coefficients
+
+Recalled that the simple regression model where $Y$ depends on a nonstochastic variable $X$ according to the relationship
+
+$$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
+
+$Y_i$ has two components. It has a nonrandom component ($\beta_{1}+\beta_{2}X_{i}$), which owes nothing to the laws of chance ($\beta_1$ and $\beta_2$ may be unknown, but nevertheless they are fixed constants), and it has a random component $u_i$.  
+<br />
+Since we calculate $\hat{\beta}_2$ according to the formula
+
+$$\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}$$
+$\hat{\beta}_{2}$ also has a random component. $\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})$ depends on the values of $Y$, and the values of $Y$ depends on the values of $u$.  
+<br />
+We can decompose $\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})$ into its nonrandom and random components
+
+$$\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})=\beta_2\sum_{i=1}^{n}(X_i-\overline{X})^2+\sum_{i=1}^{n}(X_i-\overline{X})(u_i-\overline{u})$$
+And hence
+
+$$\hat{\beta}_2=\beta_2+\frac{\sum_{i=1}^{n}(X_i-\overline{X})(u_i-\overline{u})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}$$
+The regression coefficient $\hat{\beta}_2$ obtained from any sample consists of (1) a fixed component, equal to the true value, $\beta_2$, and (2) a random component that depends on the values of the disturbance term in the sample. The random component is responsible for the variations of $\hat{\beta}_2$ around its fixed component $\beta_2$.  
+<br />
+To express $\sum_{i=1}^{n}(X_i-\overline{X})(u_i-\overline{u})$ more tidily, we get
+
+$$\sum_{i=1}^{n}(X_i-\overline{X})(u_i-\overline{u})=\sum_{i=1}^{n}(X_i-\overline{X})u_i$$
+and hence
+
+\begin{eqnarray}
+\hat{\beta}_2 &=& \beta_2+\frac{\sum_{i=1}^{n}(X_i-\overline{X})u_i}{\sum_{i=1}^{n}(X_i-\overline{X})^2} =
+\beta_2+\sum_{i=1}^{n}\Biggl\{\frac{(X_i-\overline{X})}{\sum_{j=1}^{n}(X_j-\overline{X})^2}\Biggl\}u_i \\
+&=& \beta_2+\sum_{i=1}^{n}a_iu_i \\
+\end{eqnarray}
+
+where
+
+$$a_i=\frac{(X_i-\overline{X})}{\sum_{j=1}^{n}(X_j-\overline{X})^2}$$
+(Note that we have used different index for the summations.)  
+<br />
+Thus $\hat{\beta}_2$ is equal to the true value, $\beta_2$, plus a linear combination of the values of the disturbance term in all the observations in the sample.
+
+
+
+
+
+
+
+
 We use the **least squares** criterion to choose $\hat{\beta_{1}}$ amd $\hat{\beta_{2}}$ so as to minimize _**RSS**_, the **residual sum of squares** (sum of the squares of the residuals).
 
 $$RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2$$
