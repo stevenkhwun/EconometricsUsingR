@@ -502,6 +502,7 @@ Lindeberg-Feller theorem is less restrictive.)</p>
 <div id="the-random-components-and-unbiasedness-of-the-ols-regression-coefficients" class="section level2">
 <h2>2. The random components and unbiasedness of the OLS regression
 coefficients</h2>
+<p><br /></p>
 <div id="the-random-components-of-the-ols-regression-coefficients" class="section level4">
 <h4>The random components of the OLS regression coefficients</h4>
 <p>Recalled that the simple regression model where <span class="math inline">\(Y\)</span> depends on a nonstochastic variable
@@ -547,7 +548,42 @@ and hence</p>
 <br /> Thus <span class="math inline">\(\hat{\beta}_2\)</span> is equal
 to the true value, <span class="math inline">\(\beta_2\)</span>, plus a
 linear combination of the values of the disturbance term in all the
-observations in the sample.</p>
+observations in the sample.<br />
+<br /></p>
+<p><strong>Three properties of the <span class="math inline">\(a_i\)</span> coefficients</strong></p>
+<p><span class="math display">\[\sum_{i=1}^{n}a_i=0\]</span> <span class="math display">\[\sum_{i=1}^{n}a_i^2=\frac{1}{\sum_{i=j}^{n}(X_j-\overline{X})^2}\]</span>
+<span class="math display">\[\sum_{i=1}^{n}a_iX_i=1\]</span> Similarly,
+<span class="math inline">\(\hat{\beta}_1\)</span> has a fixed component
+equal to the true value, <span class="math inline">\(\beta_1\)</span>,
+plus a random component that is a linear combination of the values of
+the disturbance term:</p>
+<p><span class="math display">\[\hat{\beta}_1=\beta_1+\sum_{i=1}^{n}c_iu_i\]</span>
+where</p>
+<p><span class="math display">\[c_i=\frac{1}{n}-a_i\overline{X}\]</span></p>
+<p><br /></p>
+</div>
+<div id="the-unbiasedness-of-the-ols-regression-coefficients" class="section level4">
+<h4>The unbiasedness of the OLS regression coefficients</h4>
+<p>It follows that <span class="math inline">\(\hat{\beta}_2\)</span> is
+an unbiased estimator of <span class="math inline">\(\beta_2\)</span>:</p>
+<p><span class="math display">\[\begin{eqnarray}
+E(\hat{\beta}_2) &amp;=&amp;
+E(\beta_2)+E\Biggl\{\sum_{i=1}^{n}a_iu_i\Biggl\} =
+\beta_2+\sum_{i=1}^{n}E(a_iu_i) \\
+&amp;=&amp; \beta_2+\sum_{i=1}^{n}a_iE(u_i) = \beta_2 \\
+\end{eqnarray}\]</span></p>
+<p>since <span class="math inline">\(E(u_i)=0\)</span> for all <span class="math inline">\(i\)</span> by Assumption 3.<br />
+<br /> Similarly, <span class="math inline">\(\hat{\beta}_1\)</span> is
+an unbiased estimator of <span class="math inline">\(\beta_1\)</span>:</p>
+<p><span class="math display">\[E(\hat{\beta}_1)=E(\beta_1)+E\Bigg(\sum_{i=1}^{n}c_iu_i\Bigg)=\beta_1+\sum_{i=1}^{n}c_iE(u_i)=\beta_1\]</span></p>
+</div>
+<div id="normal-distribution-of-the-regression-coefficients" class="section level4">
+<h4>Normal distribution of the regression coefficients</h4>
+<p>An implication of the decompositions is that the regression
+coefficients will have normal distributions if the disturbance term in
+each observation has a normal distribution, as specified in Assumption
+6. This is because a linear combinations of normal distributions is
+itself a normal distribution.</p>
 <p>We use the <strong>least squares</strong> criterion to choose <span class="math inline">\(\hat{\beta_{1}}\)</span> amd <span class="math inline">\(\hat{\beta_{2}}\)</span> so as to minimize
 <em><strong>RSS</strong></em>, the <strong>residual sum of
 squares</strong> (sum of the squares of the residuals).</p>
