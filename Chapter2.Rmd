@@ -18,8 +18,8 @@ knitr::opts_chunk$set(echo = TRUE)
 * Homoskedastic
 * Heteroscedastic
 * Autocorrelation
-* Residual sum of squares, _RSS_
-* Ordinary least squares, _OLS_
+* Mean square deviation (MSD)
+* Standard error (s.e.)
 * Normal equations
 * Demeaning
 * Goodness of fit
@@ -177,13 +177,49 @@ $$E(\hat{\beta}_1)=E(\beta_1)+E\Bigg(\sum_{i=1}^{n}c_iu_i\Bigg)=\beta_1+\sum_{i=
 
 #### Normal distribution of the regression coefficients
 
-An implication of the decompositions is that the regression coefficients will have normal distributions if the disturbance term in each observation has a normal distribution, as specified in Assumption 6. This is because a linear combinations of normal distributions is itself a normal distribution.
+An implication of the decompositions is that the regression coefficients will have normal distributions if the disturbance term in each observation has a normal distribution, as specified in Assumption 6. This is because a linear combinations of normal distributions is itself a normal distribution.  
+<br />
+
+## 3. Precision of the regression coefficients  
+<br />
+
+The population variances of the distributions of $\hat{\beta}_1$ and $\hat{\beta}_2$, $\sigma_{\hat{\beta}_1}^2$ and $\sigma_{\hat{\beta}_2}^2$, are given by the following expressions:
 
 
 
-We use the **least squares** criterion to choose $\hat{\beta_{1}}$ amd $\hat{\beta_{2}}$ so as to minimize _**RSS**_, the **residual sum of squares** (sum of the squares of the residuals).
 
-$$RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2$$
+
+$$\sigma_{\hat{\beta}_1}^2=\sigma_{u}^2\Bigg(\frac{1}{n}+\frac{\overline{X}^2}{\sum_{i=1}^{n}(X_i-\overline{X})^2}\Bigg)$$
+
+$$\sigma_{\hat{\beta}_2}^2=\frac{\sigma_{u}^2}{\sum_{i=1}^{n}(X_i-\overline{X})^2}$$
+
+For $\sigma_{\hat{\beta}_2}^2$, it is clear that the larger is $\sum_{i=1}^{n}(X_i-\overline{X})^2$, the smaller is the variance of $\hat{\beta}_2$. However, the size of $\sum_{i=1}^{n}(X_i-\overline{X})^2$ depends on two factors: the number of observations, and the size of the deviations of $X_i$ about its sample mean. To discriminate between them, it is convenient to define the **mean square deviation** (**MSD**) of $X$:
+
+$$MSD(X)=\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})^2$$
+Hence
+
+$$\sigma_{\hat{\beta}_2}^2=\frac{\sigma_{u}^2}{n~MSD(X)}$$
+It is obvious from the equation that the variance of $\hat{\beta}_2$ is inversely proportional to the number of observations in the sample. The larger the number of observations, the more closely will the sample resemble the population from which it is drawn, and the more accurate $\hat{\beta}_2$ should be as an estimator of $\beta_2$.  
+<br />
+It is also obvious that the variance of $\hat{\beta}_2$ is proportional to the variance of the disturbance term. The bigger the variance of the random factor in the relationship, the worse the estimates of the parameters are likely to be.  
+<br />
+
+#### Standard errors of the regression coefficients
+Although $\sigma_u^2$ is unknown, we can derive an estimator of $\sigma_u^2$ from the residuals. One measure of the scatter of the residuals is their mean square deviation, MSD($\hat{u}$), defined by
+
+$$MSD(\hat{u})=\frac{1}{n}\sum_{i=1}^{n}(\hat{u}_i-\overline{\hat{u}})^2=\frac{1}{n}\sum_{i=1}^{n}\hat{u}_i^2$$
+Intuitively, MSD($\hat{u}$) should provide a guide to $\sigma_u^2$.  
+<br />
+Further, because by definition the regression line, $\hat{Y}_i=\hat{\beta}_1+\hat{\beta}_2X_i$, is drawn in such a way as to minimize the sum of the squares of the distances between it and the observations, the regression line is likely to be closer to the points representing the sample of observations on $X$ and $Y$ than the true line $Y_i=\beta_1+\beta_2X_i$. Hence the spread of the residuals will tend to be smaller than the spread of the values of $u$, and MSD($\hat{u}$) will tend to underestimate $\sigma_u^2$.  
+<br />
+When there is just one explanatory variable, the expected vaue of MSD($\hat{u}$) is given by
+
+$$E\bigl\{MSD(\hat{u})\bigl\}=\frac{n-2}{n}\sigma_u^2$$
+
+
+
+# Old materials
+
 This is usually referred to as **ordinary least squares** and abbreviated _**OLS**_.  
 <br />
 The square of the residual in observation $i$ in terms of $\hat{\beta_{1}}$ and $\hat{\beta_{2}}$, and the data on $X$ and $Y$:

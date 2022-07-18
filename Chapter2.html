@@ -178,8 +178,8 @@ pre code {
 <li>Homoskedastic</li>
 <li>Heteroscedastic</li>
 <li>Autocorrelation</li>
-<li>Residual sum of squares, <em>RSS</em></li>
-<li>Ordinary least squares, <em>OLS</em></li>
+<li>Mean square deviation (MSD)</li>
+<li>Standard error (s.e.)</li>
 <li>Normal equations</li>
 <li>Demeaning</li>
 <li>Goodness of fit</li>
@@ -282,9 +282,33 @@ E(\hat{\beta}_2) &amp;=&amp; E(\beta_2)+E\Biggl\{\sum_{i=1}^{n}a_iu_i\Biggl\} =
 </div>
 <div id="normal-distribution-of-the-regression-coefficients" class="section level4">
 <h4>Normal distribution of the regression coefficients</h4>
-<p>An implication of the decompositions is that the regression coefficients will have normal distributions if the disturbance term in each observation has a normal distribution, as specified in Assumption 6. This is because a linear combinations of normal distributions is itself a normal distribution.</p>
-<p>We use the <strong>least squares</strong> criterion to choose <span class="math inline">\(\hat{\beta_{1}}\)</span> amd <span class="math inline">\(\hat{\beta_{2}}\)</span> so as to minimize <em><strong>RSS</strong></em>, the <strong>residual sum of squares</strong> (sum of the squares of the residuals).</p>
-<p><span class="math display">\[RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2\]</span> This is usually referred to as <strong>ordinary least squares</strong> and abbreviated <em><strong>OLS</strong></em>.<br />
+<p>An implication of the decompositions is that the regression coefficients will have normal distributions if the disturbance term in each observation has a normal distribution, as specified in Assumption 6. This is because a linear combinations of normal distributions is itself a normal distribution.<br />
+<br /></p>
+</div>
+</div>
+<div id="precision-of-the-regression-coefficients" class="section level2">
+<h2>3. Precision of the regression coefficients</h2>
+<p><br /></p>
+<p>The population variances of the distributions of <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span>, <span class="math inline">\(\sigma_{\hat{\beta}_1}^2\)</span> and <span class="math inline">\(\sigma_{\hat{\beta}_2}^2\)</span>, are given by the following expressions:</p>
+<p><span class="math display">\[\sigma_{\hat{\beta}_1}^2=\sigma_{u}^2\Bigg(\frac{1}{n}+\frac{\overline{X}^2}{\sum_{i=1}^{n}(X_i-\overline{X})^2}\Bigg)\]</span></p>
+<p><span class="math display">\[\sigma_{\hat{\beta}_2}^2=\frac{\sigma_{u}^2}{\sum_{i=1}^{n}(X_i-\overline{X})^2}\]</span></p>
+<p>For <span class="math inline">\(\sigma_{\hat{\beta}_2}^2\)</span>, it is clear that the larger is <span class="math inline">\(\sum_{i=1}^{n}(X_i-\overline{X})^2\)</span>, the smaller is the variance of <span class="math inline">\(\hat{\beta}_2\)</span>. However, the size of <span class="math inline">\(\sum_{i=1}^{n}(X_i-\overline{X})^2\)</span> depends on two factors: the number of observations, and the size of the deviations of <span class="math inline">\(X_i\)</span> about its sample mean. To discriminate between them, it is convenient to define the <strong>mean square deviation</strong> (<strong>MSD</strong>) of <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[MSD(X)=\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})^2\]</span> Hence</p>
+<p><span class="math display">\[\sigma_{\hat{\beta}_2}^2=\frac{\sigma_{u}^2}{n~MSD(X)}\]</span> It is obvious from the equation that the variance of <span class="math inline">\(\hat{\beta}_2\)</span> is inversely proportional to the number of observations in the sample. The larger the number of observations, the more closely will the sample resemble the population from which it is drawn, and the more accurate <span class="math inline">\(\hat{\beta}_2\)</span> should be as an estimator of <span class="math inline">\(\beta_2\)</span>.<br />
+<br /> It is also obvious that the variance of <span class="math inline">\(\hat{\beta}_2\)</span> is proportional to the variance of the disturbance term. The bigger the variance of the random factor in the relationship, the worse the estimates of the parameters are likely to be.<br />
+<br /></p>
+<div id="standard-errors-of-the-regression-coefficients" class="section level4">
+<h4>Standard errors of the regression coefficients</h4>
+<p>Although <span class="math inline">\(\sigma_u^2\)</span> is unknown, we can derive an estimator of <span class="math inline">\(\sigma_u^2\)</span> from the residuals. One measure of the scatter of the residuals is their mean square deviation, MSD(<span class="math inline">\(\hat{u}\)</span>), defined by</p>
+<p><span class="math display">\[MSD(\hat{u})=\frac{1}{n}\sum_{i=1}^{n}(\hat{u}_i-\overline{\hat{u}})^2=\frac{1}{n}\sum_{i=1}^{n}\hat{u}_i^2\]</span> Intuitively, MSD(<span class="math inline">\(\hat{u}\)</span>) should provide a guide to <span class="math inline">\(\sigma_u^2\)</span>.<br />
+<br /> Further, because by definition the regression line, <span class="math inline">\(\hat{Y}_i=\hat{\beta}_1+\hat{\beta}_2X_i\)</span>, is drawn in such a way as to minimize the sum of the squares of the distances between it and the observations, the regression line is likely to be closer to the points representing the sample of observations on <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> than the true line <span class="math inline">\(Y_i=\beta_1+\beta_2X_i\)</span>. Hence the spread of the residuals will tend to be smaller than the spread of the values of <span class="math inline">\(u\)</span>, and MSD(<span class="math inline">\(\hat{u}\)</span>) will tend to underestimate <span class="math inline">\(\sigma_u^2\)</span>.<br />
+<br /> When there is just one explanatory variable, the expected vaue of MSD(<span class="math inline">\(\hat{u}\)</span>) is given by</p>
+<p><span class="math display">\[E\bigl\{MSD(\hat{u})\bigl\}=\frac{n-2}{n}\sigma_u^2\]</span></p>
+</div>
+</div>
+<div id="old-materials" class="section level1">
+<h1>Old materials</h1>
+<p>This is usually referred to as <strong>ordinary least squares</strong> and abbreviated <em><strong>OLS</strong></em>.<br />
 <br /> The square of the residual in observation <span class="math inline">\(i\)</span> in terms of <span class="math inline">\(\hat{\beta_{1}}\)</span> and <span class="math inline">\(\hat{\beta_{2}}\)</span>, and the data on <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
 <p><span class="math display">\[\begin{eqnarray}
 {\hat{u}_{i}}^2 &amp;=&amp;(Y_i-\hat{Y}_{i})^2 =(Y_i-\hat{\beta}_{1}-\hat{\beta}_{2}X_i)^2 \\
@@ -312,8 +336,6 @@ E(\hat{\beta}_2) &amp;=&amp; E(\beta_2)+E\Biggl\{\sum_{i=1}^{n}a_iu_i\Biggl\} =
 \end{equation}\]</span></p>
 <p>and hence</p>
 <p><span class="math display">\[\hat{\beta}_{1}=\overline{Y}-\hat{\beta}_{2}\overline{X}\]</span> <span class="math display">\[\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=1}^{n}X_i^2-n\overline{X}^2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}\]</span></p>
-</div>
-</div>
 <div id="an-example" class="section level2">
 <h2>3. An example</h2>
 <p>The following example is adopted from an example in p. 98 of the text book. Hourly earnings in 2011, <code>EARNINGS</code>, measured in dollars, are regressed on schooling, <code>S</code>, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.</p>
@@ -445,6 +467,7 @@ summary(lin.model)</code></pre>
 <p>It should be intuitively obvious that the better is the fit achieved by the regression equation, the higher should be the correlation coefficient for the actual and predicted values of <span class="math inline">\(Y\)</span>, which the correlation coefficient is denoted as <span class="math inline">\(r_{Y,\hat{Y}}\)</span>:</p>
 <p><span class="math display">\[r_{Y,\hat{Y}}=\frac{\sum_{i=1}^{n}(Y_i-\overline{Y})(\hat{Y}_i-\overline{Y})}{\sqrt{\sum_{i=1}^{n}(Y_i-\overline{Y})^2\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}}\]</span> After some algebraic manipulation, we have:</p>
 <p><span class="math display">\[r_{Y,\hat{Y}}=\sqrt{R^2}\]</span></p>
+</div>
 </div>
 </div>
 <div class="footnotes">
