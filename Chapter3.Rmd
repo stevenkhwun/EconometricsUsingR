@@ -63,12 +63,19 @@ eawe21.0 <- read.csv('./Data/EAWE21.csv', header=T) %>%    # Input the data
   filter(COLLBARG == 0)                                    # Filter the data
 
 # Run the model
-lin.model.0 <- lm(EARNINGS ~ S + EXP, data = eawe21.0)     
+lin.model.0 <- lm(EARNINGS ~ S + EXP, data = eawe21.0)  
+
 
 # Regression result
 summary(lin.model.0)
 anova(lin.model.0)
 ```
+
+(See the online reference on linear regression from Prof. Alexandra Chouldechova at the following website: https://www.andrew.cmu.edu/user/achoulde/94842/lectures/lecture09/lecture09-94842.html)
+
+More information can be found in teaching website of Prof. Alexandra Chouldechova (https://www.andrew.cmu.edu/user/achoulde/)
+
+
 
 # Old materials below
 The difference between the actual value of $Y_{i}$ and the fitted value $\hat{Y_{i}}$, in observation $i$ is known as the **residual** in the observation $i$. It will be denoted \hat{\mu_{i}}:

@@ -244,7 +244,8 @@ eawe21.0 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T) %&gt;%    # Input
   filter(COLLBARG == 0)                                    # Filter the data
 
 # Run the model
-lin.model.0 &lt;- lm(EARNINGS ~ S + EXP, data = eawe21.0)     
+lin.model.0 &lt;- lm(EARNINGS ~ S + EXP, data = eawe21.0)  
+
 
 # Regression result
 summary(lin.model.0)</code></pre>
@@ -277,6 +278,8 @@ summary(lin.model.0)</code></pre>
 ## Residuals 422  52043   123.3                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>(See the online reference on linear regression from Prof. Alexandra Chouldechova at the following website: <a href="https://www.andrew.cmu.edu/user/achoulde/94842/lectures/lecture09/lecture09-94842.html" class="uri">https://www.andrew.cmu.edu/user/achoulde/94842/lectures/lecture09/lecture09-94842.html</a>)</p>
+<p>More information can be found in teaching website of Prof. Alexandra Chouldechova (<a href="https://www.andrew.cmu.edu/user/achoulde/" class="uri">https://www.andrew.cmu.edu/user/achoulde/</a>)</p>
 </div>
 <div id="old-materials-below" class="section level1">
 <h1>Old materials below</h1>
