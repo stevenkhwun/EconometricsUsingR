@@ -30,6 +30,33 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. The simple linear model
 
+**Figure 3.2 at p. 163**
+
+```{r}
+eawe21 <- read.csv('./Data/EAWE21.csv', header=T)
+
+SRM <- lm(EARNINGS ~ S, data = eawe21)
+summary(SRM)
+
+EEARN = eawe21$EARNINGS - fitted.values(lm(EARNINGS ~ EXP, data = eawe21))
+ES = eawe21$S - fitted.values(lm(S ~ EXP, data = eawe21))
+
+RegOnResid <- lm(EEARN ~ ES)
+summary(RegOnResid)
+
+plot(EEARN ~ ES, 
+     main = "Regression of EARNINGS residuals on S residuals", 
+     xlab = "ES",
+     ylab = "EEARN",
+     xlim = c(-10, 7),
+     ylim = c(-40, 90))
+
+abline(SRM, col='blue')              # Add the regression line
+abline(RegOnResid, col="red")
+
+```
+
+
 **Table 3.3 at p. 168**
 
 ```{r, message=FALSE, warning=FALSE}

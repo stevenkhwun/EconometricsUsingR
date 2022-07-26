@@ -1,8 +1,0 @@
-eawe21 <- read.csv('./Data/EAWE21.csv', header=T)
-EARN <- lm(EARNINGS ~ EXP, data = eawe21)
-S <- lm(S ~ EXP, data = eawe21)
-EEARN = eawe21$EARNINGS - fitted.values(EARN)
-ES = eawe21$S - fitted.values(S)
-model <- lm(EEARN ~ ES)
-summary(model)
-anova(model)
