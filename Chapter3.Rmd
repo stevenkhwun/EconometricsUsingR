@@ -14,8 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Key terms
 
-* Dependent variable
-* Explanatory variable, independent variable, regressor
+* Multiple regression analysis
+* Frisch-Waugh-Lovell theorem
 * Disturbance term
 * Residual
 * Residual sum of squares, _RSS_
@@ -28,7 +28,17 @@ knitr::opts_chunk$set(echo = TRUE)
 * Coefficient of determination: $R^2$
 
 
-## 1. The simple linear model
+## 1. A model with two explanatory variables
+
+```{r, warning=FALSE, message=FALSE}
+# Load the required package
+library(tidyverse)    
+
+eawe21 <- read.csv('./Data/EAWE21.csv', header=T)
+
+lm(EARNINGS ~ S + EXP, data = eawe21) %>%
+  summary
+```
 
 **Figure 3.2 at p. 163**
 

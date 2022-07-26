@@ -174,8 +174,8 @@ pre code {
 <div id="key-terms" class="section level2">
 <h2>Key terms</h2>
 <ul>
-<li>Dependent variable</li>
-<li>Explanatory variable, independent variable, regressor</li>
+<li>Multiple regression analysis</li>
+<li>Frisch-Waugh-Lovell theorem</li>
 <li>Disturbance term</li>
 <li>Residual</li>
 <li>Residual sum of squares, <em>RSS</em></li>
@@ -188,8 +188,34 @@ pre code {
 <li>Coefficient of determination: <span class="math inline">\(R^2\)</span></li>
 </ul>
 </div>
-<div id="the-simple-linear-model" class="section level2">
-<h2>1. The simple linear model</h2>
+<div id="a-model-with-two-explanatory-variables" class="section level2">
+<h2>1. A model with two explanatory variables</h2>
+<pre class="r"><code># Load the required package
+library(tidyverse)    
+
+eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)
+
+lm(EARNINGS ~ S + EXP, data = eawe21) %&gt;%
+  summary</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = EARNINGS ~ S + EXP, data = eawe21)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -21.098  -6.440  -2.113   3.782  76.907 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -14.6683     4.2884  -3.420 0.000677 ***
+## S             1.8776     0.2237   8.392 5.01e-16 ***
+## EXP           0.9833     0.2098   4.686 3.60e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 11.13 on 497 degrees of freedom
+## Multiple R-squared:  0.1242, Adjusted R-squared:  0.1207 
+## F-statistic: 35.24 on 2 and 497 DF,  p-value: 4.86e-15</code></pre>
 <p><strong>Figure 3.2 at p. 163</strong></p>
 <pre class="r"><code>eawe21 &lt;- read.csv(&#39;./Data/EAWE21.csv&#39;, header=T)
 
