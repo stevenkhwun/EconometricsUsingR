@@ -112,6 +112,43 @@ anova(lin.model.0)
 
 More information can be found in teaching website of Prof. Alexandra Chouldechova (https://www.andrew.cmu.edu/user/achoulde/)
 
+
+
+**Example of multicollinearity (p. 174 Table 3.7)**
+
+```{r}
+lm(S ~ ASVABC + SM + SF, data = eawe21) %>%
+  summary
+```
+
+```{r}
+# correlation between SM and SF
+with(eawe21, cor(SM, SF))
+```
+
+
+
+**Example of multicollinearity (p. 175 Table 3.8)**
+
+```{r}
+eawe21 <- eawe21 %>%
+  mutate(EXPSQ = EXP^2)
+  
+lm(EARNINGS ~ S + EXP + EXPSQ, data = eawe21) %>%
+  summary
+```
+
+
+**Table 3.11 on p. 179*
+
+```{r}
+eawe21 <- eawe21 %>%
+  mutate(SP = SM + SF)
+
+lm(S ~ ASVABC + SP, data = eawe21) %>%
+  summary
+```
+
 **Diagnostic plots**
 ```{r}
 # plot(lin.model.0, which=1)

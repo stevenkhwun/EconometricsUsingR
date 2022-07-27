@@ -362,6 +362,83 @@ summary(lin.model.0)</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>(See the online reference on linear regression from Prof. Alexandra Chouldechova at the following website: <a href="https://www.andrew.cmu.edu/user/achoulde/94842/lectures/lecture09/lecture09-94842.html" class="uri">https://www.andrew.cmu.edu/user/achoulde/94842/lectures/lecture09/lecture09-94842.html</a>)</p>
 <p>More information can be found in teaching website of Prof. Alexandra Chouldechova (<a href="https://www.andrew.cmu.edu/user/achoulde/" class="uri">https://www.andrew.cmu.edu/user/achoulde/</a>)</p>
+<p><strong>Example of multicollinearity (p. 174 Table 3.7)</strong></p>
+<pre class="r"><code>lm(S ~ ASVABC + SM + SF, data = eawe21) %&gt;%
+  summary</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = S ~ ASVABC + SM + SF, data = eawe21)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.9387 -1.6521  0.0186  1.5161  7.1553 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 10.59674    0.61428  17.251  &lt; 2e-16 ***
+## ASVABC       1.24253    0.12359  10.054  &lt; 2e-16 ***
+## SM           0.09135    0.04593   1.989   0.0473 *  
+## SF           0.20289    0.04251   4.773  2.4e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.254 on 496 degrees of freedom
+## Multiple R-squared:  0.329,  Adjusted R-squared:  0.3249 
+## F-statistic: 81.06 on 3 and 496 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code># correlation between SM and SF
+with(eawe21, cor(SM, SF))</code></pre>
+<pre><code>## [1] 0.5312147</code></pre>
+<p><strong>Example of multicollinearity (p. 175 Table 3.8)</strong></p>
+<pre class="r"><code>eawe21 &lt;- eawe21 %&gt;%
+  mutate(EXPSQ = EXP^2)
+  
+lm(EARNINGS ~ S + EXP + EXPSQ, data = eawe21) %&gt;%
+  summary</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = EARNINGS ~ S + EXP + EXPSQ, data = eawe21)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -21.323  -6.412  -2.140   3.771  76.675 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -15.76580    4.57953  -3.443 0.000625 ***
+## S             1.86928    0.22419   8.338  7.5e-16 ***
+## EXP           1.42785    0.68149   2.095 0.036661 *  
+## EXPSQ        -0.03284    0.04790  -0.686 0.493281    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 11.14 on 496 degrees of freedom
+## Multiple R-squared:  0.125,  Adjusted R-squared:  0.1197 
+## F-statistic: 23.63 on 3 and 496 DF,  p-value: 2.62e-14</code></pre>
+<p>**Table 3.11 on p. 179*</p>
+<pre class="r"><code>eawe21 &lt;- eawe21 %&gt;%
+  mutate(SP = SM + SF)
+
+lm(S ~ ASVABC + SP, data = eawe21) %&gt;%
+  summary</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = S ~ ASVABC + SP, data = eawe21)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.0214 -1.6087  0.0306  1.5129  6.6917 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 10.50285    0.61170  17.170  &lt; 2e-16 ***
+## ASVABC       1.24320    0.12373  10.047  &lt; 2e-16 ***
+## SP           0.15008    0.02299   6.529 1.64e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.256 on 497 degrees of freedom
+## Multiple R-squared:  0.326,  Adjusted R-squared:  0.3233 
+## F-statistic: 120.2 on 2 and 497 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong>Diagnostic plots</strong></p>
 <pre class="r"><code># plot(lin.model.0, which=1)
 plot(lin.model.0, which = c(1,2,3,5))</code></pre>
