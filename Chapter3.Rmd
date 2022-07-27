@@ -125,7 +125,7 @@ lm(S ~ ASVABC + SM + SF, data = eawe21) %>%
 # correlation between SM and SF
 with(eawe21, cor(SM, SF))
 ```
-
+The correlation coefficient of SM and SF is `r with(eawe21, cor(SM, SF))`.
 
 
 **Example of multicollinearity (p. 175 Table 3.8)**
