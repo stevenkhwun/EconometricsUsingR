@@ -175,7 +175,7 @@ pre code {
 <ul>
 <li>Dependent variable</li>
 <li>Explanatory variable, independent variable, regressor</li>
-<li>Disturbance term</li>
+<li>Error term, disturbance</li>
 <li>Residual</li>
 <li>Residual sum of squares, <em>RSS</em></li>
 <li>Ordinary least squares, <em>OLS</em></li>
@@ -193,14 +193,19 @@ pre code {
 Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}
 \tag{1.1}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(Y\)</span> is usually described as the <strong>dependent variable</strong>, and <span class="math inline">\(X\)</span> as the <strong>explanatory variable</strong> or <strong>independent variable</strong> or the <strong>regressor</strong>. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the <strong>disturbance term</strong>, <span class="math inline">\(u_i\)</span>.</p>
+<p>where <span class="math inline">\(Y\)</span> is usually described as the <strong>dependent variable</strong>, and <span class="math inline">\(X\)</span> as the <strong>explanatory variable</strong> or <strong>independent variable</strong> or the <strong>regressor</strong>. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the <strong>error term</strong> or <strong>disturbance</strong>, <span class="math inline">\(u_i\)</span>.</p>
 <p><strong>The fitted model</strong>:</p>
 <p><span class="math display">\[\hat{Y_{i}}=\hat{\beta_{1}}+\hat{\beta_{2}}X_{i}\]</span></p>
 <p>The difference between the actual value of <span class="math inline">\(Y_{i}\)</span> and the fitted value <span class="math inline">\(\hat{Y_{i}}\)</span>, in observation <span class="math inline">\(i\)</span> is known as the <strong>residual</strong> in the observation <span class="math inline">\(i\)</span>. It will be denoted :</p>
 <p><span class="math display">\[\hat{u}_{i}=Y_{i}-\hat{Y_{i}}\]</span></p>
+<div id="assumptions-of-the-error-term-u" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Assumptions of the error term, <span class="math inline">\(u\)</span></h2>
+</div>
 </div>
 <div id="derivation-of-the-regression-coefficients" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Derivation of the regression coefficients</h1>
+<div id="least-squares-approach" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Least squares approach</h2>
 <p>We use the <strong>least squares</strong> criterion to choose <span class="math inline">\(\hat{\beta_{1}}\)</span> amd <span class="math inline">\(\hat{\beta_{2}}\)</span> so as to minimize <em><strong>RSS</strong></em>, the <strong>residual sum of squares</strong> (sum of the squares of the residuals).</p>
 <p><span class="math display">\[RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2\]</span>
 This is usually referred to as <strong>ordinary least squares</strong> and abbreviated <em><strong>OLS</strong></em>.<br />
@@ -243,6 +248,10 @@ Solving the normal equations and noting that</p>
 \hat{\beta}_{1}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=1}^{n}X_i^2-n\overline{X}^2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}
 \tag{2.2}
 \end{equation}\]</span></p>
+</div>
+<div id="method-of-moments-approach" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Method of moments approach</h2>
+</div>
 </div>
 <div id="an-example" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> An example</h1>

@@ -12,7 +12,7 @@ library(tidyverse)
 
 * Dependent variable
 * Explanatory variable, independent variable, regressor
-* Disturbance term
+* Error term, disturbance
 * Residual
 * Residual sum of squares, _RSS_
 * Ordinary least squares, _OLS_
@@ -34,7 +34,7 @@ Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}
 \end{equation}
 
 
-where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $u_i$.
+where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the **error term** or **disturbance**, $u_i$.
 
 **The fitted model**:
 
@@ -44,8 +44,11 @@ The difference between the actual value of $Y_{i}$ and the fitted value $\hat{Y_
 
 $$\hat{u}_{i}=Y_{i}-\hat{Y_{i}}$$
 
+## Assumptions of the error term, $u$
 
 # Derivation of the regression coefficients
+
+## Least squares approach
 
 We use the **least squares** criterion to choose $\hat{\beta_{1}}$ amd $\hat{\beta_{2}}$ so as to minimize _**RSS**_, the **residual sum of squares** (sum of the squares of the residuals).
 
@@ -110,6 +113,7 @@ and hence
 (\#eq:slope)
 \end{equation}
 
+## Method of moments approach
 
 
 
