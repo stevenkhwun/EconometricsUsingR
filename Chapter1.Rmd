@@ -24,27 +24,83 @@ library(tidyverse)
 * Coefficient of determination: $R^2$
 
 
-# The simple linear model
+# The simple regression model
 
-**The model**:
+## The model
+
+Equation \@ref(eq:slm), which is assumed to hold in the population of interest, defines the **simple linear regression model**.
 
 \begin{equation}
-Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}
+y=\beta_{0}+\beta_{1}x+u
 (\#eq:slm)
 \end{equation}
 
 
-where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the **error term** or **disturbance**, $u_i$.
+where $y$ is usually described as the **dependent variable**, and $x$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the **error term** or **disturbance**, $u$.\
+\
+The simple regression model implies that $x$ has a linear effect on $y$:
+$${\Delta}y = \beta_{1}{\Delta}x$$
+if ${\Delta}u=0$.\
+\
+In other words, the marginal effect of $x$ on $y$ is constant and equal to $\beta_1$.
 
-**The fitted model**:
 
-$$\hat{Y_{i}}=\hat{\beta_{1}}+\hat{\beta_{2}}X_{i}$$
+## The fitted model
 
-The difference between the actual value of $Y_{i}$ and the fitted value $\hat{Y_{i}}$, in observation $i$ is known as the **residual** in the observation $i$. It will be denoted \hat{\mu_{i}}:
+After the parameters, $\beta_0$ and $\beta_1$, are estimated, the fitted model can be represented as follows:
+\begin{equation}
+\hat{y_{i}}=\hat{\beta_{0}}+\hat{\beta_{1}}x_{i}
+(\#eq:slm-fitted)
+\end{equation}
 
-$$\hat{u}_{i}=Y_{i}-\hat{Y_{i}}$$
+The difference between the actual value of $y_{i}$ and the fitted value $\hat{y_{i}}$, in observation $i$ is known as the **residual** in the observation $i$, $\hat{u}_{i}$. It can be expressed as:
+
+\begin{equation}
+\hat{u}_{i}=y_{i}-\hat{y_{i}}
+(\#eq:residual)
+\end{equation}
 
 ## Assumptions of the error term, $u$
+There are two assumptions on the *error term* of the model:
+
+1.  As long as the intercept $\beta_{0}$ is included in the equation, we assume
+\begin{equation}
+E(u)=0
+(#eq:u-A1)
+\end{equation}
+This is an innocuous normalisation and can be imposed without a loss of generality. However, it says nothing about the relationship between $u$ and $x$.
+
+2.  The second key assumption is on the expected vaue of $u$ given $x$ or, in other words, on the mean of the error term for each slice of the population determined by the values of $x$, that is:
+\begin{equation}
+E(u|x)=E(u) ~~ for ~~ all ~~ values ~~ of ~~ x
+(#eq:u-A2)
+\end{equation}
+This implies that $u$ is **mean independent** of $x$, or $u$ is uncorrelated with $x$.\
+\
+Combining with the first assumption, we have
+\begin{equation}
+E(u|x)=E(u)=0 ~~ for ~~ all ~~ values ~~ of ~~ x
+(#eq:u-A2-1)
+\end{equation}
+This is called the **zero conditional mean assumption**. It says that the expected value of the error term, $u$, is zero, regardless of what the value of the explanatory variable, $x$, is.
+
+
+By the assumptions of the *error terms*, especially the property of the conditional expectation, $E(u|x)=0$, implies:
+
+\begin{eqnarray}
+E(y|x) &=& E(\beta_0+{\beta_1}x+u|x) \\
+&=& \beta_0+{\beta_1}x+E(u|x) \\
+&=& \beta_0+{\beta_1}x \\
+(#eq:prf)
+\end{eqnarray}
+
+This shows that the **population regression function**, $E(y|x)$, has the following properties:
+
+*  it is a linear function of x
+*  an one-unit change in $x$ changes the expected value of $y$ by the amount of $\beta_1$
+*  the distribution of $y$ is centered about $E(y|x)$
+*  it gives us a relationship between the average level of $y$ at different levels of $x$
+
 
 # Derivation of the regression coefficients
 

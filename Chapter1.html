@@ -186,20 +186,74 @@ pre code {
 <li>Explained sum of squares, <em>ESS</em></li>
 <li>Coefficient of determination: <span class="math inline">\(R^2\)</span></li>
 </ul>
-<div id="the-simple-linear-model" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> The simple linear model</h1>
-<p><strong>The model</strong>:</p>
+<div id="the-simple-regression-model" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> The simple regression model</h1>
+<div id="the-model" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> The model</h2>
+<p>Equation <a href="#eq:slm">(1.1)</a>, which is assumed to hold in the population of interest, defines the <strong>simple linear regression model</strong>.</p>
 <p><span class="math display" id="eq:slm">\[\begin{equation}
-Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}
+y=\beta_{0}+\beta_{1}x+u
 \tag{1.1}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(Y\)</span> is usually described as the <strong>dependent variable</strong>, and <span class="math inline">\(X\)</span> as the <strong>explanatory variable</strong> or <strong>independent variable</strong> or the <strong>regressor</strong>. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the <strong>error term</strong> or <strong>disturbance</strong>, <span class="math inline">\(u_i\)</span>.</p>
-<p><strong>The fitted model</strong>:</p>
-<p><span class="math display">\[\hat{Y_{i}}=\hat{\beta_{1}}+\hat{\beta_{2}}X_{i}\]</span></p>
-<p>The difference between the actual value of <span class="math inline">\(Y_{i}\)</span> and the fitted value <span class="math inline">\(\hat{Y_{i}}\)</span>, in observation <span class="math inline">\(i\)</span> is known as the <strong>residual</strong> in the observation <span class="math inline">\(i\)</span>. It will be denoted :</p>
-<p><span class="math display">\[\hat{u}_{i}=Y_{i}-\hat{Y_{i}}\]</span></p>
-<div id="assumptions-of-the-error-term-u" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Assumptions of the error term, <span class="math inline">\(u\)</span></h2>
+<p>where <span class="math inline">\(y\)</span> is usually described as the <strong>dependent variable</strong>, and <span class="math inline">\(x\)</span> as the <strong>explanatory variable</strong> or <strong>independent variable</strong> or the <strong>regressor</strong>. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the <strong>error term</strong> or <strong>disturbance</strong>, <span class="math inline">\(u\)</span>.<br />
+<br />
+The simple regression model implies that <span class="math inline">\(x\)</span> has a linear effect on <span class="math inline">\(y\)</span>:
+<span class="math display">\[{\Delta}y = \beta_{1}{\Delta}x\]</span>
+if <span class="math inline">\({\Delta}u=0\)</span>.<br />
+<br />
+In other words, the marginal effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span> is constant and equal to <span class="math inline">\(\beta_1\)</span>.</p>
+</div>
+<div id="the-fitted-model" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> The fitted model</h2>
+<p>After the parameters, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, are estimated, the fitted model can be represented as follows:
+<span class="math display" id="eq:slm-fitted">\[\begin{equation}
+\hat{y_{i}}=\hat{\beta_{0}}+\hat{\beta_{1}}x_{i}
+\tag{1.2}
+\end{equation}\]</span></p>
+<p>The difference between the actual value of <span class="math inline">\(y_{i}\)</span> and the fitted value <span class="math inline">\(\hat{y_{i}}\)</span>, in observation <span class="math inline">\(i\)</span> is known as the <strong>residual</strong> in the observation <span class="math inline">\(i\)</span>, <span class="math inline">\(\hat{u}_{i}\)</span>. It can be expressed as:</p>
+<p><span class="math display" id="eq:residual">\[\begin{equation}
+\hat{u}_{i}=y_{i}-\hat{y_{i}}
+\tag{1.3}
+\end{equation}\]</span></p>
+</div>
+<div id="assumptions-of-the-error-term-u" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Assumptions of the error term, <span class="math inline">\(u\)</span></h2>
+<p>There are two assumptions on the <em>error term</em> of the model:</p>
+<ol style="list-style-type: decimal">
+<li><p>As long as the intercept <span class="math inline">\(\beta_{0}\)</span> is included in the equation, we assume
+<span class="math display" id="eq:u-A1">\[\begin{equation}
+E(u)=0
+\tag{1.4}
+\end{equation}\]</span>
+This is an innocuous normalisation and can be imposed without a loss of generality. However, it says nothing about the relationship between <span class="math inline">\(u\)</span> and <span class="math inline">\(x\)</span>.</p></li>
+<li><p>The second key assumption is on the expected vaue of <span class="math inline">\(u\)</span> given <span class="math inline">\(x\)</span> or, in other words, on the mean of the error term for each slice of the population determined by the values of <span class="math inline">\(x\)</span>, that is:
+<span class="math display" id="eq:u-A2">\[\begin{equation}
+E(u|x)=E(u) ~~ for ~~ all ~~ values ~~ of ~~ x
+\tag{1.5}
+\end{equation}\]</span>
+This implies that <span class="math inline">\(u\)</span> is <strong>mean independent</strong> of <span class="math inline">\(x\)</span>, or <span class="math inline">\(u\)</span> is uncorrelated with <span class="math inline">\(x\)</span>.<br />
+<br />
+Combining with the first assumption, we have
+<span class="math display" id="eq:u-A2-1">\[\begin{equation}
+E(u|x)=E(u)=0 ~~ for ~~ all ~~ values ~~ of ~~ x
+\tag{1.6}
+\end{equation}\]</span>
+This is called the <strong>zero conditional mean assumption</strong>. It says that the expected value of the error term, <span class="math inline">\(u\)</span>, is zero, regardless of what the value of the explanatory variable, <span class="math inline">\(x\)</span>, is.</p></li>
+</ol>
+<p>By the assumptions of the <em>error terms</em>, especially the property of the conditional expectation, <span class="math inline">\(E(u|x)=0\)</span>, implies:</p>
+<p><span class="math display" id="eq:prf">\[\begin{eqnarray}
+E(y|x) &amp;=&amp; E(\beta_0+{\beta_1}x+u|x) \\
+&amp;=&amp; \beta_0+{\beta_1}x+E(u|x) \\
+&amp;=&amp; \beta_0+{\beta_1}x \\
+\tag{1.7}
+\end{eqnarray}\]</span></p>
+<p>This shows that the <strong>population regression function</strong>, <span class="math inline">\(E(y|x)\)</span>, has the following properties:</p>
+<ul>
+<li>it is a linear function of x</li>
+<li>an one-unit change in <span class="math inline">\(x\)</span> changes the expected value of <span class="math inline">\(y\)</span> by the amount of <span class="math inline">\(\beta_1\)</span></li>
+<li>the distribution of <span class="math inline">\(y\)</span> is centered about <span class="math inline">\(E(y|x)\)</span></li>
+<li>it gives us a relationship between the average level of <span class="math inline">\(y\)</span> at different levels of <span class="math inline">\(x\)</span></li>
+</ul>
 </div>
 </div>
 <div id="derivation-of-the-regression-coefficients" class="section level1" number="2">
