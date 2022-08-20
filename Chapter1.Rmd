@@ -1,16 +1,11 @@
 ---
-title: "Simple Regression Analysis"
-author: "SW"
-date: "2022/7/10"
-output:
-  html_document:
-    number_sections: true
-  pdf_document: default
-  word_document: default
+title: "Simple regression model"
+output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
 **Key terms**
@@ -33,7 +28,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **The model**:
 
-$$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
+\begin{equation}
+Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}
+(\#eq:slm)
+\end{equation}
+
+
 where $Y$ is usually described as the **dependent variable**, and $X$ as the **explanatory variable** or **independent variable** or the **regressor**. In statistical analysis, one generally acknowledges the fact that the relationship is not exact by explicitly including in it a random factor known as the **disturbance term**, $u_i$.
 
 **The fitted model**:
@@ -100,8 +100,15 @@ Solving the normal equations and noting that
 
 and hence
 
-$$\hat{\beta}_{1}=\overline{Y}-\hat{\beta}_{2}\overline{X}$$
-$$\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=1}^{n}X_i^2-n\overline{X}^2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}$$
+\begin{equation}
+\hat{\beta}_{0}=\overline{Y}-\hat{\beta}_{1}\overline{X}
+(\#eq:intercept)
+\end{equation}
+
+\begin{equation}
+\hat{\beta}_{1}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=1}^{n}X_i^2-n\overline{X}^2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}
+(\#eq:slope)
+\end{equation}
 
 
 
@@ -110,10 +117,10 @@ $$\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=
 
 # An example
 
-The following example is adopted from an example in p. 98 of the text book. Hourly earnings in 2011, `EARNINGS`, measured in dollars, are regressed on schooling, `S`, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.
+The following example is adapted from an example in p. 98 of Dougherty (2016). The variable `EARNING`, hourly earnings in 2011 measured in dollars, is regressed on schooling, `S`, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.
 ```{r}
-# EARNINGS regress on schooling
-eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
+# EARNINGS regress on S
+eawe21 <- read.csv('Data/EAWE21.csv', header=T)     # Import data
 lin.model <- lm(EARNINGS ~ S, data = eawe21)        # Run the model
 summary(lin.model)                                  # The result
 ```
@@ -123,9 +130,9 @@ The regression output gives the estimates of the intercept and the coefficient o
 $$\hat{EARNINGS}=0.76+1.27S$$
 Interpreting the equation literally, the slope coefficient indicates that, as `S` increases by one unit, `EARNINGS` increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.  
 <br />
-The following `R` codes produces a plot of the data together with the regression line.
+Figure \@ref(fig:simple-wage), which is produced by the following `R` codes, is  a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of Dougherty (2016).
 
-```{r}
+```{r simple-wage, fig.cap = "A simple wage equation"}
 # EARNINGS regress on schooling
 # Plot the data
 plot(EARNINGS ~ S, 
