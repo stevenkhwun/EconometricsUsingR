@@ -338,7 +338,24 @@ for(n in 1:m){
   beta1hat[n] <- OLS$coefficients[2]
 }
 hist(beta1hat)
+var(beta1hat)
 ```
 
+# Simulation 2
 
+Adapted from p. 126 of [@Dougherty].
+```{r}
+x <- c(1:20)                         # variable x, with no. of observation = 250
+m <- 10000                           # 10000 regressions is simulated
+
+beta1hat2 <- vector(length = m)       # create an empty vector
+for(n in 1:m){
+  u <- rnorm(20, mean=0, sd=1)      # generate the error term
+  y <- 2+0.5*x+u                       # define dependent variable y
+  OLS <- lm(y~x)
+  beta1hat2[n] <- OLS$coefficients[2]
+}
+hist(beta1hat2)
+var(beta1hat2)
+```
 # References
