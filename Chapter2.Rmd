@@ -1,11 +1,7 @@
 ---
 title: "Properties of the Regression Coefficients and Hypothesis Testing"
-author: "SW"
-date: "2022/7/16"
-output:
-  html_document: default
-  pdf_document: default
-  word_document: default
+output: bookdown::html_document2
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -389,3 +385,8 @@ $$r_{Y,\hat{Y}}=\frac{\sum_{i=1}^{n}(Y_i-\overline{Y})(\hat{Y}_i-\overline{Y})}{
 After some algebraic manipulation, we have:
 
 $$r_{Y,\hat{Y}}=\sqrt{R^2}$$
+
+See [@Pindyck]\
+See [@Stock]\
+See [@Gujarati]\
+See [@Dougherty]
