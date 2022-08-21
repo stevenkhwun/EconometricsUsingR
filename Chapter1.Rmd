@@ -193,7 +193,7 @@ Interpreting the equation literally, the slope coefficient indicates that, as `S
 Figure \@ref(fig:simple-wage), which is produced by the following `R` codes, is  a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of Dougherty (2016).
 
 ```{r simple-wage, fig.cap = "A simple wage equation"}
-# EARNINGS regress on schooling
+# EARNINGS regress on S
 # Plot the data
 plot(EARNINGS ~ S, 
      data = eawe21,
@@ -261,9 +261,9 @@ As a corollary, the fitted values of the dependent variable are uncorrelated wit
 ## Coefficient of determination $R^2$
 The variations in $Y$ in any sample can be summarized by
 $$TSS=\sum(Y_i-\overline{Y})^2$$
-where **_TSS_** is the **total sume of squares**, the sume of the squared deviations about its sample mean.  
+where **_TSS_** is the **total sum of squares**, the sum of the squared deviations about its sample mean.  
 <br />
-After fitting a regresseion:
+After fitting a regression:
 $$Y_i=\hat{Y}_i+\hat{u}_i$$
 We can use this to decompose $\sum(Y_i-\overline{Y})^2$:
 $$\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}([\hat{Y}_i+\hat{u}_i]-[\overline{\hat{Y}}+\overline{\hat{u}}])^2$$
@@ -271,7 +271,7 @@ After some algebraic manipulation, we have:
 $$\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2+\sum_{i=1}^{n}\hat{u}_i^2$$
 Thus we have the decomposition
 $$TSS=ESS+RSS$$
-where **_ESS_**, the **explained sum of squares**, and **_RSS_**, the **residual sume of squares**, are the two terms on the right side.  
+where **_ESS_**, the **explained sum of squares**, and **_RSS_**, the **residual sum of squares**, are the two terms on the right side.  
 <br />
 
 
@@ -280,14 +280,14 @@ The proportion of the total sum of squares explained by the regression line is k
 $$R^2=\frac{ESS}{TSS}=\frac{\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}$$
 The value of _ESS_ and _RSS_ are provided by the command `anova()` in `R`. 
 ```{r}
-# EARNINGS regress on schooling
+# EARNINGS regress on S
 # Analysis of variance table
 anova(lin.model)
 ```
 _ESS_, which is described as the independent variable `S` sum of squares, is $6,014$. _TSS_ is the sum of _ESS_ and the _RSS_, which is described as `Residual` sum of squares, is 64,315. Hence, $TSS=6,014+64,315=70,329$. 
 Dividing _ESS_ by _TSS_, we have $R^2=0.08551$, which is given by the command `summary()` in `R`.
 ```{r}
-# EARNINGS regress on schooling
+# EARNINGS regress on S
 # Summary of regression results, including the coefficient of determination
 summary(lin.model)
 ```
@@ -304,3 +304,19 @@ $$r_{Y,\hat{Y}}=\frac{\sum_{i=1}^{n}(Y_i-\overline{Y})(\hat{Y}_i-\overline{Y})}{
 After some algebraic manipulation, we have:
 
 $$r_{Y,\hat{Y}}=\sqrt{R^2}$$
+
+# Units of measurement and functional form
+
+<div style="margin-left: auto;
+            margin-right: auto;
+            width: 80%">
+
+Model      | Dependent Variable|Independent Variable|Interpretation of $\beta_1$
+-----------|:-----------------:|:------------------:|:-------------------------:
+Level-level|$y$                |$x$                 |${\Delta}y={\beta_1\Delta}x$
+Level-log  |$y$                |$log(x)$            |${\Delta}y=({\beta_1/100)\%\Delta}x$
+Log-level  |$log(y)$           |$x$                 |$\%{\Delta}y=(100{\beta_1}){\Delta}x$
+Log-log    |$log(y)$           |$log(x)$            |$\%{\Delta}y={\beta_1}\%{\Delta}x$
+
+Table: Summary of Functional Forms Involving Logarithms
+</div>

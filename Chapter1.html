@@ -337,7 +337,7 @@ summary(lin.model)                                  # The result</code></pre>
 Interpreting the equation literally, the slope coefficient indicates that, as <code>S</code> increases by one unit, <code>EARNINGS</code> increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.<br />
 <br />
 Figure <a href="#fig:simple-wage">3.1</a>, which is produced by the following <code>R</code> codes, is a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of Dougherty (2016).</p>
-<pre class="r"><code># EARNINGS regress on schooling
+<pre class="r"><code># EARNINGS regress on S
 # Plot the data
 plot(EARNINGS ~ S, 
      data = eawe21,
@@ -423,9 +423,9 @@ As a corollary, the fitted values of the dependent variable are uncorrelated wit
 <h2><span class="header-section-number">5.1</span> Coefficient of determination <span class="math inline">\(R^2\)</span></h2>
 <p>The variations in <span class="math inline">\(Y\)</span> in any sample can be summarized by
 <span class="math display">\[TSS=\sum(Y_i-\overline{Y})^2\]</span>
-where <strong><em>TSS</em></strong> is the <strong>total sume of squares</strong>, the sume of the squared deviations about its sample mean.<br />
+where <strong><em>TSS</em></strong> is the <strong>total sum of squares</strong>, the sum of the squared deviations about its sample mean.<br />
 <br />
-After fitting a regresseion:
+After fitting a regression:
 <span class="math display">\[Y_i=\hat{Y}_i+\hat{u}_i\]</span>
 We can use this to decompose <span class="math inline">\(\sum(Y_i-\overline{Y})^2\)</span>:
 <span class="math display">\[\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}([\hat{Y}_i+\hat{u}_i]-[\overline{\hat{Y}}+\overline{\hat{u}}])^2\]</span>
@@ -433,12 +433,12 @@ After some algebraic manipulation, we have:
 <span class="math display">\[\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2+\sum_{i=1}^{n}\hat{u}_i^2\]</span>
 Thus we have the decomposition
 <span class="math display">\[TSS=ESS+RSS\]</span>
-where <strong><em>ESS</em></strong>, the <strong>explained sum of squares</strong>, and <strong><em>RSS</em></strong>, the <strong>residual sume of squares</strong>, are the two terms on the right side.<br />
+where <strong><em>ESS</em></strong>, the <strong>explained sum of squares</strong>, and <strong><em>RSS</em></strong>, the <strong>residual sum of squares</strong>, are the two terms on the right side.<br />
 <br /></p>
 <p>The proportion of the total sum of squares explained by the regression line is known as the <strong>coefficient of determination</strong> or, more usually, <span class="math inline">\(R^2\)</span>:</p>
 <p><span class="math display">\[R^2=\frac{ESS}{TSS}=\frac{\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}\]</span>
 The value of <em>ESS</em> and <em>RSS</em> are provided by the command <code>anova()</code> in <code>R</code>.</p>
-<pre class="r"><code># EARNINGS regress on schooling
+<pre class="r"><code># EARNINGS regress on S
 # Analysis of variance table
 anova(lin.model)</code></pre>
 <pre><code>## Analysis of Variance Table
@@ -451,7 +451,7 @@ anova(lin.model)</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p><em>ESS</em>, which is described as the independent variable <code>S</code> sum of squares, is <span class="math inline">\(6,014\)</span>. <em>TSS</em> is the sum of <em>ESS</em> and the <em>RSS</em>, which is described as <code>Residual</code> sum of squares, is 64,315. Hence, <span class="math inline">\(TSS=6,014+64,315=70,329\)</span>.
 Dividing <em>ESS</em> by <em>TSS</em>, we have <span class="math inline">\(R^2=0.08551\)</span>, which is given by the command <code>summary()</code> in <code>R</code>.</p>
-<pre class="r"><code># EARNINGS regress on schooling
+<pre class="r"><code># EARNINGS regress on S
 # Summary of regression results, including the coefficient of determination
 summary(lin.model)</code></pre>
 <pre><code>## 
@@ -483,6 +483,50 @@ summary(lin.model)</code></pre>
 <p><span class="math display">\[r_{Y,\hat{Y}}=\frac{\sum_{i=1}^{n}(Y_i-\overline{Y})(\hat{Y}_i-\overline{Y})}{\sqrt{\sum_{i=1}^{n}(Y_i-\overline{Y})^2\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}}\]</span>
 After some algebraic manipulation, we have:</p>
 <p><span class="math display">\[r_{Y,\hat{Y}}=\sqrt{R^2}\]</span></p>
+</div>
+</div>
+<div id="units-of-measurement-and-functional-form" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Units of measurement and functional form</h1>
+<div style="margin-left: auto;
+            margin-right: auto;
+            width: 80%">
+<table>
+<caption>Summary of Functional Forms Involving Logarithms</caption>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th align="center">Dependent Variable</th>
+<th align="center">Independent Variable</th>
+<th align="center">Interpretation of <span class="math inline">\(\beta_1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Level-level</td>
+<td align="center"><span class="math inline">\(y\)</span></td>
+<td align="center"><span class="math inline">\(x\)</span></td>
+<td align="center"><span class="math inline">\({\Delta}y={\beta_1\Delta}x\)</span></td>
+</tr>
+<tr class="even">
+<td>Level-log</td>
+<td align="center"><span class="math inline">\(y\)</span></td>
+<td align="center"><span class="math inline">\(log(x)\)</span></td>
+<td align="center"><span class="math inline">\({\Delta}y=({\beta_1/100)\%\Delta}x\)</span></td>
+</tr>
+<tr class="odd">
+<td>Log-level</td>
+<td align="center"><span class="math inline">\(log(y)\)</span></td>
+<td align="center"><span class="math inline">\(x\)</span></td>
+<td align="center"><span class="math inline">\(\%{\Delta}y=(100{\beta_1}){\Delta}x\)</span></td>
+</tr>
+<tr class="even">
+<td>Log-log</td>
+<td align="center"><span class="math inline">\(log(y)\)</span></td>
+<td align="center"><span class="math inline">\(log(x)\)</span></td>
+<td align="center"><span class="math inline">\(\%{\Delta}y={\beta_1}\%{\Delta}x\)</span></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="footnotes">
