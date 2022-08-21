@@ -1,6 +1,7 @@
 ---
 title: "Simple regression model"
 output: bookdown::html_document2
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -177,7 +178,7 @@ and hence
 
 # An example
 
-The following example is adapted from an example in p. 98 of Dougherty (2016). The variable `EARNING`, hourly earnings in 2011 measured in dollars, is regressed on schooling, `S`, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.
+The following example is adapted from an example in p. 98 of [@Dougherty]. The variable `EARNING`, hourly earnings in 2011 measured in dollars, is regressed on schooling, `S`, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.
 ```{r}
 # EARNINGS regress on S
 eawe21 <- read.csv('Data/EAWE21.csv', header=T)     # Import data
@@ -190,7 +191,7 @@ The regression output gives the estimates of the intercept and the coefficient o
 $$\hat{EARNINGS}=0.76+1.27S$$
 Interpreting the equation literally, the slope coefficient indicates that, as `S` increases by one unit, `EARNINGS` increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.  
 <br />
-Figure \@ref(fig:simple-wage), which is produced by the following `R` codes, is  a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of Dougherty (2016).
+Figure \@ref(fig:simple-wage), which is produced by the following `R` codes, is  a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of [@Dougherty].
 
 ```{r simple-wage, fig.cap = "A simple wage equation"}
 # EARNINGS regress on S
@@ -320,3 +321,10 @@ Log-log    |$log(y)$           |$log(x)$            |$\%{\Delta}y={\beta_1}\%{\D
 
 Table: Summary of Functional Forms Involving Logarithms
 </div>
+
+# Final reminder
+
+Some contents
+
+
+# References

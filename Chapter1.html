@@ -56,6 +56,28 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 
 
@@ -309,7 +331,7 @@ Solving the normal equations and noting that</p>
 </div>
 <div id="an-example" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> An example</h1>
-<p>The following example is adapted from an example in p. 98 of Dougherty (2016). The variable <code>EARNING</code>, hourly earnings in 2011 measured in dollars, is regressed on schooling, <code>S</code>, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.</p>
+<p>The following example is adapted from an example in p. 98 of <span class="citation">(Dougherty 2016)</span>. The variable <code>EARNING</code>, hourly earnings in 2011 measured in dollars, is regressed on schooling, <code>S</code>, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.</p>
 <pre class="r"><code># EARNINGS regress on S
 eawe21 &lt;- read.csv(&#39;Data/EAWE21.csv&#39;, header=T)     # Import data
 lin.model &lt;- lm(EARNINGS ~ S, data = eawe21)        # Run the model
@@ -336,7 +358,7 @@ summary(lin.model)                                  # The result</code></pre>
 <p><span class="math display">\[\hat{EARNINGS}=0.76+1.27S\]</span>
 Interpreting the equation literally, the slope coefficient indicates that, as <code>S</code> increases by one unit, <code>EARNINGS</code> increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.<br />
 <br />
-Figure <a href="#fig:simple-wage">3.1</a>, which is produced by the following <code>R</code> codes, is a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of Dougherty (2016).</p>
+Figure <a href="#fig:simple-wage">3.1</a>, which is produced by the following <code>R</code> codes, is a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of <span class="citation">(Dougherty 2016)</span>.</p>
 <pre class="r"><code># EARNINGS regress on S
 # Plot the data
 plot(EARNINGS ~ S, 
@@ -527,6 +549,18 @@ After some algebraic manipulation, we have:</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div id="final-reminder" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Final reminder</h1>
+<p>Some contents</p>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Dougherty" class="csl-entry">
+Dougherty, C. 2016. <em>Introduction to Econometrics, 5th Ed.</em> Oxford: Oxford University Press. <a href="https://global.oup.com/uk/orc/busecon/economics/dougherty5e/">https://global.oup.com/uk/orc/busecon/economics/dougherty5e/</a>.
+</div>
 </div>
 </div>
 <div class="footnotes">
