@@ -10,7 +10,8 @@ This repository contains my brief notes on the LSE external course EC2020 "Eleme
 
 
 
-\
+
+<br />
 
 #### References
 
