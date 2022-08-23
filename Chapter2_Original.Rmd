@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 **This is the original Chapter 2. It will be moved to Chapter 1 and will be finally deleted. (22/8/2022)**
  
 
-## Key terms
+**Key terms**
 
 * Classical linear regression model (CLRM)
 * Homoskedastic
@@ -27,13 +27,13 @@ knitr::opts_chunk$set(echo = TRUE)
 * Coefficient of determination: $R^2$
 
 
-## 1. Assumptions for regression models with nonstochastic regressors
+# Assumptions for regression models with nonstochastic regressors
 
 This list of assumptions, excluding Assumption 6, constitutes the **classical linear regression model**.^[See Robert S. Pindyck and Daniel L. Rubinfeld, _Econometric Models and Economic Forecasts_, McGraw-Hill, Singapore, 1991, pp. 47.]  
 <br />
 
 
-#### Assumption 1
+## Assumption 1
 The regression model is **linear in the parameters**, though it may or may not be linear in the variables. That is the regression model as shown in the following equation:
 
 $$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
