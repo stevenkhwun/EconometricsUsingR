@@ -178,7 +178,7 @@ and hence
 
 # An example
 
-The following example is adapted from an example in p. 98 of [@Dougherty]. The variable `EARNING`, hourly earnings in 2011 measured in dollars, is regressed on schooling, `S`, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.
+The following example is adapted from an example in p. 98 of @Dougherty. The variable `EARNING`, hourly earnings in 2011 measured in dollars, is regressed on schooling, `S`, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.
 ```{r}
 # EARNINGS regress on S
 eawe21 <- read.csv('Data/EAWE21.csv', header=T)     # Import data
@@ -193,7 +193,7 @@ As a result, the fitted equation is:
 $$\hat{EARNINGS}=0.76+1.27S$$
 Interpreting the equation literally, the slope coefficient indicates that, as `S` increases by one unit, `EARNINGS` increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.  
 <br />
-Figure \@ref(fig:simple-wage), which is produced by the following `R` codes, is  a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of [@Dougherty].
+Figure \@ref(fig:simple-wage), which is produced by the following `R` codes, is  a plot of the data together with the regression line. It is a replicate of Figure 1.7 on p. 99 of @Dougherty.
 
 ```{r simple-wage, fig.cap = "A simple wage equation"}
 # EARNINGS regress on S
@@ -411,7 +411,7 @@ var(beta1hat)
 
 # Simulation 2
 
-Adapted from p. 126 of [@Dougherty].
+Adapted from p. 126 of @Dougherty.
 ```{r}
 x <- c(1:20)                         # variable x, with no. of observation = 250
 m <- 10000                           # 10000 regressions is simulated

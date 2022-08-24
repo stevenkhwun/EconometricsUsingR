@@ -2,6 +2,7 @@
 title: "Properties of the Regression Coefficients and Hypothesis Testing"
 output: bookdown::html_document2
 bibliography: references.bib
+citation_package: biblatex
 ---
 
 ```{r setup, include=FALSE}
@@ -218,7 +219,7 @@ $$E\bigl\{MSD(\hat{u})\bigl\}=\frac{n-2}{n}\sigma_u^2$$
 
 
 
-See [@Pindyck]\
-See [@Stock]\
+See @Pindyck\
+See @Stock\
 See [@Gujarati]\
-See [@Dougherty]
+
