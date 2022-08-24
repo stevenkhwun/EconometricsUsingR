@@ -41,12 +41,12 @@ $$Y_{i}=\beta_{1}+\beta_{2}X_{i}+u_{i}$$
 <br />
 
 
-#### Assumption 2
+## Assumption 2
 Values taken by the regressor $X$ may be considered fixed in repeated samples. This is equivalent to the assumption that the independent variable in question is controlled by the researcher, who can change its value in accordance with experimental objectives. Such an assumption is unrealistic in the study of most business and economic problems; it has been made for expositional purposes.  
 <br />
 
 
-#### Assumption 3
+## Assumption 3
 Given the value of $X_i$, the mean, or expected, value of the random disturbance term $u_i$ is zero. Symbolically, we have
 
 $$E(u_i|X_i,...,X_n)=0 ~~~ for~all ~~ i$$
@@ -61,7 +61,7 @@ Actually, it is usually reasonable to assume that Assumption 3 is satisfied auto
 <br />
 
 
-#### Assumption 4
+## Assumption 4
 The disturbance term is **homoskedastic**. This means that its value in each observation is drawn from a distribution with constant population variance:
 
 $$E\{(u_i-\mu_u)^2\}=\sigma_u^2 ~~~ for~all~~i$$
@@ -78,7 +78,7 @@ If Assumption 4 is not satisfied, the OLS regression coefficient will be ineffic
 <br />
 
 
-#### Assumption 5
+## Assumption 5
 The values of the disturbance term have independent distributions. That is, $u_i$ is distributed independently of $u_j$ for all $j \ne i$. In other words, the disturbance term is not subject to **autocorrelation**, meaning that there should be no systematic association between its values in any two observations. 
 
 The assumption implies that $\sigma_{u_iu_j}$, the population covariance between $u_i$ and $u_j$, is zero, because
@@ -95,15 +95,15 @@ If this assumption is not satisfied, OLS will again give inefficient estimates.
 <br />
 
 
-#### Assumption 6
+## Assumption 6
 
 The disturbance term has a **normal distribution**. The justification for the assumption depends on the Lindeberg-Feller central limit theorem. In essence, this states that if a ranom variable is the composite result of the effects of a large number of other random variables, it will have an approximately normal distribution even if its components do not, provided that none of them is dominant. The disturbance term $u$ is composed of a number of factors not appearing explicitly in the regression equation and so, even if we know nothing about the distributions of these factors, we are usually entitled to assume that the disturbance term is normally distributed. (The Lindeberg-Levy central limit theorem required all the random components to be drawn from the same distribution. The Lindeberg-Feller theorem is less restrictive.)
 
 
-## 2. The random components and unbiasedness of the OLS regression coefficients  
+# The random components and unbiasedness of the OLS regression coefficients  
 <br />
 
-#### The random components of the OLS regression coefficients
+## The random components of the OLS regression coefficients
 
 Recalled that the simple regression model where $Y$ depends on a nonstochastic variable $X$ according to the relationship
 
@@ -157,7 +157,7 @@ $$c_i=\frac{1}{n}-a_i\overline{X}$$
 
 <br />
 
-#### The unbiasedness of the OLS regression coefficients
+## The unbiasedness of the OLS regression coefficients
 
 It follows that $\hat{\beta}_2$ is an unbiased estimator of $\beta_2$:
 
@@ -173,12 +173,12 @@ Similarly, $\hat{\beta}_1$ is an unbiased estimator of $\beta_1$:
 
 $$E(\hat{\beta}_1)=E(\beta_1)+E\Bigg(\sum_{i=1}^{n}c_iu_i\Bigg)=\beta_1+\sum_{i=1}^{n}c_iE(u_i)=\beta_1$$
 
-#### Normal distribution of the regression coefficients
+## Normal distribution of the regression coefficients
 
 An implication of the decompositions is that the regression coefficients will have normal distributions if the disturbance term in each observation has a normal distribution, as specified in Assumption 6. This is because a linear combinations of normal distributions is itself a normal distribution.  
 <br />
 
-## 3. Precision of the regression coefficients  
+# Precision of the regression coefficients  
 <br />
 
 The population variances of the distributions of $\hat{\beta}_1$ and $\hat{\beta}_2$, $\sigma_{\hat{\beta}_1}^2$ and $\sigma_{\hat{\beta}_2}^2$, are given by the following expressions:
@@ -202,7 +202,7 @@ It is obvious from the equation that the variance of $\hat{\beta}_2$ is inversel
 It is also obvious that the variance of $\hat{\beta}_2$ is proportional to the variance of the disturbance term. The bigger the variance of the random factor in the relationship, the worse the estimates of the parameters are likely to be.  
 <br />
 
-#### Standard errors of the regression coefficients
+## Standard errors of the regression coefficients
 Although $\sigma_u^2$ is unknown, we can derive an estimator of $\sigma_u^2$ from the residuals. One measure of the scatter of the residuals is their mean square deviation, MSD($\hat{u}$), defined by
 
 $$MSD(\hat{u})=\frac{1}{n}\sum_{i=1}^{n}(\hat{u}_i-\overline{\hat{u}})^2=\frac{1}{n}\sum_{i=1}^{n}\hat{u}_i^2$$
@@ -216,177 +216,7 @@ $$E\bigl\{MSD(\hat{u})\bigl\}=\frac{n-2}{n}\sigma_u^2$$
 
 
 
-# Old materials
 
-This is usually referred to as **ordinary least squares** and abbreviated _**OLS**_.  
-<br />
-The square of the residual in observation $i$ in terms of $\hat{\beta_{1}}$ and $\hat{\beta_{2}}$, and the data on $X$ and $Y$:
-
-
-\begin{eqnarray}
-{\hat{u}_{i}}^2 &=&(Y_i-\hat{Y}_{i})^2 =(Y_i-\hat{\beta}_{1}-\hat{\beta}_{2}X_i)^2 \\
-
-&=& Y_i^2+\hat{\beta}_{1}^2+\hat{\beta}_{2}^2X_i^2-2\hat{\beta}_{1}Y_i-2\hat{\beta}_{2}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}X_i \\
-\end{eqnarray}
-
-
-<br />
-
-
-Summing over all the $n$ observations, we can write _RSS_ as
-
-$$RSS=\sum_{i=1}^{n}Y_i^2+n\hat{\beta}_{1}^2+\hat{\beta}_{2}^2\sum_{i=1}^{n}X_i^2-2\hat{\beta}_{1}\sum_{i=1}^{n}Y_i-2\hat{\beta}_{2}\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}\sum_{i=1}^{n}X_i$$
-
-We find the particular values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ by minimize _RSS_. The partial differentials of _RSS_ with respect to $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ are:
-
-$$\frac{\partial{RSS}}{\partial{\hat{\beta}_{1}}}=2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i$$
-
-$$\frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i$$
-
-The values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ that minimize _RSS_ must satisfy the first-order conditions
-
-\begin{equation}
-\frac{\partial{RSS}}{\partial{\hat{\beta}_{1}}}=0
-\quad\mathrm{and}\quad
-\frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=0
-\end{equation}
-
-
-
-Hence
-$$2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0$$
-$$2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i=0$$
-These equations are known as the **normal equations** for the regression coefficients.  
-<br />
-Solving the normal equations and noting that
-
-\begin{equation}
-\overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_i
-\quad\mathrm{and}\quad
-\overline{Y}=\frac{1}{n}\sum_{i=1}^{n}Y_i
-\end{equation}
-
-and hence
-
-$$\hat{\beta}_{1}=\overline{Y}-\hat{\beta}_{2}\overline{X}$$
-$$\hat{\beta}_{2}=\frac{\sum_{i=1}^{n}X_iY_i-n\overline{X}\overline{Y}}{\sum_{i=1}^{n}X_i^2-n\overline{X}^2}=\frac{\sum_{i=1}^{n}(X_i-\overline{X})(Y_i-\overline{Y})}{\sum_{i=1}^{n}(X_i-\overline{X})^2}$$
-
-
-
-
-
-
-## 3. An example
-
-The following example is adopted from an example in p. 98 of the text book. Hourly earnings in 2011, `EARNINGS`, measured in dollars, are regressed on schooling, `S`, measured as highest grade completed, for 500 respondents from the US National Longitudinal Survey of Youth 1997-.
-```{r}
-# EARNINGS regress on schooling
-eawe21 <- read.csv('./Data/EAWE21.csv', header=T)   # Import data
-lin.model <- lm(EARNINGS ~ S, data = eawe21)        # Run the model
-summary(lin.model)                                  # The result
-```
-
-The regression output gives the estimates of the intercept and the coefficient of `S`, and thus the following fitted equation:
-
-$$\hat{EARNINGS}=0.76+1.27S$$
-Interpreting the equation literally, the slope coefficient indicates that, as `S` increases by one unit, `EARNINGS` increases by 1.27 units. This implies that hourly earnings increase by $1.27 for every extra year of schooling.
-
-#### Demeaning
-Often the intercept in a regression equation has no sensible interpretation because $X=0$ is distant from the data range. The wage equation above is an example, with the intercept being implausibly low.  
-<br />
-Sometimes it is useful to deal with the problem by defining $X^*$ as the deviation of $X$ about its sample mean
-
-$$X_{i}^{*}=X_i-\overline{X}$$
-and regressing $Y$ on $X^*$. The slope coefficient will not be affected, but the intercept will now be the fitted value of $Y$ at the sample mean of $X$.  
-<br />
-The following R code gives the descriptive statistics of `S`. This gives the mean years of schooling was 14.87.
-```{r}
-# Descriptive statistics for S
-summary(eawe21$S)
-```
-We then regress `EARNINGS` on the demeaned variable `SDEV`, where
-$$SDEV_i=S_i-\overline{S}$$
-```{r, message=FALSE, warning=FALSE}
-# Create the demeaned variable SDEV
-library(tidyverse)                  # Load the required package
-
-eawe21.dm <- eawe21 %>%
-  mutate(SDEV = S - mean(S)) %>%    # Create the demeaned variable
-  select(EARNINGS, S, SDEV)         # Select the required columns
-
-# EARNINGS regress on the demeaned variable SDEV
-# Using pipe (%>%) operator to simplify the code
-lm(EARNINGS ~ SDEV, data = eawe21.dm) %>%        # Run the model
-  summary                                        # Print the result      
-```
-From the regression results, we can see that the coefficient for `SDEV` is 1.27, which is the same as the coefficient of `S` in the original wage equation. However, this regression further predicts that the hourly earnings is $19.58 for the mean years of schooling of 14.87.
-
-
-## 4. Some important results relating to OLS regressions
-
-These results are valid only if the model includes an intercept. These results hold automatically, irrespective of whether the model is well or poorly specified.
-
-1.  The mean value of the residuals is zero
-$$\overline{\hat{u}}=0$$
-As a corollary, the mean of the fitted values of $Y$ is equal to the mean of the actual values of $Y$.
-$$\overline{\hat{Y}}=\overline{Y}$$
-2.  The sample covariance^[By definition, $Cov(X,Y)=E[(X-E[X])(Y-E[Y])]$. Hence, $Cov(X,\hat{u})=E[(X-E[X])(\hat{u}-E[\hat{u}])]=\frac{1}{n}\sum_{i=1}^{n}[(X_i-E[X])(\hat{u}_i-E(\hat{u})]$.] between the observations on $X$ and the residuals is zero. 
-Using the normal equation, we can show that $\sum{}{}X_i\hat{u}_i=0$. Together with the fact that $\overline{\hat{u}}=0$, we can show that the sample covariance between $X$ and $\hat{u}$ is $0$, that is:
-$$\frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})(\hat{u}_i-\overline{\hat{u}})=0$$
-Hence the correlation coefficient^[The correlation of two random variables $X$ and $Y$, denoted by $\rho(X,Y)$, is defined as $\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$] is also zero, provided that the sample variances of $X$ and $\hat{u}$ are both nonzero.  
-As a corollary, the fitted values of the dependent variable are uncorrelated with the residuals in a simple regression model.
-
-3.  The fitted line must pass through the point {$\overline{X}$,$\overline{Y}$} representing the mean of the observations in the sample.
-
-
-## 5. Goodness of fit: $R^2$
-
-The variations in $Y$ in any sample can be summarized by
-$$TSS=\sum(Y_i-\overline{Y})^2$$
-where **_TSS_** is the **total sume of squares**, the sume of the squared deviations about its sample mean.  
-<br />
-After fitting a regresseion:
-$$Y_i=\hat{Y}_i+\hat{u}_i$$
-We can use this to decompose $\sum(Y_i-\overline{Y})^2$:
-$$\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}([\hat{Y}_i+\hat{u}_i]-[\overline{\hat{Y}}+\overline{\hat{u}}])^2$$
-After some algebraic manipulation, we have:
-$$\sum_{i=1}^{n}(Y_i-\overline{Y})^2=\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2+\sum_{i=1}^{n}\hat{u}_i^2$$
-Thus we have the decomposition
-$$TSS=ESS+RSS$$
-where **_ESS_**, the **explained sum of squares**, and **_RSS_**, the **residual sume of squares**, are the two terms on the right side.  
-<br />
-
-#### Coefficient of determination
-
-The proportion of the total sum of squares explained by the regression line is known as the **coefficient of determination** or, more usually, $R^2$:
-
-$$R^2=\frac{ESS}{TSS}=\frac{\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}$$
-The value of _ESS_ and _RSS_ are provided by the command `anova()` in `R`. 
-```{r}
-# EARNINGS regress on schooling
-# Analysis of variance table
-anova(lin.model)
-```
-_ESS_, which is described as the independent variable `S` sum of squares, is $6,014$. _TSS_ is the sum of _ESS_ and the _RSS_, which is described as `Residual` sum of squares, is 64,315. Hence, $TSS=6,014+64,315=70,329$. 
-Dividing _ESS_ by _TSS_, we have $R^2=0.08551$, which is given by the command `summary()` in `R`.
-```{r}
-# EARNINGS regress on schooling
-# Summary of regression results, including the coefficient of determination
-summary(lin.model)
-```
-Other things being equal, one would like $R^2$ to be as high as possible. In particular, we would like the coefficients $\hat{\beta}_1$ and $\hat{\beta}_2$ should be chosen in such a way as to maximize $R^2$. On the other hand, the coefficients $\hat{\beta}_1$ and $\hat{\beta}_2$ should be chosen to minimize the sum of the squares of the residuals. In fact, the two criteria are equivalent since we can rewrite $R^2$ as:
-$$R^2=1-\frac{\sum_{i=1}^{n}\hat{u}_i^2}{\sum_{i=1}^{n}(Y_i-\overline{Y})^2}$$
-
-Since $\hat{\beta}_1$ and $\hat{\beta}_2$ minimize the residual sum of squares, they automatically maximize $R^2$.  
-<br />
-
-#### Alternative interpretation of $R^2$
-It should be intuitively obvious that the better is the fit achieved by the regression equation, the higher should be the correlation coefficient for the actual and predicted values of $Y$, which the correlation coefficient is denoted as $r_{Y,\hat{Y}}$:
-
-$$r_{Y,\hat{Y}}=\frac{\sum_{i=1}^{n}(Y_i-\overline{Y})(\hat{Y}_i-\overline{Y})}{\sqrt{\sum_{i=1}^{n}(Y_i-\overline{Y})^2\sum_{i=1}^{n}(\hat{Y}_i-\overline{Y})^2}}$$
-After some algebraic manipulation, we have:
-
-$$r_{Y,\hat{Y}}=\sqrt{R^2}$$
 
 See [@Pindyck]\
 See [@Stock]\
