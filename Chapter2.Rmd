@@ -1,5 +1,5 @@
 ---
-title: "Multiple Regression Analysis"
+title: "Multiple regression analysis: Estimation"
 author: "SW"
 date: "2022/7/25"
 output:
