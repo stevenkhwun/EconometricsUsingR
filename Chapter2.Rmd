@@ -54,6 +54,10 @@ ES = eawe21$S - fitted.values(lm(S ~ EXP, data = eawe21))
 RegOnResid <- lm(EEARN ~ ES)
 summary(RegOnResid)
 
+# Print the coefficient
+RegOnResid$coefficient[2]
+
+
 plot(EEARN ~ ES, 
      main = "Regression of EARNINGS residuals on S residuals", 
      xlab = "ES",
@@ -64,6 +68,21 @@ plot(EEARN ~ ES,
 abline(SRM, col='blue')              # Add the regression line
 abline(RegOnResid, col="red")
 
+```
+
+# Alternate way to perform the example
+
+```{r}
+# The full model
+FullModel <- lm(EARNINGS ~ S + EXP, data = eawe21)
+# Regression of X on X
+X_on_X <- lm(S ~ EXP, data = eawe21)
+# Regression of Y on r
+Y_on_r <- lm(EARNINGS ~ X_on_X$residuals, data = eawe21)
+
+# Print the coefficients
+FullModel$coefficients[2]
+Y_on_r$coefficients[2]
 ```
 
 
