@@ -9,6 +9,9 @@ This repository contains my brief notes on the LSE external course EC2020 "Eleme
 * Chapter 2 - Multiple regression analysis: Estimation
 
 
+### R Markdown techniques
+* HTML_Vignette_Example.Rmd
+
 
 
 <br />
