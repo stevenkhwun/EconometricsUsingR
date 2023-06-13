@@ -1,6 +1,7 @@
 # Econometrics Using R
 
 ### About the repository
+(Last update: 13.06.2023)
 
 This repository contains my brief notes on the LSE external course EC2020 "Elements of econometrics". `R` has been used to implement the examples and exercises in the course.
 
@@ -28,7 +29,6 @@ __Shea, J. *wooldridge: 115 Data Sets for Econometrics*. GitHub:__ https://justi
 
 __Wooldridge, J. (2020). *Introductory Econometrics: A Modern Approach, 7th ed*. Singapore: Cengage.__\
 (Solutions manual and datasets are available at the [companion website][Wooldridge] of the book.)
-
 
 
 
