@@ -1,5 +1,5 @@
 # Econometrics Using R
-## A small change
+
 ### About the repository
 (Last update: 13.06.2023)
 
