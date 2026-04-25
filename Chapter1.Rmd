@@ -71,7 +71,7 @@ E(u)=0
 \end{equation}
 This is an innocuous normalisation and can be imposed without a loss of generality. However, it says nothing about the relationship between $u$ and $x$.
 
-2.  The second key assumption is on the expected vaue of $u$ given $x$ or, in other words, on the mean of the error term for each slice of the population determined by the values of $x$, that is:
+2.  The second key assumption is on the expected value of $u$ given $x$ or, in other words, on the mean of the error term for each slice of the population determined by the values of $x$, that is:
 \begin{equation}
 E(u|x)=E(u) ~~ for ~~ all ~~ values ~~ of ~~ x
 (#eq:u-A2)
@@ -107,49 +107,49 @@ This shows that the **population regression function**, $E(y|x)$, has the follow
 
 ## Least squares approach
 
-We use the **least squares** criterion to choose $\hat{\beta_{1}}$ amd $\hat{\beta_{2}}$ so as to minimize _**RSS**_, the **residual sum of squares** (sum of the squares of the residuals).
+We use the **least squares** criterion to choose $\hat{\beta_{0}}$ amd $\hat{\beta_{1}}$ so as to minimize _**SSR**_, the **residual sum of squares** (sum of the squares of the residuals).
 
-$$RSS=\sum_{i=1}^{n}{\hat{u}_{i}}^2$$
+$$SSR=\sum_{i=1}^{n}{\hat{u}_{i}}^2$$
 This is usually referred to as **ordinary least squares** and abbreviated _**OLS**_.  
-<br />
-The square of the residual in observation $i$ in terms of $\hat{\beta_{1}}$ and $\hat{\beta_{2}}$, and the data on $X$ and $Y$:
+<br/>
+The square of the residual in observation $i$ in terms of $\hat{\beta_{0}}$ and $\hat{\beta_{1}}$, and the data on $X$ and $Y$:
 
 
 \begin{eqnarray}
-{\hat{u}_{i}}^2 &=&(Y_i-\hat{Y}_{i})^2 =(Y_i-\hat{\beta}_{1}-\hat{\beta}_{2}X_i)^2 \\
+{\hat{u}_{i}}^2 &=&(Y_i-\hat{Y}_{i})^2 =(Y_i-\hat{\beta}_{0}-\hat{\beta}_{1}X_i)^2 \\
 
-&=& Y_i^2+\hat{\beta}_{1}^2+\hat{\beta}_{2}^2X_i^2-2\hat{\beta}_{1}Y_i-2\hat{\beta}_{2}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}X_i \\
+&=& Y_i^2+\hat{\beta}_{0}^2+\hat{\beta}_{1}^2X_i^2-2\hat{\beta}_{0}Y_i-2\hat{\beta}_{1}X_iY_i+2\hat{\beta}_{0}\hat{\beta}_{1}X_i \\
 \end{eqnarray}
 
 
-<br />
+<br/>
 
 
-Summing over all the $n$ observations, we can write _RSS_ as
+Summing over all the $n$ observations, we can write _SSR_ as
 
-$$RSS=\sum_{i=1}^{n}Y_i^2+n\hat{\beta}_{1}^2+\hat{\beta}_{2}^2\sum_{i=1}^{n}X_i^2-2\hat{\beta}_{1}\sum_{i=1}^{n}Y_i-2\hat{\beta}_{2}\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\hat{\beta}_{2}\sum_{i=1}^{n}X_i$$
+$$SSR=\sum_{i=1}^{n}Y_i^2+n\hat{\beta}_{0}^2+\hat{\beta}_{1}^2\sum_{i=1}^{n}X_i^2-2\hat{\beta}_{0}\sum_{i=1}^{n}Y_i-2\hat{\beta}_{1}\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{0}\hat{\beta}_{1}\sum_{i=1}^{n}X_i$$
 
-We find the particular values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ by minimize _RSS_. The partial differentials of _RSS_ with respect to $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ are:
+We find the particular values of $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ by minimize _SSR_. The partial differentials of _SSR_ with respect to $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ are:
 
-$$\frac{\partial{RSS}}{\partial{\hat{\beta}_{1}}}=2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i$$
+$$\frac{\partial{SSR}}{\partial{\hat{\beta}_{0}}}=2n\hat{\beta}_{0}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i$$
 
-$$\frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i$$
+$$\frac{\partial{SSR}}{\partial{\hat{\beta}_{1}}}=2\hat{\beta}_{1}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{0}\sum_{i=1}^{n}X_i$$
 
-The values of $\hat{\beta}_{1}$ and $\hat{\beta}_{2}$ that minimize _RSS_ must satisfy the first-order conditions
+The values of $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ that minimize _RSS_ must satisfy the first-order conditions
 
 \begin{equation}
-\frac{\partial{RSS}}{\partial{\hat{\beta}_{1}}}=0
+\frac{\partial{SSR}}{\partial{\hat{\beta}_{0}}}=0
 \quad\mathrm{and}\quad
-\frac{\partial{RSS}}{\partial{\hat{\beta}_{2}}}=0
+\frac{\partial{SSR}}{\partial{\hat{\beta}_{1}}}=0
 \end{equation}
 
 
 
 Hence
-$$2n\hat{\beta}_{1}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{2}\sum_{i=1}^{n}X_i=0$$
-$$2\hat{\beta}_{2}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i=0$$
+$$2n\hat{\beta}_{0}-2\sum_{i=1}^{n}Y_i+2\hat{\beta}_{1}\sum_{i=1}^{n}X_i=0$$
+$$2\hat{\beta}_{1}\sum_{i=1}^{n}X_i^2-2\sum_{i=1}^{n}X_iY_i+2\hat{\beta}_{0}\sum_{i=1}^{n}X_i=0$$
 These equations are known as the **normal equations** for the regression coefficients.  
-<br />
+<br/>
 Solving the normal equations and noting that
 
 \begin{equation}
